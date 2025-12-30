@@ -7,12 +7,12 @@ WORKDIR /app
 COPY package*.json ./
 COPY dashboard/package*.json ./dashboard/
 
-# Install root dependencies
-RUN npm ci
+# Install root dependencies (skip prepare script - we use tsx, not compiled JS)
+RUN npm ci --ignore-scripts
 
 # Install dashboard dependencies
 WORKDIR /app/dashboard
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 # Copy source code
 WORKDIR /app
