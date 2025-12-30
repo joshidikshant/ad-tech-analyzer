@@ -19,9 +19,8 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:3000',
-    /\.vercel\.app$/, // Allow all Vercel deployments
-    /\.railway\.app$/, // Allow Railway preview deployments
-    /\.onrender\.com$/, // Allow Render.com deployments
+    'https://ad-stack-analyzer.onrender.com', // Production frontend
+    'https://ad-tech-analyzer.onrender.com', // Backend (for health checks)
   ],
   credentials: true
 }));
