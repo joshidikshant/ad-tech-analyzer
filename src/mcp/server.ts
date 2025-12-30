@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -188,13 +189,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   try {
     switch (name) {
       case "analyze_site":
-        return await handleAnalyzeSite(args as AnalyzeSiteArgs);
+        return await handleAnalyzeSite(args as unknown as AnalyzeSiteArgs);
       case "list_vendors":
-        return await handleListVendors(args as ListVendorsArgs);
+        return await handleListVendors(args as unknown as ListVendorsArgs);
       case "detect_managed_service":
-        return await handleDetectManagedService(args as DetectManagedServiceArgs);
+        return await handleDetectManagedService(args as unknown as DetectManagedServiceArgs);
       case "get_network_requests":
-        return await handleGetNetworkRequests(args as GetNetworkRequestsArgs);
+        return await handleGetNetworkRequests(args as unknown as GetNetworkRequestsArgs);
       default:
         throw new Error(`Unknown tool: ${name}`);
     }
@@ -230,7 +231,7 @@ async function handleAnalyzeSite(args: AnalyzeSiteArgs) {
     const apiData = await queryAdTechAPIs(client);
 
     // Classify network
-    const classification = classifyNetworkRequests(networkRequests);
+    const classification = classifyNetworkRequests(networkRequests as any);
 
     const result = {
       url,
@@ -308,7 +309,7 @@ async function handleListVendors(args: ListVendorsArgs) {
   try {
     await client.navigateToPage(url);
     const networkRequests = await client.getNetworkRequests();
-    const classification = classifyNetworkRequests(networkRequests);
+    const classification = classifyNetworkRequests(networkRequests as any);
 
     const result = {
       url,
@@ -382,7 +383,7 @@ async function handleGetNetworkRequests(args: GetNetworkRequestsArgs) {
       networkRequests = networkRequests.filter((req) => req.resourceType === type);
     }
 
-    const classification = classifyNetworkRequests(networkRequests);
+    const classification = classifyNetworkRequests(networkRequests as any);
 
     // Filter by category if specified
     let vendors = classification.vendors;

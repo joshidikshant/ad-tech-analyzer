@@ -1,0 +1,46 @@
+# Source files (published via dist/ only)
+src/
+tsconfig.json
+*.ts
+
+# Development
+.env
+.env.*
+node_modules/
+
+# Testing
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Build artifacts
+.cache/
+coverage/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Deployment
+dashboard/
+scripts/
+render.yaml
+fly.toml
+
+# Documentation (included via package.json files field)
+docs/API.md
+docs/RENDER_ONLY.md
+docs/TRULY_FREE_DEPLOY.md
+PROJECT_STRUCTURE.md
+
+# CI/CD
+.travis.yml
+.gitlab-ci.yml

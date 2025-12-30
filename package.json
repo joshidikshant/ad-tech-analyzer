@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "MCP server for automated ad-tech stack analysis. Detects 30+ vendors (Prebid, GAM, SSPs, managed services) on any website.",
   "main": "dist/mcp/server.js",
+  "types": "dist/mcp/server.d.ts",
   "bin": {
     "ad-tech-analyzer": "./dist/mcp/server.js"
   },
@@ -13,8 +14,17 @@
     "cli": "tsx src/cli/analyze-site.ts",
     "mcp": "tsx src/mcp/server.ts",
     "api": "tsx dashboard/api-server-mcp-final.ts",
+    "prepare": "npm run build && chmod +x dist/mcp/server.js",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "docs/MCP.md",
+    "docs/NPM_PACKAGE.md"
+  ],
   "keywords": [
     "mcp",
     "model-context-protocol",
