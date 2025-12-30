@@ -1,10 +1,10 @@
 {
   "name": "ad-tech-analyzer",
   "version": "1.0.0",
-  "description": "Automated ad tech stack reverse engineering tool with performance attribution and tactic detection",
-  "main": "dist/api/server.js",
+  "description": "MCP server for automated ad-tech stack analysis. Detects 30+ vendors (Prebid, GAM, SSPs, managed services) on any website.",
+  "main": "dist/mcp/server.js",
   "bin": {
-    "analyze-site": "./dist/cli/analyze-site.js"
+    "ad-tech-analyzer": "./dist/mcp/server.js"
   },
   "scripts": {
     "dev": "tsx watch src/api/server.ts",
@@ -12,12 +12,38 @@
     "start": "node dist/api/server.js",
     "cli": "tsx src/cli/analyze-site.ts",
     "mcp": "tsx src/mcp/server.ts",
+    "api": "tsx dashboard/api-server-mcp-final.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ad-tech",
+    "advertising",
+    "prebid",
+    "google-ad-manager",
+    "header-bidding",
+    "ssp",
+    "managed-services",
+    "vendor-detection",
+    "chrome-devtools",
+    "headless-chrome",
+    "ai-agent",
+    "claude",
+    "cursor",
+    "windsurf"
+  ],
+  "author": "Dikshant Joshi <joshidikshant@gmail.com>",
+  "license": "MIT",
   "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshidikshant/ad-tech-analyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joshidikshant/ad-tech-analyzer/issues"
+  },
+  "homepage": "https://github.com/joshidikshant/ad-tech-analyzer#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",
     "acorn": "^8.15.0",

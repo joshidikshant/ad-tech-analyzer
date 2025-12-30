@@ -12,10 +12,12 @@
 
 ## ✨ Features
 
+- 🤖 **MCP Server** - Use with Claude, Cursor, Windsurf via Model Context Protocol
 - 🔍 **Comprehensive Analysis** - Detects 30+ ad-tech vendors including SSPs, ad servers, header bidding
 - 📊 **Beautiful Dashboard** - Interactive charts, metrics, and vendor breakdowns
 - 🚀 **Fast** - 30-second average analysis time
 - 🎯 **Accurate** - Detects Prebid.js, GAM, managed services, identity solutions
+- 📦 **NPM Package** - Install globally or use programmatically in Node.js
 - 🆓 **Free to Deploy** - 100% free hosting on Render.com
 - 🔐 **Privacy-Focused** - Headless analysis, no data stored
 
@@ -58,7 +60,35 @@
 
 ## 🚀 Quick Start
 
-### Option 1: Deploy to Render.com (Recommended)
+### Option 1: Use as MCP Server (AI Agents)
+
+**Install globally:**
+```bash
+npm install -g ad-tech-analyzer
+```
+
+**Configure in Claude Desktop:**
+```json
+{
+  "mcpServers": {
+    "ad-tech-analyzer": {
+      "type": "stdio",
+      "command": "ad-tech-analyzer"
+    }
+  }
+}
+```
+
+**Use with AI:**
+```
+Analyze the ad-tech stack on https://www.geeksforgeeks.org/
+```
+
+See [MCP Documentation](docs/MCP.md) for full details.
+
+---
+
+### Option 2: Deploy to Render.com (Web Dashboard)
 
 **100% free hosting:**
 
@@ -77,7 +107,7 @@ See [RENDER_ONLY.md](RENDER_ONLY.md) for detailed instructions.
 
 ---
 
-### Option 2: Run Locally
+### Option 3: Run Locally
 
 **Prerequisites:**
 - Node.js 20+
@@ -303,10 +333,17 @@ See [TRULY_FREE_DEPLOY.md](TRULY_FREE_DEPLOY.md) for all options.
 
 ## 📚 Documentation
 
-- [API Documentation](docs/API.md)
-- [Deployment Guide](RENDER_ONLY.md)
-- [Project Structure](PROJECT_STRUCTURE.md)
-- [Free Hosting Options](TRULY_FREE_DEPLOY.md)
+### For AI Agents & MCP
+- **[MCP Server Guide](docs/MCP.md)** - Use with Claude, Cursor, Windsurf
+- **[NPM Package Guide](docs/NPM_PACKAGE.md)** - Install and use programmatically
+
+### For Web Dashboard
+- **[API Documentation](docs/API.md)** - REST API reference
+- **[Deployment Guide](RENDER_ONLY.md)** - Deploy to Render.com
+- **[Free Hosting Options](TRULY_FREE_DEPLOY.md)** - All free deployment options
+
+### Architecture
+- **[Project Structure](PROJECT_STRUCTURE.md)** - Codebase organization
 
 ---
 
