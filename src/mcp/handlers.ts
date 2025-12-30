@@ -75,10 +75,11 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
     }
 
     console.log(`[MCP Handler] Captured ${networkRequests?.length || 0} requests`);
-    if (networkRequests && Array.isArray(networkRequests)) {
+    if (networkRequests && Array.isArray(networkRequests) && networkRequests.length > 0) {
+      console.log('[MCP Handler] First request structure:', JSON.stringify(networkRequests[0], null, 2));
       console.log('[MCP Handler] First 10 URLs:');
       networkRequests.slice(0, 10).forEach((req, idx) => {
-        console.log(`  ${idx + 1}. ${req.url?.slice(0, 100)}`);
+        console.log(`  ${idx + 1}. ${req.url?.slice(0, 100) || req.name?.slice(0, 100) || JSON.stringify(req).slice(0, 100)}`);
       });
     }
 

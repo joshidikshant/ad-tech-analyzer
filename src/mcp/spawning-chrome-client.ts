@@ -105,22 +105,47 @@ export class SpawningChromeDevToolsClient {
   }
 
   async getNetworkRequests() {
-    // Use evaluate_script to get structured JSON instead of markdown
-    const result = await this.callTool('evaluate_script', {
-      function: `() => {
-        // Get all resource entries
-        const resources = performance.getEntriesByType('resource');
-        return resources.map((r, idx) => ({
-          reqid: idx + 1,
-          url: r.name,
-          method: 'GET',
-          resourceType: r.initiatorType || 'other',
-          status: 200,
-          duration: r.duration
-        }));
-      }`
+    // Use the actual chrome-devtools-mcp list_network_requests tool
+    const result = await this.callTool('list_network_requests', {
+      includePreservedRequests: false,
+      resourceTypes: [] // Empty array returns all types
     });
+
+    // Parse markdown response into structured format
+    // Response format: "reqid=1 GET https://url [success - 200]"
+    if (typeof result === 'string') {
+      const lines = result.split('\n');
+      const requests = [];
+
+      for (const line of lines) {
+        // Match pattern: reqid=123 METHOD URL [status - code]
+        const match = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[.*-\s*(\d+)\]/);
+        if (match) {
+          const [, reqid, method, url, status] = match;
+          requests.push({
+            reqid: parseInt(reqid),
+            url,
+            method,
+            status: parseInt(status),
+            resourceType: this.guessResourceType(url)
+          });
+        }
+      }
+
+      return requests;
+    }
+
     return result;
+  }
+
+  private guessResourceType(url: string): string {
+    const urlLower = url.toLowerCase();
+    if (urlLower.includes('.js')) return 'script';
+    if (urlLower.includes('.css')) return 'stylesheet';
+    if (urlLower.match(/\.(png|jpg|jpeg|gif|svg|webp)/)) return 'image';
+    if (urlLower.match(/\.(woff|woff2|ttf|eot)/)) return 'font';
+    if (urlLower.includes('/xhr') || urlLower.includes('/api/')) return 'xhr';
+    return 'other';
   }
 
   async evaluateScript(func: string) {
