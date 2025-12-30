@@ -11,8 +11,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Import MCP handler directly
-const { handleAnalyzeSite } = await import(path.join(__dirname, '../src/mcp/handlers.js'));
+// Import MCP handler directly from TypeScript source (tsx will transpile)
+import { handleAnalyzeSite } from '../src/mcp/handlers.js';
 
 const app = express();
 app.use(cors({

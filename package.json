@@ -10,7 +10,9 @@
   "scripts": {
     "dev": "tsx watch src/api/server.ts",
     "build": "tsc",
+    "build:api": "npm install && cd dashboard && npm install && cd ..",
     "start": "node dist/api/server.js",
+    "start:api": "npx tsx dashboard/api-server-mcp-final.ts",
     "cli": "tsx src/cli/analyze-site.ts",
     "mcp": "tsx src/mcp/server.ts",
     "api": "tsx dashboard/api-server-mcp-final.ts",
