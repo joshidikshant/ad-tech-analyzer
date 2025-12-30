@@ -58,8 +58,22 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
     await new Promise(resolve => setTimeout(resolve, 10000));
 
     console.log('[MCP Handler] Collecting network requests...');
-    const networkRequests = await client.getNetworkRequests();
+    let networkRequests = await client.getNetworkRequests();
     console.log(`[MCP Handler] Raw response type: ${typeof networkRequests}, isArray: ${Array.isArray(networkRequests)}`);
+    console.log(`[MCP Handler] First 100 chars of raw response:`, JSON.stringify(networkRequests).slice(0, 100));
+
+    // FALLBACK: If response is a string, try parsing it as JSON
+    if (typeof networkRequests === 'string') {
+      console.log('[MCP Handler] Response is string, attempting JSON parse...');
+      try {
+        networkRequests = JSON.parse(networkRequests);
+        console.log(`[MCP Handler] Successfully parsed! Now isArray: ${Array.isArray(networkRequests)}`);
+      } catch (err) {
+        console.error('[MCP Handler] JSON parse failed:', err);
+        networkRequests = [];
+      }
+    }
+
     console.log(`[MCP Handler] Captured ${networkRequests?.length || 0} requests`);
     if (networkRequests && Array.isArray(networkRequests)) {
       console.log('[MCP Handler] First 10 URLs:');
