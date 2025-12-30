@@ -1,0 +1,64 @@
+{
+  "sites": [
+    {
+      "url": "https://www.howtopronounce.com/gerald",
+      "category": "international",
+      "region": "Global",
+      "complexity": "medium",
+      "notes": "Language learning site"
+    },
+    {
+      "url": "https://istatistik.nesine.com/2556712/ozet",
+      "category": "international",
+      "region": "TR",
+      "complexity": "medium",
+      "notes": "Turkish sports statistics"
+    },
+    {
+      "url": "https://www.wenxuecity.com/news/2025/12/18/126454006.html",
+      "category": "international",
+      "region": "CN",
+      "complexity": "high",
+      "notes": "Chinese news portal"
+    },
+    {
+      "url": "https://www.macworld.com/article/3013322/2025-macworld-awards-apples-biggest-wins-and-misses.html",
+      "category": "managed_service",
+      "expected_wrapper": "AdThrive or Mediavine",
+      "region": "US",
+      "complexity": "high",
+      "notes": "Tech news, IDG network"
+    },
+    {
+      "url": "https://www.urbandictionary.com/define.php?term=IKEA%20Date",
+      "category": "direct_prebid",
+      "region": "US",
+      "complexity": "medium",
+      "notes": "User-generated content site"
+    },
+    {
+      "url": "https://news.detik.com/berita/d-8267093/10-orang-kena-ott-kpk-di-bekasi-salah-satunya-bupati-ade-kuswara",
+      "category": "international",
+      "region": "ID",
+      "complexity": "high",
+      "notes": "Indonesian news portal"
+    },
+    {
+      "url": "https://bollywoodshaadis.com/articles/payal-gaming-know-all-about-her-72568",
+      "category": "managed_service",
+      "expected_wrapper": "Custom",
+      "region": "IN",
+      "complexity": "high",
+      "notes": "Indian entertainment site"
+    },
+    {
+      "url": "https://osxdaily.com/2025/12/10/falling-snow-xmas-lights-on-mac/",
+      "category": "managed_service",
+      "expected_wrapper": "Raptive (AdThrive)",
+      "expected_ssps": ["OpenX", "PubMatic", "Rubicon", "Criteo", "Sovrn", "Index Exchange", "33Across"],
+      "region": "US",
+      "complexity": "medium",
+      "notes": "Mac tech blog - already analyzed, baseline test"
+    }
+  ]
+}

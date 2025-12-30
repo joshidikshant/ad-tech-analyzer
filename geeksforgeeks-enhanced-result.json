@@ -1,0 +1,91 @@
+{
+  "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+  "collectedAt": "2025-12-17T15:41:44.696Z",
+  "network": {
+    "loadTimeMs": 20187,
+    "totalRequests": 159,
+    "vendors": [
+      {
+        "name": "PubMatic",
+        "category": "ssp",
+        "pattern": "pubmatic\\.com|ads\\.pubmatic\\.com",
+        "matchedUrl": "https://t.pubmatic.com/wl?pubid=162080"
+      },
+      {
+        "name": "Google Ad Manager",
+        "category": "ad_server",
+        "pattern": "googlesyndication\\.com|doubleclick\\.net|gpt\\.js",
+        "matchedUrl": "https://pagead2.googlesyndication.com/pagead/js/google_top_exp.js?fcd=true"
+      },
+      {
+        "name": "Prebid.js",
+        "category": "header_bidding",
+        "pattern": "prebid\\.js|/prebid/|/hb/",
+        "matchedUrl": "https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json"
+      },
+      {
+        "name": "Criteo",
+        "category": "ssp",
+        "pattern": "criteo\\.com|criteo\\.net",
+        "matchedUrl": "https://static.criteo.net/js/ld/publishertag.ids.js"
+      },
+      {
+        "name": "Amazon APS",
+        "category": "header_bidding",
+        "pattern": "apstag\\.js|c\\.amazon-adsystem\\.com",
+        "matchedUrl": "https://c.amazon-adsystem.com/bao-csm/aps-comm/aps_csm.js"
+      },
+      {
+        "name": "ID5",
+        "category": "identity",
+        "pattern": "id5-sync\\.com|id5\\.io",
+        "matchedUrl": "https://id5-sync.com/gm/v3"
+      }
+    ]
+  },
+  "bridge": {
+    "prebid": null,
+    "gam": null,
+    "timestamp": null,
+    "error": null
+  },
+  "gamEvents": [],
+  "consoleMessages": [
+    {
+      "level": "warning",
+      "text": "Invalid GPT fixed size specification: []",
+      "timestamp": 1765986097576.969,
+      "url": "https://securepubads.g.doubleclick.net/pagead/managed/js/gpt/m202512040101/pubads_impl.js",
+      "args": [
+        "Invalid GPT fixed size specification: []"
+      ]
+    },
+    {
+      "level": "warning",
+      "text": "Invalid GPT fixed size specification: []",
+      "timestamp": 1765986097577.512,
+      "url": "https://securepubads.g.doubleclick.net/pagead/managed/js/gpt/m202512040101/pubads_impl.js",
+      "args": [
+        "Invalid GPT fixed size specification: []"
+      ]
+    },
+    {
+      "level": "warning",
+      "text": "Invalid GPT fixed size specification: []",
+      "timestamp": 1765986097577.69,
+      "url": "https://securepubads.g.doubleclick.net/pagead/managed/js/gpt/m202512040101/pubads_impl.js",
+      "args": [
+        "Invalid GPT fixed size specification: []"
+      ]
+    }
+  ],
+  "correlatedAuctions": [],
+  "raceWarnings": [],
+  "summary": {
+    "vendorCount": 6,
+    "prebidAuctionCount": 0,
+    "correlatedAuctionCount": 0,
+    "bidCount": 0,
+    "winningBidCount": 0
+  }
+}

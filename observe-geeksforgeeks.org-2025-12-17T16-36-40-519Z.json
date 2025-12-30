@@ -1,0 +1,192 @@
+{
+  "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+  "domain": "geeksforgeeks.org",
+  "startedAt": 1765989402689,
+  "navigatedAt": 1765989410172,
+  "endedAt": 1765989710180,
+  "observationMs": 300000,
+  "progressEveryMs": 30000,
+  "progress": [
+    {
+      "t": 1765989410188,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989440275,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989470407,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989500336,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989530209,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989560316,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989590199,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989620286,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989650397,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989680256,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    }
+  ],
+  "finalSnapshot": null
+}

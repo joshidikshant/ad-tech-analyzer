@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "url": "https://www.bollywoodshaadis.com/articles/stree-2-shraddha-kapoor-red-deep-neck-revealing-lehenga-hot-sizzling-jio-studios-event-39683",
+  "timestamp": "2025-12-19T02:25:15.000Z",
+  "duration": 12000,
+  "vendors_detected": 0,
+  "ssp_count": 0,
+  "managed_service": null,
+  "prebid_detected": false,
+  "gam_detected": false,
+  "vendors": [],
+  "categories": {
+    "analytics": [
+      "Google Analytics",
+      "Facebook Pixel"
+    ],
+    "tag_manager": [
+      "Google Tag Manager"
+    ]
+  },
+  "runtime_config": {
+    "prebid_version": null,
+    "ad_units_count": 0,
+    "gam_slots": 0,
+    "user_id_modules_count": 0,
+    "custom_wrappers": {
+      "ezoic": false,
+      "adthrive": false,
+      "mediavine": false,
+      "raptive": false
+    }
+  },
+  "network_summary": {
+    "total_requests": 32,
+    "ad_tech_requests": 0,
+    "tracking_pixels": 3
+  },
+  "pattern_gaps": [],
+  "notes": "Indian entertainment/celebrity news site with NO ad-tech stack detected. Only basic analytics (Google Analytics, Facebook Pixel) and GTM. No Prebid, no SSPs, no ad server. Extremely minimal compared to other test sites - appears to be content-focused without programmatic advertising."
+}

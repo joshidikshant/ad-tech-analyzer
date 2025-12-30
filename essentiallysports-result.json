@@ -1,0 +1,24 @@
+{
+  "hasPrebid": false,
+  "hasGAM": true,
+  "hasAmazon": false,
+  "hasFreestar": false,
+  "hasDataLayer": true,
+  "hasGtag": true,
+  "hasTCF": false,
+  "allGlobals": [
+    "onload",
+    "onloadeddata",
+    "onloadedmetadata",
+    "onloadstart",
+    "onbeforeunload",
+    "onunload",
+    "ongamepadconnected",
+    "ongamepaddisconnected",
+    "gtag",
+    "google_tag_manager",
+    "google_tag_data",
+    "onYouTubeIframeAPIReady",
+    "googletag"
+  ]
+}

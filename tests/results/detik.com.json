@@ -1,0 +1,88 @@
+{
+  "success": true,
+  "url": "https://news.detik.com/berita/d-8267093/10-orang-kena-ott-kpk-di-bekasi-salah-satunya-bupati-ade-kuswara",
+  "timestamp": "2025-12-19T02:23:45.000Z",
+  "duration": 12000,
+  "vendors_detected": 18,
+  "ssp_count": 13,
+  "managed_service": null,
+  "prebid_detected": true,
+  "gam_detected": true,
+  "vendors": [
+    "OpenX",
+    "PubMatic",
+    "Kargo",
+    "RichAudience",
+    "Rubicon",
+    "Smart AdServer",
+    "Teads",
+    "GumGum",
+    "The Trade Desk",
+    "Amazon APS",
+    "Index Exchange",
+    "AppNexus",
+    "Criteo",
+    "TripleLift",
+    "Sonobi",
+    "Yahoo",
+    "Google Ad Manager",
+    "Prebid.js"
+  ],
+  "categories": {
+    "ssp": [
+      "OpenX",
+      "PubMatic",
+      "Kargo",
+      "RichAudience",
+      "Rubicon",
+      "Teads",
+      "GumGum",
+      "Index Exchange",
+      "AppNexus",
+      "Criteo",
+      "TripleLift",
+      "Sonobi",
+      "Yahoo"
+    ],
+    "ad_server": [
+      "Smart AdServer",
+      "Google Ad Manager"
+    ],
+    "header_bidding": [
+      "Prebid.js",
+      "Amazon APS"
+    ],
+    "identity": [
+      "The Trade Desk"
+    ],
+    "analytics": [
+      "Google Analytics"
+    ],
+    "cmp": [
+      "OneTrust"
+    ]
+  },
+  "runtime_config": {
+    "prebid_version": "v9.40.0",
+    "ad_units_count": 0,
+    "gam_slots": 14,
+    "user_id_modules_count": 0
+  },
+  "network_summary": {
+    "total_requests": 1278,
+    "bid_requests": 89,
+    "active_bidders": 13
+  },
+  "pattern_gaps": [
+    "PubMatic (hbopenbid.pubmatic.com) - not detected by classifier",
+    "Kargo (krk2.kargo.com) - not detected",
+    "RichAudience (shb.richaudience.com) - not detected",
+    "Teads (a.teads.tv) - not detected",
+    "GumGum (g2.gumgum.com) - not detected",
+    "AppNexus (ib.adnxs.com) - not detected",
+    "TripleLift (tlx.3lift.com) - not detected",
+    "Sonobi (apex.go.sonobi.com) - not detected",
+    "Yahoo (ads.yahoo.com) - not detected"
+  ],
+  "notes": "Indonesian news portal with very heavy Prebid activity (v9.40.0) and aggressive monetization. 13 active SSPs bidding including OpenX, Rubicon, Criteo, Index Exchange, plus many Asian-market SSPs (Kargo, RichAudience, Teads). Smart AdServer primary ad server with GAM fallback. 1278 total requests with 89 bid requests. Major pattern gaps - 9 of 13 SSPs not detected by current classifier."
+}

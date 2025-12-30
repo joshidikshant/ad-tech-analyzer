@@ -1,0 +1,2236 @@
+{
+  "url": "https://www.essentiallysports.com",
+  "timestamp": "2025-12-16T14:54:58.287Z",
+  "pageType": "home",
+  "device": "desktop",
+  "loadTime": 9251,
+  "vendors": [
+    {
+      "name": "Google Ad Manager",
+      "category": "ad_server",
+      "pattern": "googlesyndication\\.com|doubleclick\\.net|gpt\\.js",
+      "matchedUrl": "https://stats.g.doubleclick.net/g/collect?v=2&tid=G-820MT0GTWE&cid=1743584803.1765896895&gtm=45je5ca1v887635151za200&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=0&tag_exp=103116026~103200004~104527907~104528500~104684208~104684211~105391253~115583767~115706422~115938465~115938469~116184927~116184929~116251938~116251940~116744867"
+    }
+  ],
+  "requests": [
+    {
+      "url": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75795.909303,
+      "initiator": {
+        "type": "other"
+      },
+      "status": 200,
+      "endTime": 75797.128581,
+      "duration": 1219.278000004124,
+      "size": 43708
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/js?id=UA-228013066-1",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.800218,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.325385,
+      "duration": 1525.166999999783,
+      "size": 114347
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1069088240.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.800878,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.973461,
+      "duration": 1172.5830000068527,
+      "size": 61809
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1067039604-1.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.800934,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.379322,
+      "duration": 1578.3879999944475,
+      "size": 20070
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Tom-Aspinall-Merab-Dvalishvili-Joshua-Van.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801228,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.380516,
+      "duration": 1579.2880000080913,
+      "size": 72085
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/PR-FI-2.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801431,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.359552,
+      "duration": 1558.1209999945713,
+      "size": 34571
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago261740277.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801472,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.985223,
+      "duration": 1183.7509999895701,
+      "size": 6356
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Nassourdine-Imavov-Dana-White-and-Khamzat-Chimaev.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801507,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.605652,
+      "duration": 1804.1450000018813,
+      "size": 9217
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1070390848.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801545,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.618873,
+      "duration": 1817.3280000046361,
+      "size": 10430
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Untitled-design-26-22.png?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801581,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.625134,
+      "duration": 1823.5529999947175,
+      "size": 11664
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Michigan-Wolverines.webp?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801613,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.64368,
+      "duration": 1842.066999990493,
+      "size": 7030
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1053405185.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801664,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.631466,
+      "duration": 1829.8020000074757,
+      "size": 9878
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/USATSI_27805219.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801697,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.637739,
+      "duration": 1836.0419999953592,
+      "size": 7957
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Peyton-Watson.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.80173,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.64929,
+      "duration": 1847.5599999947008,
+      "size": 5855
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1048485364.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801764,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.662754,
+      "duration": 1860.9900000010384,
+      "size": 15080
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1066136961.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801798,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.834846,
+      "duration": 2033.0479999975068,
+      "size": 11889
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/denny-hamlin-lost.webp?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801832,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.846847,
+      "duration": 2045.0149999960558,
+      "size": 6795
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/2024-09-12T224309Z_1490425823_MT1USATODAY24216103_RTRMADP_3_NFL-BUFFALO-BILLS-AT-MIAMI-DOLPHINS.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801878,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.904758,
+      "duration": 2102.8800000058254,
+      "size": 14718
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1041472544.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801915,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.905782,
+      "duration": 2103.86699999799,
+      "size": 12069
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1064044606.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801947,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.906129,
+      "duration": 2104.1819999954896,
+      "size": 5157
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Oklahoma-Sooners-1.webp?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.801975,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.909733,
+      "duration": 2107.7579999982845,
+      "size": 2351
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1051294634.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802005,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.911938,
+      "duration": 2109.932999999728,
+      "size": 12211
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Shaquille-ONeal-22.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802041,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.912309,
+      "duration": 2110.268000003998,
+      "size": 9852
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Tom-Brady-Scottie-Scheffler-Collage.png?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802073,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.088818,
+      "duration": 2286.745000004885,
+      "size": 10410
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/UFC-2025-04-05T140657.737.png?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802107,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.08976,
+      "duration": 2287.653000006685,
+      "size": 9886
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1057156257.jpg?width=270",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802136,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.154136,
+      "duration": 2351.9999999989523,
+      "size": 10570
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/College-Basketball-2.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802165,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.260621,
+      "duration": 2458.4559999930207,
+      "size": 67040
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/images-2025-10-17T221137.695-1.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802196,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.148454,
+      "duration": 2346.2579999904847,
+      "size": 17458
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Copy-of-Canva-FI-13-2.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802228,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.236442,
+      "duration": 2434.213999993517,
+      "size": 40281
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Copy-of-ES-WEB-FIs-1080-x-720px-21-6.jpg?width=300",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.80226,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.26363,
+      "duration": 2461.3700000045355,
+      "size": 10697
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/JJ-Redick-LeBron-James-Luka-Doncic-1.jpg?width=300",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802295,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.266357,
+      "duration": 2464.061999999103,
+      "size": 17313
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1067652432.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802332,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.583823,
+      "duration": 2781.4909999869997,
+      "size": 35491
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Alex-GholeshHH.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802366,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.584905,
+      "duration": 2782.538999992539,
+      "size": 25385
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Jon-Sumrall.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802417,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.645026,
+      "duration": 2842.6089999993565,
+      "size": 60951
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Dylan-Raiola-1.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802449,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.694238,
+      "duration": 2891.789000001154,
+      "size": 44775
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/media/e4af272ccee01ff0-s.p.woff2",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.80249,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.390927,
+      "duration": 588.4369999985211,
+      "size": 48677
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/css/60f13ee908afdb73.css",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.802572,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.929379,
+      "duration": 1126.8069999932777,
+      "size": 8433
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/css/d99ecab148278cae.css",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.803703,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.155294,
+      "duration": 351.59099999873433,
+      "size": 4679
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/css/74bde00a0cfb3069.css",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.803758,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.190613,
+      "duration": 386.85500000428874,
+      "size": 8803
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/css/ae8da34a681d8313.css",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.80381,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.233325,
+      "duration": 429.51499999617226,
+      "size": 1527
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/css/27bba7516dab0f79.css",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.803857,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.156054,
+      "duration": 352.1970000001602,
+      "size": 895
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/css/4e3216596a4c7b9f.css",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.803908,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.23357,
+      "duration": 429.6619999950053,
+      "size": 750
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/css/91823d4c4cc8b03e.css",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.803967,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.234061,
+      "duration": 430.0939999957336,
+      "size": 801
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/css/5e37f412465d2b31.css",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804009,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.156589,
+      "duration": 352.5800000061281,
+      "size": 961
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/5108.297df2e3f7f9f877.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804063,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.399826,
+      "duration": 595.7629999902565,
+      "size": 1397
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/3954.c6cae2ede5a9b4aa.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804098,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.51895,
+      "duration": 714.8520000046119,
+      "size": 813
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/7300.3a40777dd7eb3d63.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804127,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.520727,
+      "duration": 716.5999999997439,
+      "size": 771
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/4072.43fc59c0972ac940.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804167,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.411921,
+      "duration": 607.7540000114823,
+      "size": 1009
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/470.6d265f93f2b31b74.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804202,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.399416,
+      "duration": 595.2140000008512,
+      "size": 834
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/webpack-18042ab4937def80.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804234,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.411438,
+      "duration": 607.2039999999106,
+      "size": 4097
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/framework-945b357d4a851f4b.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804265,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.51982,
+      "duration": 715.555000002496,
+      "size": 46556
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/main-2947b42070779a22.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804295,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.663883,
+      "duration": 859.5880000066245,
+      "size": 40393
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/pages/_app-92abcef17f0ea6fa.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804322,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.930083,
+      "duration": 1125.7610000029672,
+      "size": 110735
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/2108-c0318710a8d7fa63.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804357,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.573933,
+      "duration": 769.5760000060545,
+      "size": 24273
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/1807-0d5d913039ea92d4.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804388,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.582455,
+      "duration": 778.0669999920065,
+      "size": 5202
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/2817-7065a1cc299fcc1e.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804418,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.574775,
+      "duration": 770.3570000012405,
+      "size": 3381
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/2882-ed3768c3bd73a805.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804447,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.600125,
+      "duration": 795.6779999949504,
+      "size": 12135
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/6996-d30c01a6947568bb.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.80448,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.604889,
+      "duration": 800.4089999885764,
+      "size": 3010
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/chunks/pages/index-76f3721158cf032a.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804513,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.927414,
+      "duration": 1122.9010000097333,
+      "size": 15959
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/NdOFVr2fyZdpIXunmFzn5/_buildManifest.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804546,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.418098,
+      "duration": 613.5519999952521,
+      "size": 4117
+    },
+    {
+      "url": "https://www.essentiallysports.com/_next/static/NdOFVr2fyZdpIXunmFzn5/_ssgManifest.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804576,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.521299,
+      "duration": 716.723000005004,
+      "size": 679
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Logo-Full-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75796.804612,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75798.379727,
+      "duration": 1575.1149999996414,
+      "size": 8840
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1006921847.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.015905,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.728685,
+      "duration": 2712.7800000016578,
+      "size": 46686
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1066184642.jpg?width=300",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.01604,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.730858,
+      "duration": 2714.8179999931017,
+      "size": 12339
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1067705668.jpg?width=300",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016109,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.730159,
+      "duration": 2714.0499999950407,
+      "size": 12256
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Copy-of-Copy-of-ES-WEB-FIs-1200-x-800-px-25-1.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016173,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.732965,
+      "duration": 2716.792000006535,
+      "size": 69256
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Rick-Barnes-Pat-Kelsey-Bob-Knight.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016231,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.831353,
+      "duration": 2815.121999999974,
+      "size": 41137
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/USATSI_27687339-e1765854934257.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016286,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.832848,
+      "duration": 2816.562000007252,
+      "size": 33494
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/MENDOZA-1.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016337,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.881018,
+      "duration": 2864.681000006385,
+      "size": 28632
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago10384379443.jpg?width=300",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016386,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75799.918955,
+      "duration": 2902.5689999980386,
+      "size": 7844
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Fernanado-mendoza.jpg?width=300",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016446,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.01684,
+      "duration": 3000.394000002416,
+      "size": 4505
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1018588421.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016495,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.016225,
+      "duration": 2999.729999995907,
+      "size": 40810
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1064177874.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016564,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.036247,
+      "duration": 3019.682999991346,
+      "size": 29519
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/freddy-peralta-pitching.jpg?width=900",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.016623,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.068471,
+      "duration": 3051.848000002792,
+      "size": 79074
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/FandomOfES.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.060868,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.111969,
+      "duration": 3051.1010000045644,
+      "size": 98759
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/A1-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.06101,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.128145,
+      "duration": 3067.1349999902304,
+      "size": 13746
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/A2.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061069,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.157049,
+      "duration": 3095.979999998235,
+      "size": 55525
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/B1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061134,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.157696,
+      "duration": 3096.561999991536,
+      "size": 15489
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/B2.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061196,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.283159,
+      "duration": 3221.9630000035977,
+      "size": 22592
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/B3-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061248,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.289352,
+      "duration": 3228.104000008898,
+      "size": 18566
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/C1-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061298,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.315103,
+      "duration": 3253.805000000284,
+      "size": 43741
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/C2-2.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061357,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.315795,
+      "duration": 3254.4380000035744,
+      "size": 21722
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/D1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061422,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.349264,
+      "duration": 3287.8420000051847,
+      "size": 22599
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/G1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061472,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.357961,
+      "duration": 3296.4890000002924,
+      "size": 20583
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/G2-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061533,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.400847,
+      "duration": 3339.3139999971027,
+      "size": 23647
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/G3-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061593,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.390687,
+      "duration": 3329.094000000623,
+      "size": 24339
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/H1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061644,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.531707,
+      "duration": 3470.063000000664,
+      "size": 30466
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/H2.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061702,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.534443,
+      "duration": 3472.740999990492,
+      "size": 11675
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/D2.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.061944,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.599497,
+      "duration": 3537.5530000019353,
+      "size": 20654
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/D3.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.6025,
+      "duration": 3540.499999988242,
+      "size": 15232
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/E1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062061,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.637537,
+      "duration": 3575.4759999981616,
+      "size": 68001
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/E2.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062109,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.646511,
+      "duration": 3584.4019999931334,
+      "size": 16942
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/F1-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062166,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.654127,
+      "duration": 3591.960999998264,
+      "size": 19776
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/F2-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062223,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.65908,
+      "duration": 3596.8569999968167,
+      "size": 17425
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/F3-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062294,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.770429,
+      "duration": 3708.13499999349,
+      "size": 12528
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/F4.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062342,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.772684,
+      "duration": 3710.341999991215,
+      "size": 22666
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/H3-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062393,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.842844,
+      "duration": 3780.4509999987204,
+      "size": 33093
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/i1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062438,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.841566,
+      "duration": 3779.128000009223,
+      "size": 13398
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/i2.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062542,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.872394,
+      "duration": 3809.852000005776,
+      "size": 25959
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/i33.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.062591,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.877856,
+      "duration": 3815.2650000120047,
+      "size": 19504
+    },
+    {
+      "url": "data:image/svg+xml,%3Csvg%20width%3D%2223%22%20height%3D%22201%22%20viewBox%3D%220%200%2023%20201%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M7.65974%20195.377C7.65974%20192.806%209.74388%20190.719%2012.3201%20190.719C14.8922%20190.719%2016.9805%20192.802%2016.9805%20195.377C16.9805%20197.948%2014.8963%20200.035%2012.3201%20200.035C9.74802%20200.035%207.65974%20197.952%207.65974%20195.377Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M8.14795%20171.027C8.14795%20168.716%2010.0211%20166.844%2012.3327%20166.844C14.6443%20166.844%2016.5217%20168.716%2016.5176%20171.031C16.5176%20173.341%2014.6443%20175.214%2012.3327%20175.214C10.0211%20175.214%208.14795%20173.341%208.14795%20171.027Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M8.68409%20146.669C8.68409%20144.656%2010.3174%20143.023%2012.3313%20143.023C14.3451%20143.023%2015.9785%20144.656%2015.9785%20146.669C15.9785%20148.682%2014.3451%20150.315%2012.3313%20150.315C10.3174%20150.315%208.68409%20148.682%208.68409%20146.669Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M9.16198%20122.323C9.16198%20120.57%2010.5845%20119.148%2012.3378%20119.148C14.0911%20119.148%2015.5137%20120.57%2015.5137%20122.323C15.5137%20124.075%2014.0911%20125.497%2012.3378%20125.497C10.5845%20125.497%209.16198%20124.075%209.16198%20122.323Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M9.69271%2097.9611C9.69271%2096.5061%2010.8712%2095.3281%2012.3268%2095.3281C13.7824%2095.3281%2014.9609%2096.5061%2014.9609%2097.9611C14.9609%2099.4161%2013.7824%20100.594%2012.3268%20100.594C10.8712%20100.594%209.69271%2099.4161%209.69271%2097.9611Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M10.1727%2073.6774C10.1727%2072.4828%2011.1403%2071.5156%2012.3354%2071.5156C13.5304%2071.5156%2014.498%2072.4828%2014.498%2073.6774C14.498%2074.872%2013.5304%2075.8392%2012.3354%2075.8392C11.1403%2075.8392%2010.1727%2074.872%2010.1727%2073.6774Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M10.717%2049.3156C10.717%2048.4228%2011.4406%2047.6953%2012.3379%2047.6953C13.2311%2047.6953%2013.959%2048.4187%2013.959%2049.3156C13.959%2050.2084%2013.2353%2050.9359%2012.3379%2050.9359C11.4406%2050.9359%2010.717%2050.2084%2010.717%2049.3156Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M11.1813%2024.9694C11.1813%2024.337%2011.6941%2023.8203%2012.3309%2023.8203C12.9636%2023.8203%2013.4805%2024.3329%2013.4805%2024.9694C13.4805%2025.6018%2012.9677%2026.1185%2012.3309%2026.1185C11.6982%2026.1185%2011.1813%2025.606%2011.1813%2024.9694Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M11.7221%200.609395C11.7221%200.273606%2011.9958%200%2012.3318%200C12.6677%200%2012.9414%200.273606%2012.9414%200.609395C12.9414%200.945185%2012.6677%201.21879%2012.3318%201.21879C11.9958%201.21879%2011.7221%200.945185%2011.7221%200.609395Z%22%20fill%3D%22black%22%2F%3E%3C%2Fsvg%3E",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75797.970403,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75797.970466,
+      "duration": 0.06299999949987978,
+      "size": 0
+    },
+    {
+      "url": "https://www.staging.essentiallysports.com/wp-content/uploads/Firefly_20251203124858-removebg-preview.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75798.013323,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75802.346803,
+      "duration": 4333.479999986594,
+      "size": 160460
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Jerry-Jones-1.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75798.013396,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75800.906043,
+      "duration": 2892.6470000005793,
+      "size": 59853
+    },
+    {
+      "url": "https://image-cdn.essentiallysports.com/wp-content/uploads/Luke.png",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75798.013418,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75801.047607,
+      "duration": 3034.1889999981504,
+      "size": 93716
+    },
+    {
+      "url": "https://sb.scorecardresearch.com/internal-cs/default/beacon.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75801.483161,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 200,
+      "endTime": 75801.737719,
+      "duration": 254.55800000054296,
+      "size": 6823
+    },
+    {
+      "url": "https://www.essentiallysports.com/_vercel/speed-insights/script.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75798.086077,
+      "initiator": {
+        "type": "script",
+        "url": "https://www.essentiallysports.com/_next/static/chunks/pages/_app-92abcef17f0ea6fa.js",
+        "lineNumber": 0
+      },
+      "status": 200,
+      "endTime": 75801.28833,
+      "duration": 3202.252999995835,
+      "size": 5052
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/js?id=UA-54357739-1&cx=c&gtm=4e5ca1",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75798.346728,
+      "initiator": {
+        "type": "script",
+        "url": "https://www.googletagmanager.com/gtag/js?id=UA-228013066-1",
+        "lineNumber": 118
+      },
+      "status": 200,
+      "endTime": 75801.381754,
+      "duration": 3035.0259999977425,
+      "size": 104802
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/js?id=G-9DS6R5BGCZ&cx=c&gtm=4e5ca1",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75798.34901,
+      "initiator": {
+        "type": "script",
+        "url": "https://www.googletagmanager.com/gtag/js?id=UA-228013066-1",
+        "lineNumber": 118
+      },
+      "status": 200,
+      "endTime": 75801.495418,
+      "duration": 3146.4080000005197,
+      "size": 135144
+    },
+    {
+      "url": "https://www.google-analytics.com/analytics.js",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75801.402593,
+      "initiator": {
+        "type": "script",
+        "url": "https://www.googletagmanager.com/gtag/js?id=UA-54357739-1&cx=c&gtm=4e5ca1",
+        "lineNumber": 89
+      },
+      "status": 200,
+      "endTime": 75802.354706,
+      "duration": 952.1129999920959,
+      "size": 21344
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/destination?id=G-820MT0GTWE&cx=c&gtm=4e5ca1",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75801.505417,
+      "initiator": {
+        "type": "script",
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-9DS6R5BGCZ&cx=c&gtm=4e5ca1",
+        "lineNumber": 178
+      },
+      "status": 200,
+      "endTime": 75801.883259,
+      "duration": 377.8420000016922,
+      "size": 145638
+    },
+    {
+      "url": "https://sb.scorecardresearch.com/b2?c1=2&c2=38433866&cs_it=b1&cv=4.13.1%2B2508250908&ns__t=1765896894872&ns_c=UTF-8&cs_cfg=1101110&c7=https%3A%2F%2Fwww.essentiallysports.com%2F%3Fpbjs_debug%3Dtrue&c8=EssentiallySports%20%7C%20The%20Fan%E2%80%99s%20Perspective&c9=",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75801.979195,
+      "initiator": {
+        "type": "parser",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true"
+      },
+      "status": 204,
+      "endTime": 75802.214207,
+      "duration": 235.0119999900926,
+      "size": 226
+    },
+    {
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-820MT0GTWE&gtm=45je5ca1v887635151za200&_p=1765896891200&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1743584803.1765896895&ul=en-us&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B143.0.7499.4%7CChromium%3B143.0.7499.4%7CNot%2520A(Brand%3B24.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&are=1&frm=0&pscdl=noapi&_s=1&tag_exp=103116026~103200004~104527907~104528500~104684208~104684211~105391253~115583767~115706422~115938465~115938469~116184927~116184929~116251938~116251940~116744867&sid=1765896895&sct=1&seg=0&dl=https%3A%2F%2Fwww.essentiallysports.com%2F%3Fpbjs_debug%3Dtrue&dt=EssentiallySports%20%7C%20The%20Fan%E2%80%99s%20Perspective&en=NicheListArticleShown&_fv=1&_nsi=1&_ss=1&_ee=1&ep.position=1&tfd=6008",
+      "method": "POST",
+      "type": "unknown",
+      "startTime": 75801.928495,
+      "initiator": {
+        "type": "script",
+        "url": "https://www.googletagmanager.com/gtag/destination?id=G-820MT0GTWE&cx=c&gtm=4e5ca1",
+        "lineNumber": 226
+      },
+      "status": 204
+    },
+    {
+      "url": "https://stats.g.doubleclick.net/g/collect?v=2&tid=G-820MT0GTWE&cid=1743584803.1765896895&gtm=45je5ca1v887635151za200&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=0&tag_exp=103116026~103200004~104527907~104528500~104684208~104684211~105391253~115583767~115706422~115938465~115938469~116184927~116184929~116251938~116251940~116744867",
+      "method": "POST",
+      "type": "unknown",
+      "startTime": 75801.929601,
+      "initiator": {
+        "type": "script",
+        "url": "https://www.googletagmanager.com/gtag/destination?id=G-820MT0GTWE&cx=c&gtm=4e5ca1",
+        "lineNumber": 225
+      },
+      "status": 204,
+      "endTime": 75802.670491,
+      "duration": 740.8900000009453,
+      "size": 565
+    },
+    {
+      "url": "https://sdk.mrf.io/statics/marfeel-sdk.js?id=6486",
+      "method": "GET",
+      "type": "unknown",
+      "startTime": 75802.36862,
+      "initiator": {
+        "type": "script",
+        "url": "https://www.essentiallysports.com/?pbjs_debug=true",
+        "lineNumber": 28
+      },
+      "status": 200,
+      "endTime": 75803.635845,
+      "duration": 1267.2250000032363,
+      "size": 40326
+    },
+    {
+      "url": "https://events.newsroom.bi/ingest.php",
+      "method": "POST",
+      "type": "unknown",
+      "startTime": 75803.663193,
+      "initiator": {
+        "type": "script",
+        "url": "https://sdk.mrf.io/statics/marfeel-sdk.js?id=6486",
+        "lineNumber": 1
+      }
+    },
+    {
+      "url": "https://icu.newsroom.bi/ingest.php",
+      "method": "POST",
+      "type": "unknown",
+      "startTime": 75803.666742,
+      "initiator": {
+        "type": "script",
+        "url": "https://sdk.mrf.io/statics/marfeel-sdk.js?id=6486",
+        "lineNumber": 1
+      },
+      "status": 200,
+      "endTime": 75804.630605,
+      "duration": 963.8629999972181,
+      "size": 1056
+    },
+    {
+      "url": "https://events.newsroom.bi/data/rfv.php",
+      "method": "POST",
+      "type": "unknown",
+      "startTime": 75804.633977,
+      "initiator": {
+        "type": "script",
+        "url": "https://sdk.mrf.io/statics/marfeel-sdk.js?id=6486",
+        "lineNumber": 1
+      }
+    }
+  ],
+  "initiatorChains": [
+    {
+      "targetUrl": "https://www.googletagmanager.com/gtag/js?id=UA-228013066-1",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1069088240.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1067039604-1.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Tom-Aspinall-Merab-Dvalishvili-Joshua-Van.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/PR-FI-2.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago261740277.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Nassourdine-Imavov-Dana-White-and-Khamzat-Chimaev.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1070390848.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Untitled-design-26-22.png?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Michigan-Wolverines.webp?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1053405185.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/USATSI_27805219.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Peyton-Watson.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1048485364.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1066136961.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/denny-hamlin-lost.webp?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/2024-09-12T224309Z_1490425823_MT1USATODAY24216103_RTRMADP_3_NFL-BUFFALO-BILLS-AT-MIAMI-DOLPHINS.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1041472544.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1064044606.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Oklahoma-Sooners-1.webp?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1051294634.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Shaquille-ONeal-22.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Tom-Brady-Scottie-Scheffler-Collage.png?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/UFC-2025-04-05T140657.737.png?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1057156257.jpg?width=270",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/College-Basketball-2.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/images-2025-10-17T221137.695-1.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Copy-of-Canva-FI-13-2.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Copy-of-ES-WEB-FIs-1080-x-720px-21-6.jpg?width=300",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/JJ-Redick-LeBron-James-Luka-Doncic-1.jpg?width=300",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1067652432.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Alex-GholeshHH.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Jon-Sumrall.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Dylan-Raiola-1.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/media/e4af272ccee01ff0-s.p.woff2",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/css/60f13ee908afdb73.css",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/css/d99ecab148278cae.css",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/css/74bde00a0cfb3069.css",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/css/ae8da34a681d8313.css",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/css/27bba7516dab0f79.css",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/css/4e3216596a4c7b9f.css",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/css/91823d4c4cc8b03e.css",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/css/5e37f412465d2b31.css",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/5108.297df2e3f7f9f877.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/3954.c6cae2ede5a9b4aa.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/7300.3a40777dd7eb3d63.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/4072.43fc59c0972ac940.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/470.6d265f93f2b31b74.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/webpack-18042ab4937def80.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/framework-945b357d4a851f4b.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/main-2947b42070779a22.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/pages/_app-92abcef17f0ea6fa.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/2108-c0318710a8d7fa63.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/1807-0d5d913039ea92d4.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/2817-7065a1cc299fcc1e.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/2882-ed3768c3bd73a805.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/6996-d30c01a6947568bb.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/chunks/pages/index-76f3721158cf032a.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/NdOFVr2fyZdpIXunmFzn5/_buildManifest.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_next/static/NdOFVr2fyZdpIXunmFzn5/_ssgManifest.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Logo-Full-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1006921847.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1066184642.jpg?width=300",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1067705668.jpg?width=300",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Copy-of-Copy-of-ES-WEB-FIs-1200-x-800-px-25-1.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Rick-Barnes-Pat-Kelsey-Bob-Knight.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/USATSI_27687339-e1765854934257.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/MENDOZA-1.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago10384379443.jpg?width=300",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Fernanado-mendoza.jpg?width=300",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1018588421.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/imago1064177874.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/freddy-peralta-pitching.jpg?width=900",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/FandomOfES.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/A1-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/A2.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/B1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/B2.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/B3-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/C1-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/C2-2.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/D1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/G1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/G2-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/G3-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/H1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/H2.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/D2.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/D3.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/E1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/E2.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/F1-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/F2-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/F3-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/F4.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/H3-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/i1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/i2.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/i33.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "data:image/svg+xml,%3Csvg%20width%3D%2223%22%20height%3D%22201%22%20viewBox%3D%220%200%2023%20201%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M7.65974%20195.377C7.65974%20192.806%209.74388%20190.719%2012.3201%20190.719C14.8922%20190.719%2016.9805%20192.802%2016.9805%20195.377C16.9805%20197.948%2014.8963%20200.035%2012.3201%20200.035C9.74802%20200.035%207.65974%20197.952%207.65974%20195.377Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M8.14795%20171.027C8.14795%20168.716%2010.0211%20166.844%2012.3327%20166.844C14.6443%20166.844%2016.5217%20168.716%2016.5176%20171.031C16.5176%20173.341%2014.6443%20175.214%2012.3327%20175.214C10.0211%20175.214%208.14795%20173.341%208.14795%20171.027Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M8.68409%20146.669C8.68409%20144.656%2010.3174%20143.023%2012.3313%20143.023C14.3451%20143.023%2015.9785%20144.656%2015.9785%20146.669C15.9785%20148.682%2014.3451%20150.315%2012.3313%20150.315C10.3174%20150.315%208.68409%20148.682%208.68409%20146.669Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M9.16198%20122.323C9.16198%20120.57%2010.5845%20119.148%2012.3378%20119.148C14.0911%20119.148%2015.5137%20120.57%2015.5137%20122.323C15.5137%20124.075%2014.0911%20125.497%2012.3378%20125.497C10.5845%20125.497%209.16198%20124.075%209.16198%20122.323Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M9.69271%2097.9611C9.69271%2096.5061%2010.8712%2095.3281%2012.3268%2095.3281C13.7824%2095.3281%2014.9609%2096.5061%2014.9609%2097.9611C14.9609%2099.4161%2013.7824%20100.594%2012.3268%20100.594C10.8712%20100.594%209.69271%2099.4161%209.69271%2097.9611Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M10.1727%2073.6774C10.1727%2072.4828%2011.1403%2071.5156%2012.3354%2071.5156C13.5304%2071.5156%2014.498%2072.4828%2014.498%2073.6774C14.498%2074.872%2013.5304%2075.8392%2012.3354%2075.8392C11.1403%2075.8392%2010.1727%2074.872%2010.1727%2073.6774Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M10.717%2049.3156C10.717%2048.4228%2011.4406%2047.6953%2012.3379%2047.6953C13.2311%2047.6953%2013.959%2048.4187%2013.959%2049.3156C13.959%2050.2084%2013.2353%2050.9359%2012.3379%2050.9359C11.4406%2050.9359%2010.717%2050.2084%2010.717%2049.3156Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M11.1813%2024.9694C11.1813%2024.337%2011.6941%2023.8203%2012.3309%2023.8203C12.9636%2023.8203%2013.4805%2024.3329%2013.4805%2024.9694C13.4805%2025.6018%2012.9677%2026.1185%2012.3309%2026.1185C11.6982%2026.1185%2011.1813%2025.606%2011.1813%2024.9694Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M11.7221%200.609395C11.7221%200.273606%2011.9958%200%2012.3318%200C12.6677%200%2012.9414%200.273606%2012.9414%200.609395C12.9414%200.945185%2012.6677%201.21879%2012.3318%201.21879C11.9958%201.21879%2011.7221%200.945185%2011.7221%200.609395Z%22%20fill%3D%22black%22%2F%3E%3C%2Fsvg%3E",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.staging.essentiallysports.com/wp-content/uploads/Firefly_20251203124858-removebg-preview.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Jerry-Jones-1.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://image-cdn.essentiallysports.com/wp-content/uploads/Luke.png",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://sb.scorecardresearch.com/internal-cs/default/beacon.js",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.essentiallysports.com/_vercel/speed-insights/script.js",
+      "initiatorUrl": "https://www.essentiallysports.com/_next/static/chunks/pages/_app-92abcef17f0ea6fa.js",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.googletagmanager.com/gtag/js?id=UA-54357739-1&cx=c&gtm=4e5ca1",
+      "initiatorUrl": "https://www.googletagmanager.com/gtag/js?id=UA-228013066-1",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.googletagmanager.com/gtag/js?id=G-9DS6R5BGCZ&cx=c&gtm=4e5ca1",
+      "initiatorUrl": "https://www.googletagmanager.com/gtag/js?id=UA-228013066-1",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.google-analytics.com/analytics.js",
+      "initiatorUrl": "https://www.googletagmanager.com/gtag/js?id=UA-54357739-1&cx=c&gtm=4e5ca1",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://www.googletagmanager.com/gtag/destination?id=G-820MT0GTWE&cx=c&gtm=4e5ca1",
+      "initiatorUrl": "https://www.googletagmanager.com/gtag/js?id=G-9DS6R5BGCZ&cx=c&gtm=4e5ca1",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://sb.scorecardresearch.com/b2?c1=2&c2=38433866&cs_it=b1&cv=4.13.1%2B2508250908&ns__t=1765896894872&ns_c=UTF-8&cs_cfg=1101110&c7=https%3A%2F%2Fwww.essentiallysports.com%2F%3Fpbjs_debug%3Dtrue&c8=EssentiallySports%20%7C%20The%20Fan%E2%80%99s%20Perspective&c9=",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://analytics.google.com/g/collect?v=2&tid=G-820MT0GTWE&gtm=45je5ca1v887635151za200&_p=1765896891200&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1743584803.1765896895&ul=en-us&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B143.0.7499.4%7CChromium%3B143.0.7499.4%7CNot%2520A(Brand%3B24.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&are=1&frm=0&pscdl=noapi&_s=1&tag_exp=103116026~103200004~104527907~104528500~104684208~104684211~105391253~115583767~115706422~115938465~115938469~116184927~116184929~116251938~116251940~116744867&sid=1765896895&sct=1&seg=0&dl=https%3A%2F%2Fwww.essentiallysports.com%2F%3Fpbjs_debug%3Dtrue&dt=EssentiallySports%20%7C%20The%20Fan%E2%80%99s%20Perspective&en=NicheListArticleShown&_fv=1&_nsi=1&_ss=1&_ee=1&ep.position=1&tfd=6008",
+      "initiatorUrl": "https://www.googletagmanager.com/gtag/destination?id=G-820MT0GTWE&cx=c&gtm=4e5ca1",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://stats.g.doubleclick.net/g/collect?v=2&tid=G-820MT0GTWE&cid=1743584803.1765896895&gtm=45je5ca1v887635151za200&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=0&tag_exp=103116026~103200004~104527907~104528500~104684208~104684211~105391253~115583767~115706422~115938465~115938469~116184927~116184929~116251938~116251940~116744867",
+      "initiatorUrl": "https://www.googletagmanager.com/gtag/destination?id=G-820MT0GTWE&cx=c&gtm=4e5ca1",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://sdk.mrf.io/statics/marfeel-sdk.js?id=6486",
+      "initiatorUrl": "https://www.essentiallysports.com/?pbjs_debug=true",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://events.newsroom.bi/ingest.php",
+      "initiatorUrl": "https://sdk.mrf.io/statics/marfeel-sdk.js?id=6486",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://icu.newsroom.bi/ingest.php",
+      "initiatorUrl": "https://sdk.mrf.io/statics/marfeel-sdk.js?id=6486",
+      "depth": 1
+    },
+    {
+      "targetUrl": "https://events.newsroom.bi/data/rfv.php",
+      "initiatorUrl": "https://sdk.mrf.io/statics/marfeel-sdk.js?id=6486",
+      "depth": 1
+    }
+  ]
+}

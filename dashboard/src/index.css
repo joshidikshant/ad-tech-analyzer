@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cyberpunk Data Forensics Theme - CSS Variables */
+:root {
+  /* Base Colors - Dark Cyberpunk */
+  --color-bg-primary: #0a0e14;
+  --color-bg-secondary: #121820;
+  --color-bg-tertiary: #1a2332;
+
+  /* Electric Accents */
+  --color-accent-primary: #00ff9f;
+  --color-accent-secondary: #00d4ff;
+  --color-accent-tertiary: #ff00ff;
+
+  /* Text Hierarchy */
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-tertiary: #6e7681;
+
+  /* Semantic Colors */
+  --color-success: #00ff9f;
+  --color-warning: #ffaa00;
+  --color-error: #ff4d6d;
+  --color-info: #00d4ff;
+
+  /* Data Visualization */
+  --color-chart-1: #00ff9f;
+  --color-chart-2: #00d4ff;
+  --color-chart-3: #ff00ff;
+  --color-chart-4: #ffaa00;
+  --color-chart-5: #ff4d6d;
+  --color-chart-6: #7c3aed;
+  --color-chart-7: #8b949e;
+
+  /* Effects */
+  --color-glow-primary: rgba(0, 255, 159, 0.3);
+  --color-glow-secondary: rgba(0, 212, 255, 0.3);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-accent: rgba(0, 255, 159, 0.3);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #0a0e14 0%, #1a2332 100%);
+  --gradient-accent: linear-gradient(135deg, #00ff9f 0%, #00d4ff 100%);
+  --gradient-mesh: radial-gradient(circle at 20% 50%, rgba(0, 255, 159, 0.1) 0%, transparent 50%),
+                   radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+
+  /* Typography */
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: var(--gradient-mesh);
+  background-attachment: fixed;
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+/* Animation Keyframes */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--color-glow-primary), 0 0 10px var(--color-glow-primary);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--color-glow-primary), 0 0 20px var(--color-glow-primary), 0 0 30px var(--color-glow-primary);
+  }
+}
+
+@keyframes glow-pulse-secondary {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--color-glow-secondary), 0 0 10px var(--color-glow-secondary);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--color-glow-secondary), 0 0 20px var(--color-glow-secondary), 0 0 30px var(--color-glow-secondary);
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes grid-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes text-glow {
+  0%, 100% {
+    text-shadow: 0 0 5px var(--color-accent-primary);
+  }
+  50% {
+    text-shadow: 0 0 10px var(--color-accent-primary), 0 0 20px var(--color-accent-primary);
+  }
+}
+
+/* Utility Classes */
+.glow-text {
+  animation: text-glow 2s ease-in-out infinite;
+}
+
+.glow-border {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.glow-border-secondary {
+  animation: glow-pulse-secondary 2s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-secondary);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent-primary);
+  color: var(--color-bg-primary);
+}

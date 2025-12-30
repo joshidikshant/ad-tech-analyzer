@@ -1,0 +1,85 @@
+{
+  "success": true,
+  "url": "https://www.macworld.com/article/3013322/2025-macworld-awards-apples-biggest-wins-and-misses.html",
+  "timestamp": "2025-12-19T02:19:30.000Z",
+  "duration": 12000,
+  "vendors_detected": 13,
+  "ssp_count": 10,
+  "managed_service": "IDG Custom",
+  "prebid_detected": true,
+  "gam_detected": true,
+  "vendors": [
+    "Amazon APS",
+    "Rubicon",
+    "Criteo",
+    "Smart AdServer",
+    "Sharethrough",
+    "TripleLift",
+    "Index Exchange",
+    "NextMillennium",
+    "Sparteo",
+    "YellowBlue",
+    "Ingage",
+    "SmileWanted",
+    "360yield"
+  ],
+  "categories": {
+    "ssp": [
+      "Amazon APS",
+      "Rubicon",
+      "Criteo",
+      "Sharethrough",
+      "TripleLift",
+      "Index Exchange",
+      "NextMillennium",
+      "Sparteo",
+      "YellowBlue",
+      "Ingage"
+    ],
+    "ad_server": [
+      "Smart AdServer",
+      "Google Ad Manager"
+    ],
+    "ad_optimization": [
+      "360yield",
+      "SmileWanted"
+    ],
+    "security": [
+      "GeoEdge"
+    ],
+    "cmp": [
+      "Sourcepoint"
+    ]
+  },
+  "runtime_config": {
+    "prebid_version": "9.50.0",
+    "ad_units_count": 0,
+    "gam_slots": 0,
+    "idg_framework": true,
+    "amazon_aps": false,
+    "user_id_modules_count": 0,
+    "custom_wrappers": {
+      "idg": true,
+      "adthrive": false,
+      "raptive": false,
+      "mediavine": false
+    }
+  },
+  "network_summary": {
+    "total_requests": 133,
+    "bid_requests": 40,
+    "active_bidders": 10
+  },
+  "pattern_gaps": [
+    "Amazon APS (aax.amazon-adsystem.com) - not detected by classifier",
+    "Sharethrough (btlr.sharethrough.com) - not detected",
+    "TripleLift (tlx.3lift.com) - not detected",
+    "NextMillennium (pbs.nextmillmedia.com) - not detected",
+    "Sparteo (bid.sparteo.com) - not detected",
+    "YellowBlue (hb.yellowblue.io) - not detected",
+    "Ingage (ex.ingage.tech) - not detected",
+    "SmileWanted (prebid.smilewanted.com) - not detected",
+    "360yield (pbs.360yield.com) - not detected"
+  ],
+  "notes": "IDG network property (Macworld) with heavy Prebid integration (v9.50.0). Prebid wrapped in IDG framework so window.pbjs not directly exposed. 10+ SSPs bidding including Amazon, Rubicon, Criteo, TripleLift. Significant pattern gaps identified - many SSPs not detected by current classifier."
+}

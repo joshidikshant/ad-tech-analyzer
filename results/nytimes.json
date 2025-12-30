@@ -1,0 +1,602 @@
+{
+  "analysis_metadata": {
+    "url": "https://www.nytimes.com",
+    "timestamp": "2025-12-22T08:16:02.852Z",
+    "analysis_method": "Network Classification + Runtime API Query",
+    "total_network_requests": 180,
+    "unique_urls_analyzed": 175
+  },
+  "executive_summary": {
+    "total_vendors_detected": 9,
+    "managed_service": null,
+    "header_bidding_wrapper": "Prebid.js v9.45.0",
+    "ad_server": "Google Ad Manager",
+    "ssp_count": 7,
+    "user_id_modules": 4,
+    "ad_units_active": 0
+  },
+  "network_analysis": {
+    "vendors_detected": [
+      "Google Ad Manager",
+      "Amazon APS",
+      "Media.net",
+      "TripleLift",
+      "PubMatic",
+      "OpenX",
+      "Rubicon",
+      "Criteo",
+      "Index Exchange"
+    ],
+    "categorized_vendors": {
+      "ad_server": [
+        "Google Ad Manager"
+      ],
+      "header_bidding": [
+        "Amazon APS"
+      ],
+      "ssp": [
+        "Media.net",
+        "TripleLift",
+        "PubMatic",
+        "OpenX",
+        "Rubicon",
+        "Criteo",
+        "Index Exchange"
+      ]
+    }
+  },
+  "runtime_configuration": {
+    "prebid": {
+      "version": "v9.45.0",
+      "present": true,
+      "bidder_timeout": 3000,
+      "enable_send_all_bids": true,
+      "user_id_modules": [
+        {
+          "name": "criteo"
+        },
+        {
+          "name": "identityLink",
+          "params": {
+            "pid": "14158",
+            "notUse3P": true
+          },
+          "storage": {
+            "expires": 15,
+            "refreshInSeconds": 1800,
+            "type": "html5",
+            "name": "idl_env"
+          }
+        },
+        {
+          "name": "pairId",
+          "params": {
+            "liveramp": {
+              "storageKey": "_lr_pairId"
+            }
+          }
+        },
+        {
+          "name": "uid2",
+          "params": {
+            "uid2ApiBase": "https://prod.uidapi.com",
+            "serverPublicKey": "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEb2nFEsnJ0npRQbsCE7O7IINIMdgu4J29kiA1Hm7GYqfTQAsmqgAQD1YfVkuBR319JpxJYrJzO6Vp73++LTlIwA==",
+            "subscriptionId": "jCQUsadB4p",
+            "uid2ServerCookie": ""
+          }
+        }
+      ],
+      "ad_units": [],
+      "price_granularity": "custom"
+    },
+    "google_ad_manager": {
+      "present": true,
+      "gpt_version": "202512040101",
+      "slots": [
+        {
+          "adUnitPath": "/29390238/nyt/homepage",
+          "sizes": [
+            null
+          ],
+          "targeting": {
+            "ss_id": [
+              "79b8dd5a-bab8-43f2-94e6-4b535ee33da0"
+            ],
+            "div": [
+              "dfp-ad-top"
+            ],
+            "pos": [
+              "top"
+            ],
+            "amznbid": [
+              "1"
+            ],
+            "amznp": [
+              "1"
+            ],
+            "request_time": [
+              "9024"
+            ],
+            "hb_pvid_medianet": [
+              "8154"
+            ],
+            "hb_format": [
+              "banner"
+            ],
+            "hb_size": [
+              "728x90"
+            ],
+            "hb_pb": [
+              "0.40"
+            ],
+            "hb_adid": [
+              "46a151fad98301a"
+            ],
+            "hb_pvid": [
+              "8154"
+            ],
+            "hb_bidder": [
+              "medianet"
+            ],
+            "hb_cid": [
+              "8CU26C87G"
+            ],
+            "hb_acid": [
+              "87e1f1ac-b326-4ff1-b551-f966ccc2dcc4"
+            ],
+            "hb_adunitcode": [
+              "dfp-ad-top"
+            ],
+            "hb_format_medianet": [
+              "banner"
+            ],
+            "hb_size_medianet": [
+              "728x90"
+            ],
+            "hb_pb_medianet": [
+              "0.40"
+            ],
+            "hb_adid_medianet": [
+              "46a151fad98301a"
+            ],
+            "hb_bidder_medianet": [
+              "medianet"
+            ],
+            "hb_dnb": [],
+            "mnet_expbkt": [],
+            "hb_flr_bkt": [],
+            "mnldp": [],
+            "hb_abt": [
+              "mp"
+            ],
+            "hb_prebidmanage": [
+              "1"
+            ],
+            "mnadc": [
+              "dfp-ad-top"
+            ]
+          }
+        },
+        {
+          "adUnitPath": "/29390238/nyt/homepage",
+          "sizes": [
+            null
+          ],
+          "targeting": {
+            "ss_id": [
+              "a53cbe72-f0fa-4927-a0e6-21d5479a2e58"
+            ],
+            "div": [
+              "dfp-ad-mid1"
+            ],
+            "pos": [
+              "mid1"
+            ],
+            "format_rules": [
+              "noxl"
+            ],
+            "amznbid": [
+              "2"
+            ],
+            "amznp": [
+              "2"
+            ],
+            "hb_pvid_pubmatic": [
+              "8195"
+            ],
+            "hb_format": [
+              "banner"
+            ],
+            "hb_size": [
+              "728x90"
+            ],
+            "hb_pb": [
+              "1.80"
+            ],
+            "hb_adid": [
+              "441c669200e43708"
+            ],
+            "hb_pvid": [
+              "8195"
+            ],
+            "hb_bidder": [
+              "pubmatic"
+            ],
+            "hb_cid": [
+              "8CU26C87G"
+            ],
+            "hb_acid": [
+              "87e1f1ac-b326-4ff1-b551-f966ccc2dcc4"
+            ],
+            "hb_adunitcode": [
+              "dfp-ad-mid1"
+            ],
+            "hb_format_pubmatic": [
+              "banner"
+            ],
+            "hb_size_pubmatic": [
+              "728x90"
+            ],
+            "hb_pb_pubmatic": [
+              "1.80"
+            ],
+            "hb_adid_pubmatic": [
+              "441c669200e43708"
+            ],
+            "hb_bidder_pubmatic": [
+              "pubmatic"
+            ],
+            "hb_format_medianet": [
+              "banner"
+            ],
+            "hb_size_medianet": [
+              "728x90"
+            ],
+            "hb_pb_medianet": [
+              "0.40"
+            ],
+            "hb_adid_medianet": [
+              "4788240cb3ac5f5"
+            ],
+            "hb_bidder_medianet": [
+              "medianet"
+            ],
+            "hb_dnb": [],
+            "mnet_expbkt": [],
+            "hb_flr_bkt": [],
+            "mnldp": [],
+            "hb_abt": [
+              "mp"
+            ],
+            "hb_prebidmanage": [
+              "1"
+            ],
+            "mnadc": [
+              "dfp-ad-mid1"
+            ],
+            "hb_pvid_medianet": [
+              "8154"
+            ]
+          }
+        },
+        {
+          "adUnitPath": "/29390238/nyt/homepage",
+          "sizes": [
+            null
+          ],
+          "targeting": {
+            "ss_id": [
+              "1eeea319-3437-4b50-a0ac-73900b3035a5"
+            ],
+            "div": [
+              "dfp-ad-mid2"
+            ],
+            "pos": [
+              "mid2"
+            ],
+            "format_rules": [
+              "noxl"
+            ],
+            "amznbid": [
+              "1"
+            ],
+            "amznp": [
+              "1"
+            ],
+            "hb_pvid_medianet": [
+              "8154"
+            ],
+            "hb_format": [
+              "banner"
+            ],
+            "hb_size": [
+              "728x90"
+            ],
+            "hb_pb": [
+              "0.40"
+            ],
+            "hb_adid": [
+              "487da230a9afa4b"
+            ],
+            "hb_pvid": [
+              "8154"
+            ],
+            "hb_bidder": [
+              "medianet"
+            ],
+            "hb_cid": [
+              "8CU26C87G"
+            ],
+            "hb_acid": [
+              "87e1f1ac-b326-4ff1-b551-f966ccc2dcc4"
+            ],
+            "hb_adunitcode": [
+              "dfp-ad-mid2"
+            ],
+            "hb_format_medianet": [
+              "banner"
+            ],
+            "hb_size_medianet": [
+              "728x90"
+            ],
+            "hb_pb_medianet": [
+              "0.40"
+            ],
+            "hb_adid_medianet": [
+              "487da230a9afa4b"
+            ],
+            "hb_bidder_medianet": [
+              "medianet"
+            ],
+            "hb_dnb": [],
+            "mnet_expbkt": [],
+            "hb_flr_bkt": [],
+            "mnldp": [],
+            "hb_abt": [
+              "mp"
+            ],
+            "hb_prebidmanage": [
+              "1"
+            ],
+            "mnadc": [
+              "dfp-ad-mid2"
+            ]
+          }
+        },
+        {
+          "adUnitPath": "/29390238/nyt/homepage",
+          "sizes": [
+            null
+          ],
+          "targeting": {
+            "ss_id": [
+              "934020a4-4c86-4758-8821-b29a984c0f9b"
+            ],
+            "div": [
+              "dfp-ad-mid3"
+            ],
+            "pos": [
+              "mid3"
+            ],
+            "format_rules": [
+              "noxl"
+            ],
+            "amznbid": [
+              "1"
+            ],
+            "amznp": [
+              "1"
+            ],
+            "hb_pvid_medianet": [
+              "8154"
+            ],
+            "hb_format": [
+              "banner"
+            ],
+            "hb_size": [
+              "970x250"
+            ],
+            "hb_pb": [
+              "0.15"
+            ],
+            "hb_adid": [
+              "49ad9a4cb03814e8"
+            ],
+            "hb_pvid": [
+              "8154"
+            ],
+            "hb_bidder": [
+              "medianet"
+            ],
+            "hb_cid": [
+              "8CU26C87G"
+            ],
+            "hb_acid": [
+              "87e1f1ac-b326-4ff1-b551-f966ccc2dcc4"
+            ],
+            "hb_adunitcode": [
+              "dfp-ad-mid3"
+            ],
+            "hb_format_medianet": [
+              "banner"
+            ],
+            "hb_size_medianet": [
+              "970x250"
+            ],
+            "hb_pb_medianet": [
+              "0.15"
+            ],
+            "hb_adid_medianet": [
+              "49ad9a4cb03814e8"
+            ],
+            "hb_bidder_medianet": [
+              "medianet"
+            ],
+            "hb_dnb": [],
+            "mnet_expbkt": [],
+            "hb_flr_bkt": [],
+            "mnldp": [],
+            "hb_abt": [
+              "mp"
+            ],
+            "hb_prebidmanage": [
+              "1"
+            ],
+            "mnadc": [
+              "dfp-ad-mid3"
+            ]
+          }
+        },
+        {
+          "adUnitPath": "/29390238/nyt/homepage",
+          "sizes": [
+            null
+          ],
+          "targeting": {
+            "ss_id": [
+              "6821115e-d3fa-41bc-b746-b9645757d40d"
+            ],
+            "div": [
+              "dfp-ad-bottom"
+            ],
+            "pos": [
+              "bottom"
+            ],
+            "format_rules": [
+              "noxl"
+            ],
+            "amznbid": [
+              "1"
+            ],
+            "amznp": [
+              "1"
+            ],
+            "hb_pvid_ix": [
+              "8128"
+            ],
+            "hb_format": [
+              "banner"
+            ],
+            "hb_size": [
+              "970x250"
+            ],
+            "hb_pb": [
+              "0.40"
+            ],
+            "hb_adid": [
+              "45701e1cb6ee3bc8"
+            ],
+            "hb_pvid": [
+              "8128"
+            ],
+            "hb_bidder": [
+              "ix"
+            ],
+            "hb_cid": [
+              "8CU26C87G"
+            ],
+            "hb_acid": [
+              "87e1f1ac-b326-4ff1-b551-f966ccc2dcc4"
+            ],
+            "hb_adunitcode": [
+              "dfp-ad-bottom"
+            ],
+            "hb_format_ix": [
+              "banner"
+            ],
+            "hb_size_ix": [
+              "970x250"
+            ],
+            "hb_pb_ix": [
+              "0.40"
+            ],
+            "hb_adid_ix": [
+              "45701e1cb6ee3bc8"
+            ],
+            "hb_bidder_ix": [
+              "ix"
+            ],
+            "hb_dnb": [],
+            "mnet_expbkt": [],
+            "hb_flr_bkt": [],
+            "mnldp": [],
+            "hb_abt": [
+              "mp"
+            ],
+            "hb_prebidmanage": [
+              "1"
+            ],
+            "mnadc": [
+              "dfp-ad-bottom"
+            ]
+          }
+        }
+      ],
+      "page_targeting": {
+        "als_test_clientside": [
+          "reqfailed_reqfailed_reqfailed_2169"
+        ],
+        "cookie": [
+          "false"
+        ],
+        "edn": [
+          "us"
+        ],
+        "test": [
+          "projectvi"
+        ],
+        "ver": [
+          "vi"
+        ],
+        "typ": [
+          "hp"
+        ],
+        "prop": [
+          "nyt"
+        ],
+        "plat": [
+          "web"
+        ],
+        "abra_dfp": [
+          "dfp_adelaide_0325_0_ros"
+        ],
+        "sov": [
+          "1"
+        ],
+        "page_view_id": [
+          "jRviLmBJi8JO3H6KNHwgKV9E"
+        ],
+        "purr": [
+          "full"
+        ],
+        "ps_id": [
+          "6632ba5a-26a1-4a13-af20-9db399f4a3e1"
+        ],
+        "vp": [
+          "large"
+        ],
+        "uap": [
+          "browser"
+        ]
+      }
+    }
+  },
+  "key_insights": {
+    "identity_resolution": {
+      "strategy": "Multi-provider identity graph",
+      "id_providers": 4
+    }
+  },
+  "technical_architecture": {
+    "stack": "Prebid.js → Google Ad Manager"
+  },
+  "monetization_analysis": {
+    "revenue_optimization_score": "Basic",
+    "factors": {
+      "bidder_density": "High",
+      "s2s_bidding": "None",
+      "identity_resolution": "Basic",
+      "managed_service": "No"
+    }
+  }
+}

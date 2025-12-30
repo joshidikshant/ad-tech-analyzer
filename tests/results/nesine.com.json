@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "url": "https://istatistik.nesine.com/2556712/ozet",
+  "timestamp": "2025-12-19T02:11:30.000Z",
+  "duration": 12000,
+  "vendors_detected": 1,
+  "ssp_count": 0,
+  "managed_service": "Ezoic",
+  "prebid_detected": false,
+  "gam_detected": false,
+  "vendors": [
+    "Ezoic"
+  ],
+  "categories": {
+    "managed_service": [
+      "Ezoic"
+    ],
+    "analytics": [
+      "Google Analytics",
+      "Facebook Pixel",
+      "New Relic"
+    ],
+    "tag_manager": [
+      "Google Tag Manager"
+    ]
+  },
+  "runtime_config": {
+    "prebid_version": null,
+    "ad_units_count": 0,
+    "user_id_modules_count": 0,
+    "custom_wrappers": {
+      "adthrive": false,
+      "mediavine": false,
+      "ezoic": false,
+      "amazon_apstag": false,
+      "criteo": false,
+      "openx": false,
+      "rubicon": false
+    }
+  },
+  "network_summary": {
+    "total_requests": 63,
+    "ad_tech_requests": 14,
+    "tracking_pixels": 8
+  },
+  "notes": "Turkish sports statistics site with Ezoic managed ads. Minimal ad-tech stack compared to US sites. No Prebid or header bidding detected."
+}

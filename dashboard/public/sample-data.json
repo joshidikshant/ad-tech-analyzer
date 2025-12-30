@@ -1,0 +1,162 @@
+{
+  "success": true,
+  "data": {
+    "url": "https://www.carscoops.com/",
+    "timestamp": "2025-12-26T19:30:39.208Z",
+    "device": "desktop",
+    "vendors": [
+      "Google Ad Manager",
+      "AdPushup",
+      "Prebid.js",
+      "Amazon APS",
+      "Quantcast",
+      "Criteo",
+      "The Trade Desk",
+      "SmileWanted",
+      "YellowBlue",
+      "Sparteo",
+      "Sovrn",
+      "Rubicon",
+      "Teads",
+      "Sharethrough",
+      "PubMatic",
+      "Media.net",
+      "TripleLift",
+      "NextMillennium",
+      "AppNexus",
+      "Smart AdServer",
+      "Index Exchange"
+    ],
+    "vendor_count": 21,
+    "ssp_count": 14,
+    "managed_service": "AdPushup",
+    "categories": {
+      "ad_server": ["Google Ad Manager", "Smart AdServer"],
+      "managed_service": ["AdPushup"],
+      "header_bidding": ["Prebid.js", "Amazon APS"],
+      "consent": ["Quantcast"],
+      "ssp": [
+        "Criteo",
+        "SmileWanted",
+        "YellowBlue",
+        "Sparteo",
+        "Sovrn",
+        "Rubicon",
+        "Teads",
+        "Sharethrough",
+        "PubMatic",
+        "Media.net",
+        "TripleLift",
+        "NextMillennium",
+        "AppNexus",
+        "Index Exchange"
+      ],
+      "identity": ["The Trade Desk"]
+    },
+    "prebid": {
+      "detected": true,
+      "config": {
+        "priceGranularity": "dense",
+        "timeout": 3000,
+        "currency": {
+          "adServerCurrency": "USD"
+        }
+      },
+      "bid_responses": null
+    },
+    "gam": {
+      "detected": true,
+      "slots": [
+        {
+          "adUnitPath": "/103512698,17301952/ADP_44437_responsiveXresponsive_82503191-e1d1-435a-874f-9c78a2a54a2f",
+          "elementId": "ADP_44437_responsivexresponsive_00000001-2ebdfbbc-67ac-4e7b-90f5-20329cad579d",
+          "sizes": [
+            {"width": 970, "height": 306},
+            {"width": 970, "height": 250},
+            {"width": 728, "height": 300},
+            {"width": 300, "height": 250},
+            {"width": 728, "height": 90}
+          ]
+        },
+        {
+          "adUnitPath": "/103512698,17301952/ADP_44437_responsiveXresponsive_f25825bd-1260-4574-84ce-2b26e315fad8",
+          "elementId": "ADP_44437_responsivexresponsive_00000001-5f694908-c809-42fb-ae22-ff62020398ae",
+          "sizes": [
+            {"width": 970, "height": 306},
+            {"width": 728, "height": 300},
+            {"width": 300, "height": 250}
+          ]
+        },
+        {
+          "adUnitPath": "/103512698,17301952/ADP_44437_responsiveXresponsive_9b1169d9-7a89-4971-a77f-1397f7588751",
+          "elementId": "ADP_44437_responsivexresponsive_00000001-50a8a16f-d96c-4481-9034-a5e3c21e721b",
+          "sizes": [
+            {"width": 970, "height": 250},
+            {"width": 728, "height": 90}
+          ]
+        },
+        {
+          "adUnitPath": "/103512698,17301952/HVU_ADP_44437_responsiveXresponsive_6655775d-e4d7-4616-a36d-3d65a760bed3",
+          "elementId": "ADP_44437_responsivexresponsive_00000001-2cfcc333-7d92-4e49-899b-e6ce6f1975f0",
+          "sizes": [
+            {"width": 300, "height": 250}
+          ]
+        },
+        {
+          "adUnitPath": "/103512698,17301952/HVU_ADP_44437_responsiveXresponsive_6655775d-e4d7-4616-a36d-3d65a760bed3",
+          "elementId": "ADP_44437_responsivexresponsive_00000001-f763ea05-144d-412a-bb2f-003d82aa73af",
+          "sizes": [
+            {"width": 300, "height": 250}
+          ]
+        }
+      ],
+      "targeting": []
+    },
+    "managed_services_detected": {
+      "adthrive": false,
+      "freestar": false,
+      "raptive": false,
+      "mediavine": false,
+      "ezoic": false,
+      "adpushup": true,
+      "adapex": false,
+      "pubguru": false,
+      "vuukle": false,
+      "pubgalaxy": false
+    },
+    "custom_wrappers": [
+      {
+        "key": "adpushup",
+        "methods": ["que"]
+      },
+      {
+        "key": "googletag",
+        "methods": ["getConfig", "setConfig"]
+      },
+      {
+        "key": "_apPbJs",
+        "methods": ["getConfig", "getBidResponses", "requestBids", "setConfig", "que"]
+      },
+      {
+        "key": "adpTags",
+        "methods": ["que"]
+      },
+      {
+        "key": "PublisherCommonId",
+        "methods": ["que"]
+      },
+      {
+        "key": "__brw_lc",
+        "methods": ["que"]
+      },
+      {
+        "key": "pbjs",
+        "methods": ["que"]
+      }
+    ],
+    "network": {
+      "total_requests": 250,
+      "classified_requests": 21
+    }
+  }
+}

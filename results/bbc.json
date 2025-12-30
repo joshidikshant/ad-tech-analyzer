@@ -1,0 +1,36 @@
+{
+  "analysis_metadata": {
+    "url": "https://www.bbc.com",
+    "timestamp": "2025-12-22T08:18:01.019Z",
+    "analysis_method": "Network Classification + Runtime API Query",
+    "total_network_requests": 103,
+    "unique_urls_analyzed": 101
+  },
+  "executive_summary": {
+    "total_vendors_detected": 0,
+    "managed_service": null,
+    "header_bidding_wrapper": null,
+    "ad_server": null,
+    "ssp_count": 0,
+    "user_id_modules": 0,
+    "ad_units_active": 0
+  },
+  "network_analysis": {
+    "vendors_detected": [],
+    "categorized_vendors": {}
+  },
+  "runtime_configuration": {},
+  "key_insights": {},
+  "technical_architecture": {
+    "stack": ""
+  },
+  "monetization_analysis": {
+    "revenue_optimization_score": "Basic",
+    "factors": {
+      "bidder_density": "Medium",
+      "s2s_bidding": "None",
+      "identity_resolution": "Basic",
+      "managed_service": "No"
+    }
+  }
+}

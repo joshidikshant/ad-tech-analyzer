@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "types": ["node"]
+  },
+  "include": [
+    "src/mcp/handlers.ts",
+    "src/mcp/spawning-chrome-client.ts",
+    "src/mcp/chrome-devtools-client.ts",
+    "src/analyzer/api-query-orchestrator.ts",
+    "src/analyzer/network-classifier.ts",
+    "src/analyzer/vendor-patterns.ts"
+  ],
+  "exclude": ["node_modules", "dist", "dashboard"]
+}

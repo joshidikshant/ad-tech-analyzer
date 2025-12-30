@@ -1,0 +1,192 @@
+{
+  "url": "https://cardgames.io/checkers/",
+  "domain": "cardgames.io",
+  "startedAt": 1765989409883,
+  "navigatedAt": 1765989413314,
+  "endedAt": 1765989713318,
+  "observationMs": 300000,
+  "progressEveryMs": 30000,
+  "progress": [
+    {
+      "t": 1765989413320,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989443434,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989473558,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989503486,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989533347,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989563477,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989593333,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989623448,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989653560,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    },
+    {
+      "t": 1765989683439,
+      "hooks": {
+        "gptCmdHooked": false,
+        "gptEventsHooked": false,
+        "prebidHooked": false
+      },
+      "gam": {
+        "slotsDefined": 0,
+        "eventsCaptured": 0,
+        "refreshCyclesDetected": 0,
+        "raceConditionsFound": 0
+      },
+      "prebid": {
+        "eventsCaptured": 0
+      },
+      "error": null
+    }
+  ],
+  "finalSnapshot": null
+}

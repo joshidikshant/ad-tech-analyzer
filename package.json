@@ -1,0 +1,47 @@
+{
+  "name": "ad-tech-analyzer",
+  "version": "1.0.0",
+  "description": "Automated ad tech stack reverse engineering tool with performance attribution and tactic detection",
+  "main": "dist/api/server.js",
+  "bin": {
+    "analyze-site": "./dist/cli/analyze-site.js"
+  },
+  "scripts": {
+    "dev": "tsx watch src/api/server.ts",
+    "build": "tsc",
+    "start": "node dist/api/server.js",
+    "cli": "tsx src/cli/analyze-site.ts",
+    "mcp": "tsx src/mcp/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.1",
+    "acorn": "^8.15.0",
+    "better-sqlite3": "^12.5.0",
+    "chalk": "^5.6.2",
+    "cheerio": "^1.1.2",
+    "chrome-devtools-mcp": "^0.12.1",
+    "commander": "^14.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "ora": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.2",
+    "esbuild": "^0.27.1",
+    "nodemon": "^3.1.11",
+    "playwright": "^1.57.0",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

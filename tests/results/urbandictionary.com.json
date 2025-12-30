@@ -1,0 +1,73 @@
+{
+  "success": true,
+  "url": "https://www.urbandictionary.com/define.php?term=IKEA%20Date",
+  "timestamp": "2025-12-19T02:21:20.000Z",
+  "duration": 10000,
+  "vendors_detected": 11,
+  "ssp_count": 10,
+  "managed_service": null,
+  "prebid_detected": true,
+  "gam_detected": false,
+  "vendors": [
+    "Rubicon",
+    "Sharethrough",
+    "Index Exchange",
+    "Sonobi",
+    "AppNexus",
+    "GumGum",
+    "TripleLift",
+    "Media.net",
+    "Sovrn",
+    "PubMatic",
+    "ServeNoBids"
+  ],
+  "categories": {
+    "ssp": [
+      "Rubicon",
+      "Sharethrough",
+      "Index Exchange",
+      "Sonobi",
+      "AppNexus",
+      "GumGum",
+      "TripleLift",
+      "Media.net",
+      "Sovrn",
+      "PubMatic"
+    ],
+    "header_bidding": [
+      "Prebid.js"
+    ],
+    "ad_network": [
+      "ServeNoBids"
+    ],
+    "security": [
+      "Confiant"
+    ],
+    "consent": [
+      "CookieYes"
+    ]
+  },
+  "runtime_config": {
+    "prebid_version": "v10.0.0",
+    "ad_units_count": 6,
+    "gam_detected": false,
+    "googletag_present": true,
+    "user_id_modules_count": 0
+  },
+  "network_summary": {
+    "total_requests": 178,
+    "bid_requests": 50,
+    "active_bidders": 10
+  },
+  "pattern_gaps": [
+    "Sharethrough (btlr.sharethrough.com) - not detected by classifier",
+    "Sonobi (apex.go.sonobi.com) - not detected",
+    "AppNexus (ib.adnxs.com) - not detected",
+    "GumGum (g2.gumgum.com) - not detected",
+    "TripleLift (tlx.3lift.com) - not detected",
+    "Media.net (prebid.media.net) - not detected",
+    "PubMatic (hbopenbid.pubmatic.com) - not detected",
+    "ServeNoBids (ads.servenobid.com) - not detected"
+  ],
+  "notes": "User-generated content site with custom Prebid implementation (v10.0.0). 10 active SSPs bidding including Rubicon, AppNexus, TripleLift, GumGum. Confiant wrapper for ad security. Major pattern gaps identified - 8 of 10 SSPs not detected by current classifier."
+}

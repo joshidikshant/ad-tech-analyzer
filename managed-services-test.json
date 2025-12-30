@@ -1,0 +1,114 @@
+[
+  {
+    "service": "adpushup",
+    "url": "https://teachmeanatomy.info",
+    "detected": false,
+    "pageType": "home",
+    "totalVendors": 2,
+    "vendors": [
+      "AppNexus",
+      "Google Ad Manager"
+    ],
+    "requests": 133
+  },
+  {
+    "service": "adpushup",
+    "url": "https://www.imei.info",
+    "detected": true,
+    "pageType": "article",
+    "totalVendors": 9,
+    "vendors": [
+      "AdPushup",
+      "Google Ad Manager",
+      "Amazon APS",
+      "AppNexus",
+      "Prebid Server",
+      "OpenX",
+      "Rubicon",
+      "PubMatic",
+      "Index Exchange"
+    ],
+    "requests": 1209
+  },
+  {
+    "service": "adpushup",
+    "url": "https://www.ndtv.com",
+    "detected": false,
+    "pageType": "home",
+    "totalVendors": 0,
+    "vendors": [],
+    "requests": 1
+  },
+  {
+    "service": "freestar",
+    "url": "https://www.salary.com",
+    "detected": false,
+    "pageType": "home",
+    "totalVendors": 5,
+    "vendors": [
+      "Google Ad Manager",
+      "AppNexus",
+      "PubMatic",
+      "Mediavine",
+      "Rubicon"
+    ],
+    "requests": 181
+  },
+  {
+    "service": "freestar",
+    "url": "https://www.ultimate-guitar.com",
+    "detected": false,
+    "pageType": "article",
+    "totalVendors": 6,
+    "vendors": [
+      "PubMatic",
+      "Google Ad Manager",
+      "OpenX",
+      "Rubicon",
+      "AppNexus",
+      "Index Exchange"
+    ],
+    "requests": 188
+  },
+  {
+    "service": "freestar",
+    "url": "https://www.gametop.com",
+    "detected": false,
+    "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.gametop.com/\nCall log:\n\u001b[2m  - navigating to \"https://www.gametop.com/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "service": "ezoic",
+    "url": "https://chromeunboxed.com",
+    "detected": true,
+    "pageType": "article",
+    "totalVendors": 4,
+    "vendors": [
+      "Google Ad Manager",
+      "Ezoic",
+      "PubMatic",
+      "Rubicon"
+    ],
+    "requests": 139
+  },
+  {
+    "service": "ezoic",
+    "url": "https://smallbiztrends.com",
+    "detected": false,
+    "pageType": "home",
+    "totalVendors": 0,
+    "vendors": [],
+    "requests": 8
+  },
+  {
+    "service": "ezoic",
+    "url": "https://www.metric-conversions.org",
+    "detected": true,
+    "pageType": "article",
+    "totalVendors": 2,
+    "vendors": [
+      "Ezoic",
+      "PubMatic"
+    ],
+    "requests": 85
+  }
+]

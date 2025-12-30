@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <style>
+            body{
+                width: 300px;
+                background-color: #f7f7f7;
+            }
+            header{
+                background: white;
+            }
+            main, footer{
+                padding: 5px;
+                margin: 5px;
+                font-family: "Source Sans Pro", Arial, sans-serif;
+                color: rgb(126, 126, 126);
+            }
+            .m2d-adoverlay-toggle{
+                margin: 4px 0 0 8px !important;
+                cursor:pointer;
+                transform: scale(2.3);
+                /* float: right;
+                padding-right: 5%; */
+            }
+            .m2d-adoverlay-toggle * {
+                transition: all 0.25s ease-out;
+            }
+            .m2d-adoverlay-toggle.m2d-adoverlay-toggle-on rect{
+                fill:#B8E986;
+            }
+            .m2d-adoverlay-toggle.m2d-adoverlay-toggle-on .m2d-adoverlay-toggle-circle{
+                transform: translate(8px,0px);
+            }
+            .status, .m2d-desclaimer{
+                /* display:flex; */
+                padding: 5px;
+            }
+            .status .forSite, .status .forAll{
+                width: 100%;
+                padding: 5px;
+                display: flex;
+                padding-bottom: 5px;
+            }
+            #textSite, #textAll{
+                width: 80%;
+                font-size: large;
+                color: rgb(126, 126, 126);
+            }
+            .status .statusChecked{
+                width: 40%
+            }
+            hr{
+                border-color: #cacaca;
+                border-width: 0.5px;
+            }
+            .log-data{
+                font-size: large;
+                display: none;
+                /* padding: 5px; */
+            }
+            .logs{
+                padding: 10px;
+                background: white;
+                box-shadow: 0px 0px 3px;
+                border-radius: 3px;
+                /* border: 2px grey dotted; */
+                display: flex;
+                margin: 10px;
+            }
+            .log-error{
+                color: #ff3232d9;
+            }
+            .log-warning{
+                color: #FFA500;
+            }
+            .log-pass{
+                color: #41AD49;
+            }
+            .log-error, .log-warning, .log-pass{
+                width: 40%;
+            }
+            a{
+                color: #3e94d4;
+                text-decoration: none;
+            }
+            .logo-anchor {
+                background: #f7f7f7;
+            }
+            .m2d-desclaimer{
+                text-align: center;
+            }
+            .refreshDiv{
+                text-align: center;
+                padding: 5px;
+                display: none;
+                opacity: 0;
+                transform: scale(0);
+                transition: opacity 0.5s ease-in;
+            }
+            .refreshDiv #refreshButton{
+                border: none;
+                color: white;
+                background: #3e94d4;
+                box-shadow: 0px 0px 3px;
+                border-radius: 5px;
+                height: 25px;
+                padding: 0px 10px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div>
+                <a href="https://www.pubguru.com" class="logo-anchor" target="_blank" style="display:block; text-align: center;">
+                    <img src="../icons/pgai-logo-ext-transparent.png" alt="Image" width="200px">
+                </a>
+            </div>
+        </header>
+        <main>
+            <div class="status">
+                <!-- <div class="forSite">
+                    <span id='textSite'>Toggle for this site</span>
+                    <svg width="19" height="11" xmlns="http://www.w3.org/2000/svg" id="forSite" class="m2d-adoverlay-toggle m2d-adoverlay-toggle-on">
+                        <rect fill="#D8D8D8" width="19" height="11" rx="5.5" fill-rule="evenodd"/>
+                        <circle fill="#FFF" cx="5.5" cy="5.5" r="4.5" fill-rule="evenodd" class="m2d-adoverlay-toggle-circle"/>
+                    </svg>
+                </div> -->
+                <!-- <hr> -->
+                <div class="forAll">
+                    <span id='textAll'></span>
+                    <svg width="19" height="11" xmlns="http://www.w3.org/2000/svg" id="forAll" class="m2d-adoverlay-toggle m2d-adoverlay-toggle-on">
+                        <rect fill="#D8D8D8" width="19" height="11" rx="5.5" fill-rule="evenodd"/>
+                        <circle fill="#FFF" cx="5.5" cy="5.5" r="4.5" fill-rule="evenodd" class="m2d-adoverlay-toggle-circle"/>
+                    </svg>
+                </div>
+                <div class="refreshDiv">
+                    <button id="refreshButton">Refresh page</button>
+                </div>
+            </div>
+            <div class="log-data">
+                <hr>
+                <span style="font-weight: bold; padding-left: 5px; padding-top: 5px">Inspected data</span>
+                <div class="logs">
+                    <span class="log-error">Errors:</span>
+                    <span class="log-error error-text"></span>
+                </div>
+                <div class="logs">
+                    <span class="log-warning">Warnings:</span>
+                    <span class="log-warning warning-text"></span>
+                </div>
+                <div class="logs">
+                    <span class="log-pass">Pass:</span>
+                    <span class="log-pass pass-text"></span>
+                </div>
+            </div>
+        </main>
+        <hr>
+        <footer>
+            <div class="m2d-desclaimer">
+                <a href="https://www.pubguru.com" target="_blank" style="text-decoration: none">
+                    <img src="https://s3.amazonaws.com/m2hb/pubguru-text.png" height="10" width="53">
+                </a>
+                 can help you improve optimization! 
+                <br>
+                <a href="https://www.pubguru.com" target="_blank" style="text-align: center;">Learn more &#9656;</a>
+            </div>
+        </footer>
+        <script src='popup.js'></script>
+    </body>
+</html>

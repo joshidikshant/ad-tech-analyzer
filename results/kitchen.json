@@ -1,0 +1,55 @@
+{
+  "analysis_metadata": {
+    "url": "https://www.thekitchenwhisperer.net/2016/12/09/the-ultimate-easy-creamy-chocolate-fudge/",
+    "timestamp": "2025-12-22T08:19:17.464Z",
+    "analysis_method": "Network Classification + Runtime API Query",
+    "total_network_requests": 56,
+    "unique_urls_analyzed": 56
+  },
+  "executive_summary": {
+    "total_vendors_detected": 2,
+    "managed_service": "Mediavine",
+    "header_bidding_wrapper": null,
+    "ad_server": "Google Ad Manager",
+    "ssp_count": 0,
+    "user_id_modules": 0,
+    "ad_units_active": 0
+  },
+  "network_analysis": {
+    "vendors_detected": [
+      "Mediavine",
+      "Google Ad Manager"
+    ],
+    "categorized_vendors": {
+      "managed_service": [
+        "Mediavine"
+      ],
+      "ad_server": [
+        "Google Ad Manager"
+      ]
+    }
+  },
+  "runtime_configuration": {
+    "google_ad_manager": {
+      "present": true,
+      "page_targeting": {}
+    }
+  },
+  "key_insights": {
+    "managed_wrapper": {
+      "provider": "Mediavine"
+    }
+  },
+  "technical_architecture": {
+    "stack": "Mediavine → Google Ad Manager"
+  },
+  "monetization_analysis": {
+    "revenue_optimization_score": "Basic",
+    "factors": {
+      "bidder_density": "Medium",
+      "s2s_bidding": "None",
+      "identity_resolution": "Basic",
+      "managed_service": "Yes"
+    }
+  }
+}
