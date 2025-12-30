@@ -1,0 +1,29 @@
+services:
+  # Backend API Service (Docker with Chromium)
+  - type: web
+    name: ad-tech-analyzer-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    region: oregon
+    plan: starter  # $7/mo (512MB RAM - might need upgrade to standard)
+    branch: main
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: NODE_ENV
+        value: production
+
+  # Frontend Static Site
+  - type: web
+    name: ad-tech-analyzer-frontend
+    runtime: static
+    buildCommand: cd dashboard && npm install && npm run build
+    staticPublishPath: dashboard/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://ad-tech-analyzer-api.onrender.com
