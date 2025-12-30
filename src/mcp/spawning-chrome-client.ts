@@ -71,8 +71,16 @@ export class SpawningChromeDevToolsClient {
                 resolve(JSON.parse(jsonMatch[1]));
                 return;
               } catch {
-                // If JSON parsing fails, return the text
+                // If JSON parsing fails, try parsing directly
               }
+            }
+
+            // Try parsing as JSON directly (not wrapped in markdown)
+            try {
+              resolve(JSON.parse(textContent));
+              return;
+            } catch {
+              // Not JSON, return as-is
             }
 
             // Return the text content as-is
