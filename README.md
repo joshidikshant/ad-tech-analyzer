@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
 
-**Live Demo:** [Coming Soon]
+**Live Demo:** https://ad-stack-analyzer.onrender.com
 
 ---
 
@@ -352,10 +352,18 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
+## 🚀 Deployment Status
+
+- **Frontend:** https://ad-stack-analyzer.onrender.com (Static Site)
+- **Backend API:** https://ad-tech-analyzer.onrender.com (Web Service)
+- **Repository:** https://github.com/joshidikshant/ad-tech-analyzer
+
+---
+
 ## 📧 Contact
 
-- **Issues:** [GitHub Issues](https://github.com/YOUR-USERNAME/ad-tech-analyzer/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/YOUR-USERNAME/ad-tech-analyzer/discussions)
+- **Issues:** [GitHub Issues](https://github.com/joshidikshant/ad-tech-analyzer/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/joshidikshant/ad-tech-analyzer/discussions)
 
 ---
 
