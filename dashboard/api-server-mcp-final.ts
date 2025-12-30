@@ -21,6 +21,7 @@ app.use(cors({
     'http://localhost:3000',
     /\.vercel\.app$/, // Allow all Vercel deployments
     /\.railway\.app$/, // Allow Railway preview deployments
+    /\.onrender\.com$/, // Allow Render.com deployments
   ],
   credentials: true
 }));
