@@ -154,73 +154,6 @@ export default function AnalysisView({ data }: Props) {
         )}
       </GlowCard>
 
-      {/* Vendor Distribution + Detected Vendors Side by Side */}
-      {categoryData.length > 0 && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Pie Chart */}
-          <GlowCard glowColor="secondary">
-            <h3 className="text-xl font-display font-bold text-cyber-accent-secondary mb-6 uppercase">
-              Vendor Distribution
-            </h3>
-            <ResponsiveContainer width="100%" height={280}>
-              <PieChart>
-                <Pie
-                  data={categoryData}
-                  dataKey="count"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={90}
-                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                  labelLine={{ stroke: 'var(--color-accent-primary)', strokeWidth: 1 }}
-                  animationBegin={0}
-                  animationDuration={800}
-                >
-                  {categoryData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
-          </GlowCard>
-
-          {/* Detected Vendors */}
-          <GlowCard>
-            <h3 className="text-xl font-display font-bold text-cyber-accent-primary mb-6 uppercase">
-              Detected Vendors
-            </h3>
-            <div className="space-y-4 max-h-[280px] overflow-y-auto pr-2">
-              {Object.entries(data.categories)
-                .filter(([_, vendors]) => vendors && vendors.length > 0)
-                .map(([category, vendors]) => (
-                  <div key={category}>
-                    <div className="flex items-center gap-2 mb-2">
-                      <div
-                        className="w-1 h-5 rounded"
-                        style={{ backgroundColor: CATEGORY_COLORS[category] || CATEGORY_COLORS.other }}
-                      />
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-cyber-text-secondary">
-                        {category.replace(/_/g, ' ')} ({vendors.length})
-                      </h4>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 pl-3">
-                      {vendors.map((vendor: string, idx: number) => (
-                        <DataBadge
-                          key={idx}
-                          label={vendor}
-                          variant="default"
-                          size="sm"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </GlowCard>
-        </div>
-      )}
-
       {/* Prebid.js Section */}
       {data.prebid.detected && (
         <GlowCard>
@@ -451,6 +384,73 @@ export default function AnalysisView({ data }: Props) {
             </div>
           )}
         </GlowCard>
+      )}
+
+      {/* Vendor Distribution + Detected Vendors Side by Side */}
+      {categoryData.length > 0 && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Pie Chart */}
+          <GlowCard glowColor="secondary">
+            <h3 className="text-xl font-display font-bold text-cyber-accent-secondary mb-6 uppercase">
+              Vendor Distribution
+            </h3>
+            <ResponsiveContainer width="100%" height={280}>
+              <PieChart>
+                <Pie
+                  data={categoryData}
+                  dataKey="count"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={90}
+                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                  labelLine={{ stroke: 'var(--color-accent-primary)', strokeWidth: 1 }}
+                  animationBegin={0}
+                  animationDuration={800}
+                >
+                  {categoryData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip content={<CustomTooltip />} />
+              </PieChart>
+            </ResponsiveContainer>
+          </GlowCard>
+
+          {/* Detected Vendors */}
+          <GlowCard>
+            <h3 className="text-xl font-display font-bold text-cyber-accent-primary mb-6 uppercase">
+              Detected Vendors
+            </h3>
+            <div className="space-y-4 max-h-[280px] overflow-y-auto pr-2">
+              {Object.entries(data.categories)
+                .filter(([_, vendors]) => vendors && vendors.length > 0)
+                .map(([category, vendors]) => (
+                  <div key={category}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div
+                        className="w-1 h-5 rounded"
+                        style={{ backgroundColor: CATEGORY_COLORS[category] || CATEGORY_COLORS.other }}
+                      />
+                      <h4 className="text-xs font-mono uppercase tracking-wider text-cyber-text-secondary">
+                        {category.replace(/_/g, ' ')} ({vendors.length})
+                      </h4>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 pl-3">
+                      {vendors.map((vendor: string, idx: number) => (
+                        <DataBadge
+                          key={idx}
+                          label={vendor}
+                          variant="default"
+                          size="sm"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </GlowCard>
+        </div>
       )}
 
     </motion.div>
