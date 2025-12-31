@@ -92,8 +92,8 @@ export class SpawningChromeDevToolsClient {
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
         this.pending.delete(id);
-        reject(new Error('RPC timeout after 30s'));
-      }, 30000);
+        reject(new Error('RPC timeout after 60s'));
+      }, 60000);
 
       this.pending.set(id, { resolve: (res) => {
         clearTimeout(timeout);

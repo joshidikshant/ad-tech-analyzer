@@ -253,7 +253,8 @@ export async function queryAdTechAPIs(
         pbjsAdFormats: Array.from(adFormats),
         pbjsVersion: pbjsVersion,  // Use wrapper-aware version
         pbjsAdUnitsCount: Array.isArray(pbjsAdUnits) ? pbjsAdUnits.length : 0,
-        gamPresent: !!gt,
+        // Only mark GAM as present if pubads() is available (GPT library loaded)
+        gamPresent: !!pubads,
         gamSlots: slots || null,
         gamTargeting: (targeting && typeof targeting === "object") ? targeting : null,
         adthrive: !!w.adthrive,
@@ -304,17 +305,21 @@ export async function queryAdTechAPIs(
       out.customWrappers = Array.isArray(snap.wrappers) ? (snap.wrappers as CustomWrapperCandidate[]) : out.customWrappers;
       out.windowKeysSample = Array.isArray(snap.keysSample) ? (snap.keysSample as string[]) : out.windowKeysSample;
 
-      // Only break if we have actual bidders OR no managed service is detected
+      // Only break if we have meaningful data
       const anyManagedService = Object.values(out.managedServices).some(v => v);
       const hasBidders = out.pbjs.bidders.length > 0;
+      const hasGamSlots = Array.isArray(out.gam.slots) && out.gam.slots.length > 0;
 
       // If managed service detected, keep polling until we get bidders or timeout
       if (anyManagedService) {
         if (hasBidders) break; // Got bidders, we're done
         // Otherwise continue polling (managed services lazy-load config)
       } else {
-        // No managed service - break if we found pbjs or GAM
-        if (out.pbjs.present || out.gam.present) break;
+        // No managed service - break if we have BOTH prebid bidders AND GAM slots (or timeout)
+        // This ensures we capture GAM slots which may load after pbjs
+        if (hasBidders && hasGamSlots) break;
+        // Also break if we've tried 3+ times and have at least some data
+        if (out.attempts >= 3 && (out.pbjs.present || out.gam.present)) break;
       }
     }
 
