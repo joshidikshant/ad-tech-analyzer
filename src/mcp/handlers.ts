@@ -25,7 +25,8 @@ export interface AnalysisResult {
     detected: boolean;
     config?: any;
     bid_responses?: any;
-    bidders?: string[];  // List of configured bidders
+    bidders?: string[];  // List of configured bidders (from client-side)
+    network_bidders?: string[];  // Bidders inferred from network requests (fallback)
     ad_formats?: string[];  // Ad formats (banner, video, native)
     version?: string | null;  // Prebid.js version
     ad_units_count?: number;  // Number of ad units
@@ -57,9 +58,42 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
     console.log(`[MCP Handler] Navigating to ${url}...`);
     await client.navigateToPage(url);
 
-    // Wait for page to load and network requests to complete
-    console.log('[MCP Handler] Waiting for page to load...');
-    await new Promise(resolve => setTimeout(resolve, 10000));
+    // Wait for initial page load
+    console.log('[MCP Handler] Waiting for initial page load...');
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    // Trigger lazy-loaded ads (scroll + click patterns for CWV optimization)
+    console.log('[MCP Handler] Triggering user interaction to load lazy ads...');
+    try {
+      await client.evaluateScript(`() => {
+        // 1. Simulate click to trigger click-based ad initialization
+        document.body.click();
+        document.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+        // 2. Scroll down to 75% of page to trigger intersection observers
+        const totalHeight = document.documentElement.scrollHeight;
+        const viewportHeight = window.innerHeight;
+        const scrollPositions = [0.25, 0.5, 0.75, 0.5, 0.25, 0]; // Scroll pattern
+
+        let delay = 0;
+        scrollPositions.forEach((percent, i) => {
+          setTimeout(() => {
+            window.scrollTo(0, totalHeight * percent);
+            // Also trigger scroll event manually (some libs listen to this)
+            window.dispatchEvent(new Event('scroll'));
+          }, delay);
+          delay += 400;
+        });
+
+        return { totalHeight, viewportHeight, scrollPositions };
+      }`);
+    } catch (err) {
+      console.log('[MCP Handler] Interaction trigger failed (non-critical):', err);
+    }
+
+    // Wait for lazy-loaded ad requests to complete
+    console.log('[MCP Handler] Waiting for ad requests after interaction...');
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     console.log('[MCP Handler] Collecting network requests...');
     let networkRequests = await client.getNetworkRequests();
@@ -88,7 +122,7 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
     }
 
     console.log('[MCP Handler] Querying ad-tech APIs...');
-    const apiData = await queryAdTechAPIs(client);
+    const apiData = await queryAdTechAPIs(client, networkRequests || []);
 
     console.log('[MCP Handler] Classifying vendors...');
     const classification = classifyNetworkRequests(networkRequests || []);
@@ -142,7 +176,8 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
         detected: apiData.pbjs.present,
         config: apiData.pbjs.config,
         bid_responses: apiData.pbjs.bidResponses,
-        bidders: apiData.pbjs.bidders,
+        bidders: apiData.pbjs.bidders,  // Client-side extracted
+        network_bidders: apiData.networkBidders,  // Network-inferred fallback
         ad_formats: apiData.pbjs.adFormats,
         version: apiData.pbjs.version,
         ad_units_count: apiData.pbjs.adUnitsCount,

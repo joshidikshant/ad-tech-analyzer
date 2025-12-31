@@ -3,6 +3,17 @@ FROM mcr.microsoft.com/playwright:v1.49.0-jammy
 
 WORKDIR /app
 
+# Upgrade Node.js to v22.12.0 (required by chrome-devtools-mcp)
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y nodejs && \
+    node --version
+
+# Install Chrome (chrome-devtools-mcp looks for Chrome at /opt/google/chrome/chrome)
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb && \
+    google-chrome --version
+
 # Copy package files
 COPY package*.json ./
 COPY dashboard/package*.json ./dashboard/

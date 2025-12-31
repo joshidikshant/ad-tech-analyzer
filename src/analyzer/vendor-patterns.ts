@@ -171,6 +171,48 @@ export const VENDOR_PATTERNS: VendorCategory[] = [
         patterns: [
           { url: "sovrn\\.com|lijit\\.com", type: ["script", "xhr"], confidence: "high" }
         ]
+      },
+      {
+        name: "Unruly",
+        patterns: [
+          { url: "unruly\\.co|video\\.unruly\\.co", type: ["script", "xhr"], confidence: "high" }
+        ]
+      },
+      {
+        name: "Tremor",
+        patterns: [
+          { url: "tremorhub\\.com|ads\\.tremorhub\\.com", type: ["script", "xhr"], confidence: "high" }
+        ]
+      },
+      {
+        name: "MediaGrid",
+        patterns: [
+          { url: "themediagrid\\.com|grid\\.bidswitch\\.net", type: ["script", "xhr"], confidence: "high" }
+        ]
+      },
+      {
+        name: "ImproveDigital",
+        patterns: [
+          { url: "360yield\\.com|ad\\.360yield\\.com", type: ["script", "xhr"], confidence: "high" }
+        ]
+      },
+      {
+        name: "Equativ",
+        patterns: [
+          { url: "smartadserver\\.com|sascdn\\.com|equativ\\.com", type: ["script", "xhr"], confidence: "high" }
+        ]
+      },
+      {
+        name: "Nobid",
+        patterns: [
+          { url: "nobid\\.io|ads\\.nobid\\.io", type: ["script", "xhr"], confidence: "high" }
+        ]
+      },
+      {
+        name: "RhythmOne",
+        patterns: [
+          { url: "rhythmone\\.com|1rx\\.io", type: ["script", "xhr"], confidence: "high" }
+        ]
       }
     ]
   },

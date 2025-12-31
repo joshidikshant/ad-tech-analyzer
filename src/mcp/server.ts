@@ -41,7 +41,7 @@ const analysisCache = new Map<string, any>();
 const server = new Server(
   {
     name: "ad-tech-analyzer",
-    version: "1.1.0",
+    version: "1.2.0",
   },
   {
     capabilities: {
@@ -227,8 +227,8 @@ async function handleAnalyzeSite(args: AnalyzeSiteArgs) {
     // Collect network requests
     const networkRequests = await client.getNetworkRequests();
 
-    // Query APIs
-    const apiData = await queryAdTechAPIs(client);
+    // Query APIs (pass network requests for fallback extraction)
+    const apiData = await queryAdTechAPIs(client, networkRequests);
 
     // Classify network
     const classification = classifyNetworkRequests(networkRequests as any);
@@ -246,6 +246,11 @@ async function handleAnalyzeSite(args: AnalyzeSiteArgs) {
         detected: apiData.pbjs.present,
         config: apiData.pbjs.config,
         bid_responses: apiData.pbjs.bidResponses,
+        bidders: apiData.pbjs.bidders,  // Client-side extracted bidders
+        network_bidders: apiData.networkBidders,  // Inferred from network (fallback)
+        ad_formats: apiData.pbjs.adFormats,
+        version: apiData.pbjs.version,
+        ad_units_count: apiData.pbjs.adUnitsCount,
       },
       gam: {
         detected: apiData.gam.present,

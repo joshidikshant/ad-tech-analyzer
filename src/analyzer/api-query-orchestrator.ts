@@ -1,3 +1,5 @@
+import { VENDOR_PATTERNS } from './vendor-patterns.js';
+
 export type CustomWrapperCandidate = { key: string; methods: string[] };
 export interface ChromeClient {
   evaluateScript(fn: string): Promise<any>;
@@ -7,7 +9,7 @@ export type AdTechData = {
     present: boolean;
     config: unknown | null;
     bidResponses: unknown | null;
-    bidders: string[];  // List of configured bidders (e.g., ["appnexus", "rubicon", "pubmatic"])
+    bidders: string[];  // List of configured bidders from client-side extraction
     adFormats: string[];  // Ad formats used (e.g., ["banner", "video"])
     version: string | null;  // Prebid.js version
     adUnitsCount: number;  // Number of ad units configured
@@ -25,6 +27,7 @@ export type AdTechData = {
     vuukle: boolean;
     pubgalaxy: boolean;
   };
+  networkBidders: string[];  // Bidders inferred from network requests (when client-side fails)
   customWrappers: CustomWrapperCandidate[];
   windowKeysSample: string[];
   attempts: number;
@@ -33,7 +36,37 @@ export type AdTechData = {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData> {
+// Valid resource types for ad-related network requests (per Gemini council review)
+const VALID_AD_RESOURCE_TYPES = new Set(['script', 'xhr', 'fetch', 'image', 'ping']);
+
+// Normalize vendor names to Prebid bidder codes
+function normalizeBidderCode(name: string): string {
+  const specialCases: Record<string, string> = {
+    'Index Exchange': 'ix',
+    'Google Ad Manager': 'gam',
+    'Google AdX': 'adx',
+    'Amazon APS': 'amazon',
+    'Amazon': 'amazon',
+    'AppNexus': 'appnexus',
+    'Xandr': 'appnexus',
+    '33Across': '33across',
+    'TripleLift': 'triplelift',
+  };
+  return specialCases[name] || name.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+export interface NetworkRequest {
+  url?: string;
+  method?: string;
+  type?: string;
+  status?: number;
+  resourceType?: string;
+}
+
+export async function queryAdTechAPIs(
+  client: ChromeClient,
+  networkRequests: NetworkRequest[] = []
+): Promise<AdTechData> {
   const started = Date.now();
   const out: AdTechData = {
     pbjs: {
@@ -58,13 +91,14 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
       vuukle: false,
       pubgalaxy: false
     },
+    networkBidders: [],
     customWrappers: [],
     windowKeysSample: [],
     attempts: 0,
     lastSeenAt: null
   };
 
-  while (Date.now() - started < 30_000) {
+  while (Date.now() - started < 20_000) {
     out.attempts++;
     const snap = await client.evaluateScript(`() => {
       // Debug: Log what wrapper objects exist
@@ -164,6 +198,53 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
         });
       }
 
+      // FALLBACK: If adUnits is empty/hidden, try getBidderRequests() for active auctions
+      if (bidders.size === 0 && pbjs) {
+        const bidderRequests = safe(() => pbjs.getBidderRequests?.()) || [];
+        if (Array.isArray(bidderRequests)) {
+          bidderRequests.forEach(req => {
+            if (req?.bidderCode) bidders.add(req.bidderCode);
+            // Extract from individual bids
+            if (Array.isArray(req?.bids)) {
+              req.bids.forEach(bid => {
+                if (bid?.bidder) bidders.add(bid.bidder);
+                if (bid?.mediaTypes) {
+                  Object.keys(bid.mediaTypes).forEach(type => adFormats.add(type));
+                }
+              });
+            }
+          });
+        }
+      }
+
+      // FALLBACK 2: Extract from config.bidderTimeout which lists all bidders
+      if (bidders.size === 0 && pbjsConfig) {
+        // Some configs have bidderSettings with all bidder names as keys
+        const bidderSettings = safe(() => pbjsConfig.bidderSettings);
+        if (bidderSettings && typeof bidderSettings === 'object') {
+          Object.keys(bidderSettings).forEach(key => {
+            if (key !== 'standard' && key !== 'default') bidders.add(key);
+          });
+        }
+      }
+
+      // Debug: Track extraction method
+      let extractionMethod = 'none';
+      if (Array.isArray(pbjsAdUnits) && pbjsAdUnits.length > 0) {
+        extractionMethod = 'adUnits';
+      } else if (bidders.size > 0) {
+        extractionMethod = bidderRequests && bidderRequests.length > 0 ? 'getBidderRequests' : 'bidderSettings';
+      }
+
+      // Debug wrapper object structures
+      const wrapperKeys = {
+        adpushup: w.adpushup ? Object.keys(w.adpushup).slice(0, 30) : null,
+        pubfig: w.pubfig ? Object.keys(w.pubfig).slice(0, 30) : null,
+        freestar: w.freestar ? Object.keys(w.freestar).slice(0, 30) : null,
+        raptive: w.raptive ? Object.keys(w.raptive).slice(0, 30) : null,
+        mediavine: w.mediavine ? Object.keys(w.mediavine).slice(0, 30) : null
+      };
+
       return {
         pbjsPresent: !!pbjs,
         pbjsConfig: pbjsConfig,
@@ -186,11 +267,19 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
         vuukle: !!w._vuuklehb,
         pubgalaxy: !!(w.pubgalaxy || w.titantag || w.titanWrapper),
         wrappers,
-        keysSample: keys.slice(0, 200)
+        keysSample: keys.slice(0, 200),
+        wrapperKeys,  // Add wrapper object keys for debugging
+        extractionMethod  // Track which method extracted bidders
       };
     }`);
 
     console.log(`[API Query] Attempt ${out.attempts}: snap =`, JSON.stringify(snap)?.slice(0, 300));
+    if (snap?.extractionMethod && snap.extractionMethod !== 'none') {
+      console.log(`[EXTRACTION] Method: ${snap.extractionMethod}, Bidders: ${snap.pbjsBidders?.length || 0}`);
+    }
+    if (snap?.wrapperKeys) {
+      console.log('[DEBUG] Wrapper object keys:', JSON.stringify(snap.wrapperKeys, null, 2));
+    }
     if (snap) {
       out.pbjs.present ||= !!snap.pbjsPresent;
       out.pbjs.config ??= snap.pbjsConfig ?? null;
@@ -215,11 +304,72 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
       out.customWrappers = Array.isArray(snap.wrappers) ? (snap.wrappers as CustomWrapperCandidate[]) : out.customWrappers;
       out.windowKeysSample = Array.isArray(snap.keysSample) ? (snap.keysSample as string[]) : out.windowKeysSample;
 
+      // Only break if we have actual bidders OR no managed service is detected
       const anyManagedService = Object.values(out.managedServices).some(v => v);
-      if (out.pbjs.present || out.gam.present || anyManagedService)
-        break;
+      const hasBidders = out.pbjs.bidders.length > 0;
+
+      // If managed service detected, keep polling until we get bidders or timeout
+      if (anyManagedService) {
+        if (hasBidders) break; // Got bidders, we're done
+        // Otherwise continue polling (managed services lazy-load config)
+      } else {
+        // No managed service - break if we found pbjs or GAM
+        if (out.pbjs.present || out.gam.present) break;
+      }
     }
-    await sleep(2000);
+
+    // Increase delay for managed services (lazy loading can take 5-10 seconds)
+    const anyManagedService = Object.values(out.managedServices).some(v => v);
+    await sleep(anyManagedService ? 3000 : 2000);
+  }
+
+  // FALLBACK: Extract bidders from network requests if client-side extraction failed
+  // Uses VENDOR_PATTERNS for robust detection with resourceType filtering (per Gemini council review)
+  if (out.pbjs.bidders.length === 0 && networkRequests.length > 0) {
+    console.log('[Network Fallback] Client-side extraction failed, analyzing network requests...');
+
+    const networkBidders = new Set<string>();
+
+    // Check both SSP and header_bidding categories for bidders
+    const bidderCategories = VENDOR_PATTERNS.filter(c =>
+      c.category === 'ssp' || c.category === 'header_bidding'
+    );
+
+    for (const category of bidderCategories) {
+      for (const req of networkRequests) {
+        if (!req.url) continue;
+
+        // Filter by resource type to avoid false positives (per Gemini council review)
+        const resourceType = req.resourceType || req.type || '';
+        if (!VALID_AD_RESOURCE_TYPES.has(resourceType)) continue;
+
+        // Check each vendor's patterns
+        for (const vendor of category.vendors) {
+          // Skip Prebid.js itself (it's a wrapper, not a bidder)
+          if (vendor.name === 'Prebid.js' || vendor.name === 'Index Wrapper') continue;
+
+          const matches = vendor.patterns.some(pattern => {
+            try {
+              const regex = new RegExp(pattern.url, 'i');
+              return regex.test(req.url!);
+            } catch {
+              return false;
+            }
+          });
+
+          if (matches) {
+            const bidderCode = normalizeBidderCode(vendor.name);
+            networkBidders.add(bidderCode);
+            console.log(`[Network Fallback] Detected ${vendor.name} → ${bidderCode} from: ${req.url.slice(0, 80)}`);
+          }
+        }
+      }
+    }
+
+    if (networkBidders.size > 0) {
+      out.networkBidders = Array.from(networkBidders);
+      console.log(`[Network Fallback] Extracted ${out.networkBidders.length} bidders from network: ${out.networkBidders.join(', ')}`);
+    }
   }
 
   out.lastSeenAt = new Date().toISOString();

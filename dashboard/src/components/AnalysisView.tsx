@@ -18,6 +18,11 @@ interface AnalysisData {
     detected: boolean;
     config?: any;
     bid_responses?: any;
+    bidders?: string[];  // Client-side extracted bidders
+    network_bidders?: string[];  // Network-inferred bidders (fallback)
+    ad_formats?: string[];
+    version?: string | null;
+    ad_units_count?: number;
   };
   gam: {
     detected: boolean;
@@ -233,6 +238,71 @@ export default function AnalysisView({ data }: Props) {
             </button>
           </div>
 
+          {/* Prebid Version & Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+            <div>
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">
+                Version
+              </p>
+              <p className="text-sm font-mono text-cyber-accent-primary">
+                {data.prebid.version || 'N/A'}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">
+                Ad Units
+              </p>
+              <p className="text-sm font-mono text-cyber-accent-primary">
+                {data.prebid.ad_units_count || 0}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">
+                Timeout
+              </p>
+              <p className="text-sm font-mono text-cyber-accent-primary">
+                {data.prebid.config?.bidderTimeout ? `${data.prebid.config.bidderTimeout}ms` : 'N/A'}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">
+                Ad Formats
+              </p>
+              <p className="text-sm font-mono text-cyber-accent-primary">
+                {data.prebid.ad_formats?.join(', ') || 'N/A'}
+              </p>
+            </div>
+          </div>
+
+          {/* Bidders Section */}
+          {((data.prebid.bidders && data.prebid.bidders.length > 0) ||
+            (data.prebid.network_bidders && data.prebid.network_bidders.length > 0)) && (
+            <div className="mb-4">
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-2">
+                Configured Bidders ({(data.prebid.bidders?.length || 0) + (data.prebid.network_bidders?.length || 0)})
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {data.prebid.bidders?.map((bidder, idx) => (
+                  <span
+                    key={`bidder-${idx}`}
+                    className="px-2 py-1 bg-cyber-success/20 border border-cyber-success/50 text-cyber-success rounded text-xs font-mono uppercase"
+                  >
+                    {bidder}
+                  </span>
+                ))}
+                {data.prebid.network_bidders?.map((bidder, idx) => (
+                  <span
+                    key={`net-bidder-${idx}`}
+                    className="px-2 py-1 bg-cyber-accent-secondary/20 border border-cyber-accent-secondary/50 text-cyber-accent-secondary rounded text-xs font-mono uppercase"
+                    title="Detected from network requests"
+                  >
+                    {bidder} ⚡
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
           {data.prebid.config && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
               <div>
@@ -253,10 +323,10 @@ export default function AnalysisView({ data }: Props) {
               </div>
               <div>
                 <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">
-                  Timeout
+                  Bid Caching
                 </p>
                 <p className="text-sm font-mono text-cyber-accent-primary">
-                  {data.prebid.config.bidderTimeout ? `${data.prebid.config.bidderTimeout}ms` : 'N/A'}
+                  {data.prebid.config.useBidCache ? 'Enabled' : 'Disabled'}
                 </p>
               </div>
             </div>
@@ -274,6 +344,33 @@ export default function AnalysisView({ data }: Props) {
               </pre>
             </motion.div>
           )}
+        </GlowCard>
+      )}
+
+      {/* Network-Detected Bidders (when Prebid.js not detected but bidders found) */}
+      {!data.prebid.detected && data.prebid.network_bidders && data.prebid.network_bidders.length > 0 && (
+        <GlowCard>
+          <div className="flex items-center gap-3 mb-4">
+            <h3 className="text-xl font-display font-bold text-cyber-accent-secondary uppercase">
+              Header Bidding Partners
+            </h3>
+            <span className="px-3 py-1 bg-cyber-accent-secondary/20 border border-cyber-accent-secondary/50 text-cyber-accent-secondary rounded-full text-xs font-mono uppercase tracking-wider">
+              Detected via Network
+            </span>
+          </div>
+          <p className="text-xs font-mono text-cyber-text-tertiary mb-3">
+            Prebid.js configuration not accessible (managed service wrapper), but bidders detected from network requests:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {data.prebid.network_bidders.map((bidder, idx) => (
+              <span
+                key={`net-bidder-${idx}`}
+                className="px-3 py-1.5 bg-cyber-accent-secondary/20 border border-cyber-accent-secondary/50 text-cyber-accent-secondary rounded text-sm font-mono uppercase"
+              >
+                {bidder}
+              </span>
+            ))}
+          </div>
         </GlowCard>
       )}
 

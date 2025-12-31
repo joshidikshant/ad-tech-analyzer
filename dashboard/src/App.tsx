@@ -17,6 +17,11 @@ interface AnalysisData {
     detected: boolean;
     config?: any;
     bid_responses?: any;
+    bidders?: string[];
+    network_bidders?: string[];
+    ad_formats?: string[];
+    version?: string | null;
+    ad_units_count?: number;
   };
   gam: {
     detected: boolean;
