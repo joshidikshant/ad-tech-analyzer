@@ -22,11 +22,22 @@ interface AnalysisData {
     ad_formats?: string[];
     version?: string | null;
     ad_units_count?: number;
+    instances?: Array<{
+      globalName: string;
+      version: string | null;
+      bidders: string[];
+      adUnitsCount: number;
+    }>;
   };
   gam: {
     detected: boolean;
     slots?: any[];
     targeting?: Record<string, string[]>;
+  };
+  consent?: {
+    tcf: { detected: boolean; version: number | null; tcString: string | null; gdprApplies: boolean | null };
+    usp: { detected: boolean; uspString: string | null };
+    gpp: { detected: boolean; gppString: string | null; applicableSections: number[] | null };
   };
   managed_services_detected: Record<string, boolean>;
   network: {

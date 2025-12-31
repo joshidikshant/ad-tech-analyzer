@@ -12,6 +12,33 @@ export interface AnalyzeSiteArgs {
   snapshot?: boolean;
 }
 
+// Consent/CMP data for the result
+export interface ConsentResult {
+  tcf: {
+    detected: boolean;
+    version: number | null;
+    tcString: string | null;
+    gdprApplies: boolean | null;
+  };
+  usp: {
+    detected: boolean;
+    uspString: string | null;
+  };
+  gpp: {
+    detected: boolean;
+    gppString: string | null;
+    applicableSections: number[] | null;
+  };
+}
+
+// Prebid instance info
+export interface PrebidInstanceResult {
+  globalName: string;
+  version: string | null;
+  bidders: string[];
+  adUnitsCount: number;
+}
+
 export interface AnalysisResult {
   url: string;
   timestamp: string;
@@ -30,12 +57,14 @@ export interface AnalysisResult {
     ad_formats?: string[];  // Ad formats (banner, video, native)
     version?: string | null;  // Prebid.js version
     ad_units_count?: number;  // Number of ad units
+    instances?: PrebidInstanceResult[];  // P3: All detected Prebid instances
   };
   gam: {
     detected: boolean;
     slots?: any[];
     targeting?: Record<string, string[]> | null;
   };
+  consent?: ConsentResult;  // P2: CMP/Consent detection
   managed_services_detected: Record<string, boolean>;
   custom_wrappers: any[];
   network: {
@@ -181,12 +210,17 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
         ad_formats: apiData.pbjs.adFormats,
         version: apiData.pbjs.version,
         ad_units_count: apiData.pbjs.adUnitsCount,
+        instances: apiData.pbjs.instances.length > 0 ? apiData.pbjs.instances : undefined,  // P3: All instances
       },
       gam: {
         detected: apiData.gam.present,
         slots: apiData.gam.slots || undefined,
         targeting: apiData.gam.targeting || undefined,
       },
+      // P2: Include consent data if any CMP detected
+      consent: (apiData.consent.tcf.detected || apiData.consent.usp.detected || apiData.consent.gpp.detected)
+        ? apiData.consent
+        : undefined,
       managed_services_detected: apiData.managedServices,
       custom_wrappers: apiData.customWrappers,
       network: {

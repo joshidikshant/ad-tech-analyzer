@@ -23,11 +23,22 @@ interface AnalysisData {
     ad_formats?: string[];
     version?: string | null;
     ad_units_count?: number;
+    instances?: Array<{
+      globalName: string;
+      version: string | null;
+      bidders: string[];
+      adUnitsCount: number;
+    }>;
   };
   gam: {
     detected: boolean;
     slots?: any[];
     targeting?: Record<string, string[]>;
+  };
+  consent?: {
+    tcf: { detected: boolean; version: number | null; tcString: string | null; gdprApplies: boolean | null };
+    usp: { detected: boolean; uspString: string | null };
+    gpp: { detected: boolean; gppString: string | null; applicableSections: number[] | null };
   };
   managed_services_detected: Record<string, boolean>;
   network: {
@@ -383,6 +394,79 @@ export default function AnalysisView({ data }: Props) {
               </div>
             </div>
           )}
+        </GlowCard>
+      )}
+
+      {/* Consent/Privacy Section */}
+      {data.consent && (data.consent.tcf.detected || data.consent.usp.detected || data.consent.gpp.detected) && (
+        <GlowCard>
+          <div className="flex items-center gap-3 mb-6">
+            <h3 className="text-xl font-display font-bold text-cyber-accent-primary uppercase">
+              Privacy & Consent
+            </h3>
+            <span className="px-3 py-1 bg-cyber-success/20 border border-cyber-success/50 text-cyber-success rounded-full text-xs font-mono uppercase tracking-wider animate-pulse">
+              CMP Detected
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* TCF/GDPR */}
+            <div className={`p-4 rounded border ${data.consent.tcf.detected ? 'bg-cyber-success/10 border-cyber-success/30' : 'bg-cyber-bg-tertiary/30 border-cyber-text-tertiary/20'}`}>
+              <div className="flex items-center gap-2 mb-2">
+                <span className={`w-2 h-2 rounded-full ${data.consent.tcf.detected ? 'bg-cyber-success' : 'bg-cyber-text-tertiary'}`} />
+                <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-secondary">TCF (GDPR)</p>
+              </div>
+              {data.consent.tcf.detected ? (
+                <div className="space-y-1">
+                  <p className="text-sm font-mono text-cyber-accent-primary">
+                    GDPR: {data.consent.tcf.gdprApplies ? 'Yes' : 'No'}
+                  </p>
+                  {data.consent.tcf.tcString && (
+                    <p className="text-xs font-mono text-cyber-text-tertiary truncate" title={data.consent.tcf.tcString}>
+                      TC: {data.consent.tcf.tcString.slice(0, 20)}...
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <p className="text-sm font-mono text-cyber-text-tertiary">Not detected</p>
+              )}
+            </div>
+
+            {/* USP/CCPA */}
+            <div className={`p-4 rounded border ${data.consent.usp.detected ? 'bg-cyber-success/10 border-cyber-success/30' : 'bg-cyber-bg-tertiary/30 border-cyber-text-tertiary/20'}`}>
+              <div className="flex items-center gap-2 mb-2">
+                <span className={`w-2 h-2 rounded-full ${data.consent.usp.detected ? 'bg-cyber-success' : 'bg-cyber-text-tertiary'}`} />
+                <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-secondary">USP (CCPA)</p>
+              </div>
+              {data.consent.usp.detected ? (
+                <p className="text-sm font-mono text-cyber-accent-primary">
+                  {data.consent.usp.uspString || 'Detected'}
+                </p>
+              ) : (
+                <p className="text-sm font-mono text-cyber-text-tertiary">Not detected</p>
+              )}
+            </div>
+
+            {/* GPP */}
+            <div className={`p-4 rounded border ${data.consent.gpp.detected ? 'bg-cyber-success/10 border-cyber-success/30' : 'bg-cyber-bg-tertiary/30 border-cyber-text-tertiary/20'}`}>
+              <div className="flex items-center gap-2 mb-2">
+                <span className={`w-2 h-2 rounded-full ${data.consent.gpp.detected ? 'bg-cyber-success' : 'bg-cyber-text-tertiary'}`} />
+                <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-secondary">GPP</p>
+              </div>
+              {data.consent.gpp.detected ? (
+                <div className="space-y-1">
+                  <p className="text-sm font-mono text-cyber-accent-primary">Detected</p>
+                  {data.consent.gpp.applicableSections && (
+                    <p className="text-xs font-mono text-cyber-text-tertiary">
+                      Sections: {data.consent.gpp.applicableSections.join(', ')}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <p className="text-sm font-mono text-cyber-text-tertiary">Not detected</p>
+              )}
+            </div>
+          </div>
         </GlowCard>
       )}
 

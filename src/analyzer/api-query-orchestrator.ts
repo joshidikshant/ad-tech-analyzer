@@ -4,6 +4,33 @@ export type CustomWrapperCandidate = { key: string; methods: string[] };
 export interface ChromeClient {
   evaluateScript(fn: string): Promise<any>;
 }
+// Consent/CMP data structure
+export type ConsentData = {
+  tcf: {
+    detected: boolean;
+    version: number | null;
+    tcString: string | null;
+    gdprApplies: boolean | null;
+  };
+  usp: {
+    detected: boolean;
+    uspString: string | null;  // e.g., "1YNN"
+  };
+  gpp: {
+    detected: boolean;
+    gppString: string | null;
+    applicableSections: number[] | null;
+  };
+};
+
+// Prebid instance info (for multiple wrappers)
+export type PrebidInstance = {
+  globalName: string;  // e.g., "pbjs", "mmPrebid", "voltaxPlayerPrebid"
+  version: string | null;
+  bidders: string[];
+  adUnitsCount: number;
+};
+
 export type AdTechData = {
   pbjs: {
     present: boolean;
@@ -13,8 +40,10 @@ export type AdTechData = {
     adFormats: string[];  // Ad formats used (e.g., ["banner", "video"])
     version: string | null;  // Prebid.js version
     adUnitsCount: number;  // Number of ad units configured
+    instances: PrebidInstance[];  // All detected Prebid instances (via _pbjsGlobals)
   };
   gam: { present: boolean; slots: unknown[] | null; targeting: Record<string, string[]> | null };
+  consent: ConsentData;  // CMP/Consent detection
   managedServices: {
     adthrive: boolean;
     freestar: boolean;
@@ -76,9 +105,15 @@ export async function queryAdTechAPIs(
       bidders: [],
       adFormats: [],
       version: null,
-      adUnitsCount: 0
+      adUnitsCount: 0,
+      instances: []  // All detected Prebid instances
     },
     gam: { present: false, slots: null, targeting: null },
+    consent: {
+      tcf: { detected: false, version: null, tcString: null, gdprApplies: null },
+      usp: { detected: false, uspString: null },
+      gpp: { detected: false, gppString: null, applicableSections: null }
+    },
     managedServices: {
       adthrive: false,
       freestar: false,
@@ -245,18 +280,124 @@ export async function queryAdTechAPIs(
         mediavine: w.mediavine ? Object.keys(w.mediavine).slice(0, 30) : null
       };
 
+      // ========== P3: _pbjsGlobals - Detect ALL Prebid instances ==========
+      // Many sites use custom wrappers like mmPrebid, voltaxPlayerPrebid, etc.
+      const pbjsInstances = [];
+      const pbjsGlobals = w._pbjsGlobals || [];
+
+      // Always include default 'pbjs' if it exists and not in globals
+      const allGlobals = [...new Set([...pbjsGlobals, 'pbjs'])];
+
+      for (const globalName of allGlobals) {
+        try {
+          const instance = w[globalName];
+          if (instance && typeof instance === 'object') {
+            const hasGetConfig = typeof instance.getConfig === 'function';
+            const hasAdUnits = Array.isArray(instance.adUnits);
+            const hasVersion = typeof instance.version === 'string';
+
+            if (hasGetConfig || hasAdUnits || hasVersion) {
+              const instanceBidders = new Set();
+              const instanceAdUnits = safe(() => instance.adUnits) || [];
+
+              if (Array.isArray(instanceAdUnits)) {
+                instanceAdUnits.forEach(unit => {
+                  if (Array.isArray(unit?.bids)) {
+                    unit.bids.forEach(bid => {
+                      if (bid?.bidder) instanceBidders.add(bid.bidder);
+                    });
+                  }
+                });
+              }
+
+              // Fallback to getBidderRequests
+              if (instanceBidders.size === 0) {
+                const bidderRequests = safe(() => instance.getBidderRequests?.()) || [];
+                if (Array.isArray(bidderRequests)) {
+                  bidderRequests.forEach(req => {
+                    if (req?.bidderCode) instanceBidders.add(req.bidderCode);
+                  });
+                }
+              }
+
+              pbjsInstances.push({
+                globalName,
+                version: safe(() => instance.version) || null,
+                bidders: Array.from(instanceBidders),
+                adUnitsCount: instanceAdUnits.length
+              });
+
+              // Merge bidders into main set
+              instanceBidders.forEach(b => bidders.add(b));
+            }
+          }
+        } catch (e) {
+          // Ignore inaccessible globals
+        }
+      }
+
+      // ========== P2: CMP/Consent Detection ==========
+      const consentData = {
+        tcf: { detected: false, version: null, tcString: null, gdprApplies: null },
+        usp: { detected: false, uspString: null },
+        gpp: { detected: false, gppString: null, applicableSections: null }
+      };
+
+      // TCF v2 (__tcfapi)
+      if (typeof w.__tcfapi === 'function') {
+        consentData.tcf.detected = true;
+        try {
+          w.__tcfapi('getTCData', 2, (tcData, success) => {
+            if (success && tcData) {
+              consentData.tcf.version = tcData.cmpVersion || 2;
+              consentData.tcf.tcString = tcData.tcString || null;
+              consentData.tcf.gdprApplies = tcData.gdprApplies ?? null;
+            }
+          });
+        } catch (e) {}
+      }
+
+      // USP/CCPA (__uspapi)
+      if (typeof w.__uspapi === 'function') {
+        consentData.usp.detected = true;
+        try {
+          w.__uspapi('getUSPData', 1, (uspData, success) => {
+            if (success && uspData) {
+              consentData.usp.uspString = uspData.uspString || null;
+            }
+          });
+        } catch (e) {}
+      }
+
+      // GPP (__gpp)
+      if (typeof w.__gpp === 'function') {
+        consentData.gpp.detected = true;
+        try {
+          w.__gpp('ping', (data, success) => {
+            if (success && data) {
+              consentData.gpp.gppString = data.gppString || null;
+              consentData.gpp.applicableSections = data.applicableSections || null;
+            }
+          });
+        } catch (e) {}
+      }
+
       return {
-        pbjsPresent: !!pbjs,
+        pbjsPresent: !!pbjs || pbjsInstances.length > 0,
         pbjsConfig: pbjsConfig,
         pbjsBidResponses: safe(() => pbjs?.getBidResponses?.()),
         pbjsBidders: Array.from(bidders),
         pbjsAdFormats: Array.from(adFormats),
         pbjsVersion: pbjsVersion,  // Use wrapper-aware version
         pbjsAdUnitsCount: Array.isArray(pbjsAdUnits) ? pbjsAdUnits.length : 0,
+        pbjsInstances: pbjsInstances,  // P3: All detected Prebid instances
+        pbjsGlobalsFound: pbjsGlobals.length > 0 ? pbjsGlobals : null,  // Debug info
         // Only mark GAM as present if pubads() is available (GPT library loaded)
         gamPresent: !!pubads,
         gamSlots: slots || null,
         gamTargeting: (targeting && typeof targeting === "object") ? targeting : null,
+        // P2: Consent/CMP data
+        consent: consentData,
         adthrive: !!w.adthrive,
         freestar: !!(w.freestar || w._fsprebid || w.pubfig),
         raptive: !!w.raptive,
@@ -289,6 +430,31 @@ export async function queryAdTechAPIs(
       out.pbjs.adFormats = Array.isArray(snap.pbjsAdFormats) && snap.pbjsAdFormats.length > 0 ? snap.pbjsAdFormats : out.pbjs.adFormats;
       out.pbjs.version ??= snap.pbjsVersion ?? null;
       out.pbjs.adUnitsCount = snap.pbjsAdUnitsCount || out.pbjs.adUnitsCount;
+
+      // P3: Prebid instances from _pbjsGlobals
+      if (Array.isArray(snap.pbjsInstances) && snap.pbjsInstances.length > 0) {
+        out.pbjs.instances = snap.pbjsInstances as PrebidInstance[];
+        if (snap.pbjsGlobalsFound) {
+          console.log(`[P3 _pbjsGlobals] Found ${snap.pbjsGlobalsFound.length} globals: ${snap.pbjsGlobalsFound.join(', ')}`);
+        }
+      }
+
+      // P2: CMP/Consent data
+      if (snap.consent) {
+        if (snap.consent.tcf?.detected) {
+          out.consent.tcf = snap.consent.tcf;
+          console.log(`[P2 Consent] TCF detected, gdprApplies: ${snap.consent.tcf.gdprApplies}`);
+        }
+        if (snap.consent.usp?.detected) {
+          out.consent.usp = snap.consent.usp;
+          console.log(`[P2 Consent] USP detected, string: ${snap.consent.usp.uspString}`);
+        }
+        if (snap.consent.gpp?.detected) {
+          out.consent.gpp = snap.consent.gpp;
+          console.log(`[P2 Consent] GPP detected`);
+        }
+      }
+
       out.gam.present ||= !!snap.gamPresent;
       out.gam.slots ??= snap.gamSlots ?? null;
       out.gam.targeting ??= snap.gamTargeting ?? null;
