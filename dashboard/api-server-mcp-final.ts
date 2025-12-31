@@ -50,6 +50,9 @@ app.post('/api/analyze', async (req, res) => {
 
   } catch (error: any) {
     console.error('[API] Analysis failed:', error.message);
+    // Ensure CORS headers are always set on error responses
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.status(500).json({
       success: false,
       error: error.message
