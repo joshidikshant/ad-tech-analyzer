@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import GlowCard from './common/GlowCard';
 import MetricDisplay from './common/MetricDisplay';
 import DataBadge from './common/DataBadge';
@@ -154,7 +154,7 @@ export default function AnalysisView({ data }: Props) {
         )}
       </GlowCard>
 
-      {/* Charts */}
+      {/* Vendor Distribution + Detected Vendors Side by Side */}
       {categoryData.length > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Pie Chart */}
@@ -162,7 +162,7 @@ export default function AnalysisView({ data }: Props) {
             <h3 className="text-xl font-display font-bold text-cyber-accent-secondary mb-6 uppercase">
               Vendor Distribution
             </h3>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={280}>
               <PieChart>
                 <Pie
                   data={categoryData}
@@ -170,7 +170,7 @@ export default function AnalysisView({ data }: Props) {
                   nameKey="name"
                   cx="50%"
                   cy="50%"
-                  outerRadius={100}
+                  outerRadius={90}
                   label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                   labelLine={{ stroke: 'var(--color-accent-primary)', strokeWidth: 1 }}
                   animationBegin={0}
@@ -185,38 +185,38 @@ export default function AnalysisView({ data }: Props) {
             </ResponsiveContainer>
           </GlowCard>
 
-          {/* Bar Chart */}
-          <GlowCard glowColor="secondary">
-            <h3 className="text-xl font-display font-bold text-cyber-accent-secondary mb-6 uppercase">
-              Vendors by Category
+          {/* Detected Vendors */}
+          <GlowCard>
+            <h3 className="text-xl font-display font-bold text-cyber-accent-primary mb-6 uppercase">
+              Detected Vendors
             </h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={categoryData} layout="horizontal">
-                <XAxis
-                  type="number"
-                  stroke="var(--color-text-tertiary)"
-                  style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}
-                />
-                <YAxis
-                  type="category"
-                  dataKey="name"
-                  stroke="var(--color-text-tertiary)"
-                  style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}
-                  width={150}
-                />
-                <Tooltip content={<CustomTooltip />} />
-                <Bar
-                  dataKey="count"
-                  radius={[0, 4, 4, 0]}
-                  animationBegin={0}
-                  animationDuration={800}
-                >
-                  {categoryData.map((entry, index) => (
-                    <Cell key={`bar-${index}`} fill={entry.color} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="space-y-4 max-h-[280px] overflow-y-auto pr-2">
+              {Object.entries(data.categories)
+                .filter(([_, vendors]) => vendors && vendors.length > 0)
+                .map(([category, vendors]) => (
+                  <div key={category}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div
+                        className="w-1 h-5 rounded"
+                        style={{ backgroundColor: CATEGORY_COLORS[category] || CATEGORY_COLORS.other }}
+                      />
+                      <h4 className="text-xs font-mono uppercase tracking-wider text-cyber-text-secondary">
+                        {category.replace(/_/g, ' ')} ({vendors.length})
+                      </h4>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 pl-3">
+                      {vendors.map((vendor: string, idx: number) => (
+                        <DataBadge
+                          key={idx}
+                          label={vendor}
+                          variant="default"
+                          size="sm"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+            </div>
           </GlowCard>
         </div>
       )}
