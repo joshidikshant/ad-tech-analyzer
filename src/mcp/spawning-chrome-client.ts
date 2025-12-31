@@ -3,34 +3,76 @@ import { createInterface } from 'readline';
 
 interface JsonRpcRes { id: number; result?: any; error?: any; }
 
+interface PendingPromise {
+  resolve: (res: JsonRpcRes) => void;
+  reject: (error: any) => void;
+}
+
 export class SpawningChromeDevToolsClient {
   private proc: ChildProcess | null = null;
   private nextId = 1;
-  private pending = new Map<number, (res: JsonRpcRes) => void>();
+  private pending = new Map<number, PendingPromise>();
 
   async init() {
     await this.killZombies();
 
-    this.proc = spawn('npx', ['-y', 'chrome-devtools-mcp@latest'], {
-      stdio: ['pipe', 'pipe', 'pipe']
+    console.log('[ChromeClient] Spawning chrome-devtools-mcp process...');
+    this.proc = spawn('npx', [
+      '-y',
+      'chrome-devtools-mcp@latest',
+      '--chrome-arg=--no-sandbox',
+      '--chrome-arg=--disable-setuid-sandbox',
+      '--chrome-arg=--disable-dev-shm-usage',
+      '--chrome-arg=--disable-gpu',
+      '--headless'
+    ], {
+      stdio: ['pipe', 'pipe', 'pipe'],
+      detached: true
+    });
+
+    // Capture stderr for debugging
+    let stderrOutput = '';
+    this.proc.stderr?.on('data', (data) => {
+      const text = data.toString();
+      stderrOutput += text;
+      console.error('[ChromeClient stderr]', text);
+    });
+
+    // Handle process errors
+    this.proc.on('error', (err) => {
+      console.error('[ChromeClient] Process error:', err);
+      this.proc = null;
+    });
+
+    // Track if process exits prematurely
+    let processExited = false;
+    this.proc.on('exit', (code, signal) => {
+      console.log(`[ChromeClient] Process exited with code ${code}, signal ${signal}`);
+      processExited = true;
+      this.close();
     });
 
     const rl = createInterface({ input: this.proc.stdout! });
     rl.on('line', (line) => {
+      console.log('[ChromeClient stdout]', line);
       try {
         const msg = JSON.parse(line);
         if (msg.id && this.pending.has(msg.id)) {
-          this.pending.get(msg.id)!(msg);
+          this.pending.get(msg.id)!.resolve(msg);
           this.pending.delete(msg.id);
         }
       } catch { /* ignore non-JSON output */ }
     });
 
-    this.proc.stderr?.on('data', () => {}); // Consume stderr to prevent deadlock
-    this.proc.on('exit', () => this.close());
-
     // Wait for process to be ready
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    // Check if process is still alive
+    if (!this.proc || processExited) {
+      throw new Error(`chrome-devtools-mcp failed to start. stderr: ${stderrOutput}`);
+    }
+
+    console.log('[ChromeClient] Process initialized successfully');
   }
 
   private async killZombies() {
@@ -53,7 +95,7 @@ export class SpawningChromeDevToolsClient {
         reject(new Error('RPC timeout after 30s'));
       }, 30000);
 
-      this.pending.set(id, (res) => {
+      this.pending.set(id, { resolve: (res) => {
         clearTimeout(timeout);
         if (res.error) {
           reject(res.error);
@@ -89,7 +131,7 @@ export class SpawningChromeDevToolsClient {
             resolve(result);
           }
         }
-      });
+      }, reject });
 
       const success = this.proc?.stdin?.write(JSON.stringify(req) + '\n');
       if (!success) {
@@ -157,10 +199,22 @@ export class SpawningChromeDevToolsClient {
   }
 
   close() {
-    if (this.proc) {
-      this.proc.kill();
-      this.proc = null;
+    // Reject all pending promises before cleanup
+    for (const [id, promise] of this.pending.entries()) {
+      promise.reject(new Error('Client closed'));
     }
     this.pending.clear();
+
+    // Kill the entire process tree
+    if (this.proc && this.proc.pid) {
+      try {
+        // Kill process group (Chrome + all children)
+        process.kill(-this.proc.pid, 'SIGKILL');
+      } catch {
+        // Fallback if process group kill fails
+        this.proc.kill('SIGKILL');
+      }
+      this.proc = null;
+    }
   }
 }

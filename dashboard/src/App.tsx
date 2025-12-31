@@ -77,7 +77,12 @@ function App() {
       const result = await response.json();
 
       if (result.success && result.data) {
-        setAnalysisData(result.data);
+        // Update timestamp to current time for sample data
+        const freshData = {
+          ...result.data,
+          timestamp: new Date().toISOString()
+        };
+        setAnalysisData(freshData);
         setUrl(result.data.url);
       } else {
         throw new Error('Invalid sample data format');

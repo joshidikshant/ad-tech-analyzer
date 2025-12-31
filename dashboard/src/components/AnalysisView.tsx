@@ -256,7 +256,7 @@ export default function AnalysisView({ data }: Props) {
                   Timeout
                 </p>
                 <p className="text-sm font-mono text-cyber-accent-primary">
-                  {data.prebid.config.bidderTimeout || 'N/A'}ms
+                  {data.prebid.config.bidderTimeout ? `${data.prebid.config.bidderTimeout}ms` : 'N/A'}
                 </p>
               </div>
             </div>
