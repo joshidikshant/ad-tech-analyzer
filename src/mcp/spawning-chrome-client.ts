@@ -160,31 +160,20 @@ export class SpawningChromeDevToolsClient {
       const requests = [];
 
       for (const line of lines) {
-        // Try to match pattern with resource type: reqid=123 METHOD URL [TYPE - code]
-        let matchWithType = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[(\w+)\s*-\s*(\d+)\]/);
+        // Chrome DevTools returns: reqid=123 METHOD URL [success/failed - code]
+        // The text in brackets is status text, NOT resource type
+        // Match pattern: reqid=123 METHOD URL [anything - code]
+        const match = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[.*-\s*(\d+)\]/);
 
-        if (matchWithType) {
-          const [, reqid, method, url, resourceType, status] = matchWithType;
+        if (match) {
+          const [, reqid, method, url, status] = match;
           requests.push({
             reqid: parseInt(reqid),
             url,
             method,
             status: parseInt(status),
-            type: this.normalizeResourceType(resourceType)
+            type: this.guessResourceType(url)  // Use URL-based type detection
           });
-        } else {
-          // Fallback: try generic pattern without type extraction: reqid=123 METHOD URL [anything - code]
-          const matchGeneric = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[.*-\s*(\d+)\]/);
-          if (matchGeneric) {
-            const [, reqid, method, url, status] = matchGeneric;
-            requests.push({
-              reqid: parseInt(reqid),
-              url,
-              method,
-              status: parseInt(status),
-              type: this.guessResourceType(url)  // Fallback to URL-based guessing
-            });
-          }
         }
       }
 
