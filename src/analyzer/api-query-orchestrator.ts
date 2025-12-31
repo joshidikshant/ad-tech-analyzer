@@ -67,6 +67,17 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
   while (Date.now() - started < 30_000) {
     out.attempts++;
     const snap = await client.evaluateScript(`() => {
+      // Debug: Log what wrapper objects exist
+      const debugInfo = {
+        hasWindowPbjs: !!window.pbjs,
+        hasAdpushup: !!window.adpushup,
+        adpushupKeys: window.adpushup ? Object.keys(window.adpushup).slice(0, 20) : [],
+        hasPubfig: !!window.pubfig,
+        pubfigKeys: window.pubfig ? Object.keys(window.pubfig).slice(0, 20) : [],
+        hasFreestar: !!window.freestar,
+        freestarKeys: window.freestar ? Object.keys(window.freestar).slice(0, 20) : []
+      };
+      console.log('[Debug Wrappers]', JSON.stringify(debugInfo));
       const w = window;
       const safe = (fn) => { try { return fn(); } catch { return null; } };
       const pbjs = w.pbjs;
