@@ -97,8 +97,44 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
         }
       });
       // Extract detailed Prebid configuration
-      const pbjsConfig = safe(() => pbjs?.getConfig?.());
-      const pbjsAdUnits = safe(() => pbjs?.adUnits);
+      // Check multiple sources: direct pbjs, or wrapped in managed services
+      let pbjsConfig = safe(() => pbjs?.getConfig?.());
+      let pbjsAdUnits = safe(() => pbjs?.adUnits);
+      let pbjsVersion = safe(() => pbjs?.version);
+
+      // Fallback: Try extracting from managed service wrappers
+      // AdPushup wrapper
+      if (!pbjsAdUnits && w.adpushup) {
+        pbjsAdUnits = safe(() => w.adpushup?.pbjs?.adUnits) ||
+                      safe(() => w.adpushup?.que?.pbjs?.adUnits);
+        pbjsConfig ??= safe(() => w.adpushup?.pbjs?.getConfig?.());
+        pbjsVersion ??= safe(() => w.adpushup?.pbjs?.version);
+      }
+
+      // Freestar/Pubfig wrapper
+      if (!pbjsAdUnits && (w.freestar || w.pubfig)) {
+        pbjsAdUnits = safe(() => w.pubfig?.pbjs?.adUnits) ||
+                      safe(() => w.freestar?.pbjs?.adUnits) ||
+                      safe(() => w._fsprebid?.adUnits);
+        pbjsConfig ??= safe(() => w.pubfig?.pbjs?.getConfig?.()) ||
+                       safe(() => w.freestar?.pbjs?.getConfig?.());
+        pbjsVersion ??= safe(() => w.pubfig?.pbjs?.version) ||
+                        safe(() => w.freestar?.pbjs?.version);
+      }
+
+      // Raptive wrapper
+      if (!pbjsAdUnits && w.raptive) {
+        pbjsAdUnits = safe(() => w.raptive?.pbjs?.adUnits);
+        pbjsConfig ??= safe(() => w.raptive?.pbjs?.getConfig?.());
+        pbjsVersion ??= safe(() => w.raptive?.pbjs?.version);
+      }
+
+      // Mediavine wrapper
+      if (!pbjsAdUnits && w.mediavine) {
+        pbjsAdUnits = safe(() => w.mediavine?.pbjs?.adUnits);
+        pbjsConfig ??= safe(() => w.mediavine?.pbjs?.getConfig?.());
+        pbjsVersion ??= safe(() => w.mediavine?.pbjs?.version);
+      }
 
       // Extract all configured bidders from adUnits
       const bidders = new Set();
@@ -123,7 +159,7 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
         pbjsBidResponses: safe(() => pbjs?.getBidResponses?.()),
         pbjsBidders: Array.from(bidders),
         pbjsAdFormats: Array.from(adFormats),
-        pbjsVersion: safe(() => pbjs?.version),
+        pbjsVersion: pbjsVersion,  // Use wrapper-aware version
         pbjsAdUnitsCount: Array.isArray(pbjsAdUnits) ? pbjsAdUnits.length : 0,
         gamPresent: !!gt,
         gamSlots: slots || null,
