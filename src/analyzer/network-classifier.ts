@@ -31,7 +31,16 @@ export function classifyNetworkRequests(requests: NetworkRequest[]): VendorRepor
       for (const vendor of category.vendors) {
         for (const pattern of vendor.patterns) {
           const regex = new RegExp(pattern.url, 'i');
-          if (regex.test(request.url)) {
+          const urlMatches = regex.test(request.url);
+
+          // Check if resource type matches (if pattern specifies types)
+          // If pattern.type is empty array, match any type
+          // If pattern.type has values, request.type must be in that list
+          const typeMatches = !pattern.type ||
+                              pattern.type.length === 0 ||
+                              (request.type && pattern.type.includes(request.type));
+
+          if (urlMatches && typeMatches) {
             detectedVendors.add(vendor.name);
 
             if (!categorizedVendors[category.category]) {

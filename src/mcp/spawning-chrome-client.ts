@@ -154,22 +154,23 @@ export class SpawningChromeDevToolsClient {
     });
 
     // Parse markdown response into structured format
-    // Response format: "reqid=1 GET https://url [success - 200]"
+    // Response format: "reqid=1 GET https://url [resourceType - 200]"
     if (typeof result === 'string') {
       const lines = result.split('\n');
       const requests = [];
 
       for (const line of lines) {
-        // Match pattern: reqid=123 METHOD URL [status - code]
-        const match = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[.*-\s*(\d+)\]/);
-        if (match) {
-          const [, reqid, method, url, status] = match;
+        // Match pattern: reqid=123 METHOD URL [RESOURCE_TYPE - code]
+        // Try to extract resource type from the response (e.g., [script - 200], [fetch - 200])
+        const matchWithType = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[(\w+)\s*-\s*(\d+)\]/);
+        if (matchWithType) {
+          const [, reqid, method, url, resourceType, status] = matchWithType;
           requests.push({
             reqid: parseInt(reqid),
             url,
             method,
             status: parseInt(status),
-            resourceType: this.guessResourceType(url)
+            type: this.normalizeResourceType(resourceType)  // Use 'type' field, normalize Chrome's type names
           });
         }
       }
@@ -180,14 +181,48 @@ export class SpawningChromeDevToolsClient {
     return result;
   }
 
-  private guessResourceType(url: string): string {
-    const urlLower = url.toLowerCase();
-    if (urlLower.includes('.js')) return 'script';
-    if (urlLower.includes('.css')) return 'stylesheet';
-    if (urlLower.match(/\.(png|jpg|jpeg|gif|svg|webp)/)) return 'image';
-    if (urlLower.match(/\.(woff|woff2|ttf|eot)/)) return 'font';
-    if (urlLower.includes('/xhr') || urlLower.includes('/api/')) return 'xhr';
-    return 'other';
+  private normalizeResourceType(chromeType: string): string {
+    // Normalize Chrome DevTools resource type names to match vendor patterns
+    const type = chromeType.toLowerCase();
+
+    // Chrome uses various type names - normalize them
+    switch (type) {
+      case 'script':
+      case 'javascript':
+        return 'script';
+
+      case 'xhr':
+      case 'fetch':
+      case 'xmlhttprequest':
+        return 'xhr';
+
+      case 'image':
+      case 'img':
+        return 'image';
+
+      case 'stylesheet':
+      case 'css':
+        return 'stylesheet';
+
+      case 'font':
+      case 'woff':
+      case 'woff2':
+      case 'ttf':
+        return 'font';
+
+      case 'document':
+      case 'subdocument':
+      case 'iframe':
+        return 'document';
+
+      case 'media':
+      case 'video':
+      case 'audio':
+        return 'media';
+
+      default:
+        return 'other';
+    }
   }
 
   async evaluateScript(func: string) {
