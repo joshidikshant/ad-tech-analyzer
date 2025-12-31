@@ -160,9 +160,9 @@ export class SpawningChromeDevToolsClient {
       const requests = [];
 
       for (const line of lines) {
-        // Match pattern: reqid=123 METHOD URL [RESOURCE_TYPE - code]
-        // Try to extract resource type from the response (e.g., [script - 200], [fetch - 200])
-        const matchWithType = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[(\w+)\s*-\s*(\d+)\]/);
+        // Try to match pattern with resource type: reqid=123 METHOD URL [TYPE - code]
+        let matchWithType = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[(\w+)\s*-\s*(\d+)\]/);
+
         if (matchWithType) {
           const [, reqid, method, url, resourceType, status] = matchWithType;
           requests.push({
@@ -170,8 +170,21 @@ export class SpawningChromeDevToolsClient {
             url,
             method,
             status: parseInt(status),
-            type: this.normalizeResourceType(resourceType)  // Use 'type' field, normalize Chrome's type names
+            type: this.normalizeResourceType(resourceType)
           });
+        } else {
+          // Fallback: try generic pattern without type extraction: reqid=123 METHOD URL [anything - code]
+          const matchGeneric = line.match(/reqid=(\d+)\s+(\w+)\s+(https?:\/\/[^\s]+).*\[.*-\s*(\d+)\]/);
+          if (matchGeneric) {
+            const [, reqid, method, url, status] = matchGeneric;
+            requests.push({
+              reqid: parseInt(reqid),
+              url,
+              method,
+              status: parseInt(status),
+              type: this.guessResourceType(url)  // Fallback to URL-based guessing
+            });
+          }
         }
       }
 
@@ -223,6 +236,17 @@ export class SpawningChromeDevToolsClient {
       default:
         return 'other';
     }
+  }
+
+  private guessResourceType(url: string): string {
+    // Fallback URL-based type guessing when Chrome doesn't provide type
+    const urlLower = url.toLowerCase();
+    if (urlLower.includes('.js')) return 'script';
+    if (urlLower.includes('.css')) return 'stylesheet';
+    if (urlLower.match(/\.(png|jpg|jpeg|gif|svg|webp)/)) return 'image';
+    if (urlLower.match(/\.(woff|woff2|ttf|eot)/)) return 'font';
+    if (urlLower.includes('/xhr') || urlLower.includes('/api/')) return 'xhr';
+    return 'other';
   }
 
   async evaluateScript(func: string) {
