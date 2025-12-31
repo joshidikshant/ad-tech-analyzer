@@ -453,44 +453,6 @@ export default function AnalysisView({ data }: Props) {
         </GlowCard>
       )}
 
-      {/* Detected Vendors */}
-      {Object.keys(data.categories).length > 0 && (
-        <GlowCard>
-          <h3 className="text-2xl font-display font-bold text-cyber-accent-primary mb-6 uppercase">
-            Detected Vendors
-          </h3>
-
-          <div className="space-y-6">
-            {Object.entries(data.categories)
-              .filter(([_, vendors]) => vendors && vendors.length > 0)
-              .map(([category, vendors]) => (
-                <div key={category}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div
-                      className="w-1 h-6 rounded"
-                      style={{ backgroundColor: CATEGORY_COLORS[category] || CATEGORY_COLORS.other }}
-                    />
-                    <h4 className="text-sm font-mono uppercase tracking-wider text-cyber-text-secondary">
-                      {category.replace(/_/g, ' ')} ({vendors.length})
-                    </h4>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {vendors.map((vendor: string, idx: number) => (
-                      <DataBadge
-                        key={idx}
-                        label={vendor}
-                        variant="default"
-                        size="sm"
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-          </div>
-        </GlowCard>
-      )}
-
     </motion.div>
   );
 }
