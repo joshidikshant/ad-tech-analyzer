@@ -146,7 +146,7 @@ function App() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://example.com/article"
-                  className="w-full px-4 py-3 bg-cyber-bg-tertiary/50 border border-cyber-accent-primary/30 rounded text-cyber-text-primary font-mono text-sm focus:outline-none focus:border-cyber-accent-primary focus:ring-2 focus:ring-cyber-accent-primary/20 transition-all"
+                  className="w-full px-4 py-3 bg-cyber-bg-tertiary border border-cyber-accent-primary/30 rounded text-white placeholder:text-cyber-text-secondary font-mono text-sm focus:outline-none focus:border-cyber-accent-primary focus:ring-2 focus:ring-cyber-accent-primary/20 transition-all"
                 />
               </div>
 
