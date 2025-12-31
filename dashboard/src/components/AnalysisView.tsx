@@ -64,7 +64,10 @@ const container = {
 
 export default function AnalysisView({ data }: Props) {
   const [showPrebidConfig, setShowPrebidConfig] = useState(false);
-  const [showGAMDetails, setShowGAMDetails] = useState(false);
+  const [showGAMDetails, setShowGAMDetails] = useState(true); // Show GAM by default
+
+  // Calculate total bidders (client-side + network-inferred)
+  const totalBidders = (data.prebid.bidders?.length || 0) + (data.prebid.network_bidders?.length || 0);
 
   // Prepare chart data
   const categoryData = Object.entries(data.categories || {})
@@ -106,18 +109,18 @@ export default function AnalysisView({ data }: Props) {
             color="primary"
           />
           <MetricDisplay
-            value={data.ssp_count}
-            label="SSP Count"
+            value={totalBidders}
+            label="Bidders"
             color="secondary"
+          />
+          <MetricDisplay
+            value={data.gam.slots?.length || 0}
+            label="GAM Slots"
+            color="tertiary"
           />
           <MetricDisplay
             value={data.network.total_requests}
             label="Network Requests"
-            color="tertiary"
-          />
-          <MetricDisplay
-            value={data.network.classified_requests}
-            label="Classified"
             color="primary"
           />
         </div>
@@ -385,68 +388,67 @@ export default function AnalysisView({ data }: Props) {
               <span className="px-3 py-1 bg-cyber-success/20 border border-cyber-success/50 text-cyber-success rounded-full text-xs font-mono uppercase tracking-wider animate-pulse">
                 Detected
               </span>
+              {data.gam.slots && data.gam.slots.length > 0 && (
+                <span className="px-3 py-1 bg-cyber-bg-tertiary border border-cyber-accent-primary/30 text-cyber-accent-primary rounded text-xs font-mono">
+                  {data.gam.slots.length} slots
+                </span>
+              )}
             </div>
-            <button
-              onClick={() => setShowGAMDetails(!showGAMDetails)}
-              className="text-sm font-mono text-cyber-accent-secondary hover:text-cyber-accent-primary transition-colors uppercase tracking-wider"
-            >
-              {showGAMDetails ? '▼ Hide Details' : '▶ Show Details'}
-            </button>
+            {data.gam.slots && data.gam.slots.length > 5 && (
+              <button
+                onClick={() => setShowGAMDetails(!showGAMDetails)}
+                className="text-sm font-mono text-cyber-accent-secondary hover:text-cyber-accent-primary transition-colors uppercase tracking-wider"
+              >
+                {showGAMDetails ? '▼ Show Less' : `▶ Show All ${data.gam.slots.length}`}
+              </button>
+            )}
           </div>
 
+          {/* Always show first 5 slots */}
           {data.gam.slots && data.gam.slots.length > 0 && (
             <div className="mb-4">
               <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-3">
-                Ad Slots: {data.gam.slots.length}
+                Ad Unit Paths
               </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {data.gam.slots
+                  .slice(0, showGAMDetails ? data.gam.slots.length : 5)
+                  .map((slot: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className="bg-cyber-bg-tertiary/30 border border-cyber-accent-primary/20 px-3 py-2 rounded text-xs font-mono text-cyber-text-primary truncate"
+                      title={slot.adUnitPath || slot.elementId}
+                    >
+                      {slot.adUnitPath || slot.elementId || `Slot ${idx + 1}`}
+                    </div>
+                  ))}
+              </div>
+              {!showGAMDetails && data.gam.slots.length > 5 && (
+                <p className="text-xs font-mono text-cyber-text-tertiary mt-2">
+                  +{data.gam.slots.length - 5} more slots
+                </p>
+              )}
             </div>
           )}
 
-          {showGAMDetails && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="space-y-4"
-            >
-              {data.gam.slots && data.gam.slots.length > 0 && (
-                <div>
-                  <h4 className="text-sm font-mono uppercase tracking-wider text-cyber-accent-secondary mb-3">
-                    Slots
-                  </h4>
-                  <div className="space-y-2">
-                    {data.gam.slots.map((slot: any, idx: number) => (
-                      <div
-                        key={idx}
-                        className="bg-cyber-bg-tertiary/30 border border-cyber-accent-primary/20 p-3 rounded"
-                      >
-                        <p className="text-sm font-mono text-cyber-text-primary">
-                          {slot.adUnitPath || slot.elementId || `Slot ${idx + 1}`}
-                        </p>
-                        {slot.sizes && (
-                          <p className="text-xs font-mono text-cyber-text-tertiary mt-1">
-                            Sizes: {JSON.stringify(slot.sizes)}
-                          </p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {data.gam.targeting && Object.keys(data.gam.targeting).length > 0 && (
-                <div>
-                  <h4 className="text-sm font-mono uppercase tracking-wider text-cyber-accent-secondary mb-3">
-                    Targeting
-                  </h4>
-                  <div className="bg-cyber-bg-tertiary/50 border border-cyber-accent-primary/30 p-4 rounded">
-                    <pre className="text-xs font-mono text-cyber-success overflow-x-auto">
-                      {JSON.stringify(data.gam.targeting, null, 2)}
-                    </pre>
-                  </div>
-                </div>
-              )}
-            </motion.div>
+          {/* Targeting (if available) */}
+          {data.gam.targeting && Object.keys(data.gam.targeting).length > 0 && (
+            <div className="mt-4 pt-4 border-t border-cyber-accent-primary/20">
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-2">
+                Page-Level Targeting
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {Object.entries(data.gam.targeting).slice(0, 10).map(([key, values]) => (
+                  <span
+                    key={key}
+                    className="px-2 py-1 bg-cyber-bg-tertiary border border-cyber-accent-secondary/30 text-cyber-text-secondary rounded text-xs font-mono"
+                    title={`${key}: ${Array.isArray(values) ? values.join(', ') : values}`}
+                  >
+                    {key}
+                  </span>
+                ))}
+              </div>
+            </div>
           )}
         </GlowCard>
       )}
@@ -489,27 +491,6 @@ export default function AnalysisView({ data }: Props) {
         </GlowCard>
       )}
 
-      {/* Managed Services Summary */}
-      {Object.values(data.managed_services_detected || {}).some(v => v) && (
-        <GlowCard glowColor="secondary">
-          <h3 className="text-xl font-display font-bold text-cyber-accent-secondary mb-6 uppercase">
-            Managed Services Detected
-          </h3>
-
-          <div className="flex flex-wrap gap-3">
-            {Object.entries(data.managed_services_detected)
-              .filter(([_, detected]) => detected)
-              .map(([service, _]) => (
-                <DataBadge
-                  key={service}
-                  label={service.toUpperCase()}
-                  variant="success"
-                  size="md"
-                />
-              ))}
-          </div>
-        </GlowCard>
-      )}
     </motion.div>
   );
 }
