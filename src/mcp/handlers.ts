@@ -148,7 +148,7 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
       custom_wrappers: apiData.customWrappers,
       network: {
         total_requests: networkRequests?.length || 0,
-        classified_requests: classification.vendors.length,
+        classified_requests: classification.classified_count,
       },
     };
 

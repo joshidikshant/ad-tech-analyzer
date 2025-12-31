@@ -14,11 +14,13 @@ export interface VendorReport {
   prebid_detected: boolean;
   gam_detected: boolean;
   categories: Record<string, string[]>;
+  classified_count: number;  // Number of requests that matched vendor patterns
 }
 
 export function classifyNetworkRequests(requests: NetworkRequest[]): VendorReport {
   const detectedVendors = new Set<string>();
   const categorizedVendors: Record<string, string[]> = {};
+  const classifiedRequests = new Set<number>();  // Track indices of classified requests
 
   // Guard against non-array input
   if (!Array.isArray(requests)) {
@@ -26,7 +28,8 @@ export function classifyNetworkRequests(requests: NetworkRequest[]): VendorRepor
     requests = [];
   }
 
-  for (const request of requests) {
+  for (let i = 0; i < requests.length; i++) {
+    const request = requests[i];
     for (const category of VENDOR_PATTERNS) {
       for (const vendor of category.vendors) {
         for (const pattern of vendor.patterns) {
@@ -42,6 +45,7 @@ export function classifyNetworkRequests(requests: NetworkRequest[]): VendorRepor
 
           if (urlMatches && typeMatches) {
             detectedVendors.add(vendor.name);
+            classifiedRequests.add(i);  // Mark this request as classified
 
             if (!categorizedVendors[category.category]) {
               categorizedVendors[category.category] = [];
@@ -78,6 +82,7 @@ export function classifyNetworkRequests(requests: NetworkRequest[]): VendorRepor
     managed_service,
     prebid_detected,
     gam_detected,
-    categories: categorizedVendors
+    categories: categorizedVendors,
+    classified_count: classifiedRequests.size
   };
 }
