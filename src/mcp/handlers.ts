@@ -25,6 +25,10 @@ export interface AnalysisResult {
     detected: boolean;
     config?: any;
     bid_responses?: any;
+    bidders?: string[];  // List of configured bidders
+    ad_formats?: string[];  // Ad formats (banner, video, native)
+    version?: string | null;  // Prebid.js version
+    ad_units_count?: number;  // Number of ad units
   };
   gam: {
     detected: boolean;
@@ -138,6 +142,10 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
         detected: apiData.pbjs.present,
         config: apiData.pbjs.config,
         bid_responses: apiData.pbjs.bidResponses,
+        bidders: apiData.pbjs.bidders,
+        ad_formats: apiData.pbjs.adFormats,
+        version: apiData.pbjs.version,
+        ad_units_count: apiData.pbjs.adUnitsCount,
       },
       gam: {
         detected: apiData.gam.present,

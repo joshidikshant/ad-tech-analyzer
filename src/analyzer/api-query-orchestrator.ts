@@ -3,7 +3,15 @@ export interface ChromeClient {
   evaluateScript(fn: string): Promise<any>;
 }
 export type AdTechData = {
-  pbjs: { present: boolean; config: unknown | null; bidResponses: unknown | null };
+  pbjs: {
+    present: boolean;
+    config: unknown | null;
+    bidResponses: unknown | null;
+    bidders: string[];  // List of configured bidders (e.g., ["appnexus", "rubicon", "pubmatic"])
+    adFormats: string[];  // Ad formats used (e.g., ["banner", "video"])
+    version: string | null;  // Prebid.js version
+    adUnitsCount: number;  // Number of ad units configured
+  };
   gam: { present: boolean; slots: unknown[] | null; targeting: Record<string, string[]> | null };
   managedServices: {
     adthrive: boolean;
@@ -28,7 +36,15 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData> {
   const started = Date.now();
   const out: AdTechData = {
-    pbjs: { present: false, config: null, bidResponses: null },
+    pbjs: {
+      present: false,
+      config: null,
+      bidResponses: null,
+      bidders: [],
+      adFormats: [],
+      version: null,
+      adUnitsCount: 0
+    },
     gam: { present: false, slots: null, targeting: null },
     managedServices: {
       adthrive: false,
@@ -80,10 +96,35 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
           return []; // Ignore keys that throw on access
         }
       });
+      // Extract detailed Prebid configuration
+      const pbjsConfig = safe(() => pbjs?.getConfig?.());
+      const pbjsAdUnits = safe(() => pbjs?.adUnits);
+
+      // Extract all configured bidders from adUnits
+      const bidders = new Set();
+      const adFormats = new Set();
+      if (Array.isArray(pbjsAdUnits)) {
+        pbjsAdUnits.forEach(unit => {
+          if (Array.isArray(unit?.bids)) {
+            unit.bids.forEach(bid => {
+              if (bid?.bidder) bidders.add(bid.bidder);
+            });
+          }
+          // Extract ad formats (banner, video, native)
+          if (unit?.mediaTypes) {
+            Object.keys(unit.mediaTypes).forEach(type => adFormats.add(type));
+          }
+        });
+      }
+
       return {
         pbjsPresent: !!pbjs,
-        pbjsConfig: safe(() => pbjs?.getConfig?.()),
+        pbjsConfig: pbjsConfig,
         pbjsBidResponses: safe(() => pbjs?.getBidResponses?.()),
+        pbjsBidders: Array.from(bidders),
+        pbjsAdFormats: Array.from(adFormats),
+        pbjsVersion: safe(() => pbjs?.version),
+        pbjsAdUnitsCount: Array.isArray(pbjsAdUnits) ? pbjsAdUnits.length : 0,
         gamPresent: !!gt,
         gamSlots: slots || null,
         gamTargeting: (targeting && typeof targeting === "object") ? targeting : null,
@@ -107,6 +148,10 @@ export async function queryAdTechAPIs(client: ChromeClient): Promise<AdTechData>
       out.pbjs.present ||= !!snap.pbjsPresent;
       out.pbjs.config ??= snap.pbjsConfig ?? null;
       out.pbjs.bidResponses ??= snap.pbjsBidResponses ?? null;
+      out.pbjs.bidders = Array.isArray(snap.pbjsBidders) && snap.pbjsBidders.length > 0 ? snap.pbjsBidders : out.pbjs.bidders;
+      out.pbjs.adFormats = Array.isArray(snap.pbjsAdFormats) && snap.pbjsAdFormats.length > 0 ? snap.pbjsAdFormats : out.pbjs.adFormats;
+      out.pbjs.version ??= snap.pbjsVersion ?? null;
+      out.pbjs.adUnitsCount = snap.pbjsAdUnitsCount || out.pbjs.adUnitsCount;
       out.gam.present ||= !!snap.gamPresent;
       out.gam.slots ??= snap.gamSlots ?? null;
       out.gam.targeting ??= snap.gamTargeting ?? null;
