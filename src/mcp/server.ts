@@ -41,7 +41,7 @@ const analysisCache = new Map<string, any>();
 const server = new Server(
   {
     name: "ad-tech-analyzer",
-    version: "1.0.0",
+    version: "1.1.0",
   },
   {
     capabilities: {
