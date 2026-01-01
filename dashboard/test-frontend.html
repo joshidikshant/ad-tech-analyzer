@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Integration Test Suite</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h1 { margin-bottom: 20px; color: #333; }
+    .config { margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 4px; }
+    .config label { display: block; margin-bottom: 10px; font-weight: 600; }
+    .config select { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+    .test-section { margin-bottom: 30px; }
+    .test-section h2 { margin-bottom: 15px; color: #555; font-size: 18px; }
+    .test-item { padding: 12px; margin-bottom: 8px; border-radius: 4px; border-left: 4px solid #ddd; background: #fafafa; }
+    .test-item.running { border-left-color: #ffa500; background: #fff8f0; }
+    .test-item.pass { border-left-color: #22c55e; background: #f0fdf4; }
+    .test-item.fail { border-left-color: #ef4444; background: #fef2f2; }
+    .test-name { font-weight: 600; margin-bottom: 4px; }
+    .test-details { font-size: 13px; color: #666; font-family: monospace; }
+    .summary { padding: 20px; background: #e0e7ff; border-radius: 4px; margin-bottom: 20px; }
+    .summary-stat { display: inline-block; margin-right: 20px; font-weight: 600; }
+    .summary-stat.pass { color: #22c55e; }
+    .summary-stat.fail { color: #ef4444; }
+    button { padding: 12px 24px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+    button:hover { background: #2563eb; }
+    button:disabled { background: #9ca3af; cursor: not-allowed; }
+    .log { margin-top: 20px; padding: 15px; background: #1f2937; color: #e5e7eb; font-family: monospace; font-size: 12px; border-radius: 4px; max-height: 300px; overflow-y: auto; }
+    .log-entry { margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Frontend Integration Test Suite</h1>
+
+    <div class="config">
+      <label>
+        Test Environment:
+        <select id="envSelect">
+          <option value="http://localhost:3001">Local (localhost:3001)</option>
+          <option value="https://ad-tech-analyzer-717920911778.asia-south1.run.app">Production (GCP)</option>
+        </select>
+      </label>
+      <button id="runBtn" style="margin-top: 10px;">Run All Tests</button>
+    </div>
+
+    <div id="summary" style="display: none;"></div>
+    <div id="testResults"></div>
+    <div id="log" class="log" style="display: none;"></div>
+  </div>
+
+  <script>
+    const TEST_SITES = [
+      {
+        name: 'CardGames.io Chess',
+        url: 'https://www.cardgames.io/chess/',
+        tests: {
+          prebidDetected: true,
+          gamDetected: true,
+          minVendorCount: 10,
+          managedService: 'Freestar',
+          hasVendors: ['Freestar', 'Prebid.js', 'Google Ad Manager']
+        }
+      },
+      {
+        name: 'Bollywood Shaadis',
+        url: 'https://www.bollywoodshaadis.com/articles/stranger-things-finale-episode-trailer-73090',
+        tests: {
+          prebidDetected: true,
+          gamDetected: true,
+          minVendorCount: 5,
+          managedService: 'AdPushup',
+          hasVendors: ['AdPushup', 'Prebid.js']
+        }
+      },
+      {
+        name: 'PCWorld',
+        url: 'https://www.pcworld.com/article/2965913/the-best-pc-hardware-and-software-of-2025-2026.html',
+        tests: {
+          prebidDetected: true,
+          adaptexDetected: true,
+          managedService: 'Adapex',
+          hasVendors: ['Adapex', 'Prebid.js']
+        }
+      }
+    ];
+
+    let currentEnv = '';
+    let totalTests = 0;
+    let passedTests = 0;
+    let failedTests = 0;
+
+    function log(message, level = 'info') {
+      const logDiv = document.getElementById('log');
+      logDiv.style.display = 'block';
+      const entry = document.createElement('div');
+      entry.className = 'log-entry';
+      const timestamp = new Date().toLocaleTimeString();
+      entry.textContent = `[${timestamp}] [${level.toUpperCase()}] ${message}`;
+      logDiv.appendChild(entry);
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    function createTestItem(name, status = 'pending') {
+      const item = document.createElement('div');
+      item.className = `test-item ${status}`;
+
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'test-name';
+      nameDiv.textContent = name;
+      item.appendChild(nameDiv);
+
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'test-details';
+      detailsDiv.textContent = status === 'pending' ? 'Waiting...' : '';
+      item.appendChild(detailsDiv);
+
+      return { item, detailsDiv };
+    }
+
+    function updateTestItem(item, detailsDiv, status, details) {
+      item.className = `test-item ${status}`;
+      detailsDiv.textContent = details;
+    }
+
+    function updateSummary() {
+      const summaryDiv = document.getElementById('summary');
+      summaryDiv.style.display = 'block';
+      summaryDiv.innerHTML = '';
+
+      const total = document.createElement('span');
+      total.className = 'summary-stat';
+      total.textContent = `Total: ${totalTests}`;
+      summaryDiv.appendChild(total);
+
+      const passed = document.createElement('span');
+      passed.className = 'summary-stat pass';
+      passed.textContent = `Passed: ${passedTests}`;
+      summaryDiv.appendChild(passed);
+
+      const failed = document.createElement('span');
+      failed.className = 'summary-stat fail';
+      failed.textContent = `Failed: ${failedTests}`;
+      summaryDiv.appendChild(failed);
+
+      const rate = document.createElement('span');
+      rate.className = 'summary-stat';
+      const percentage = totalTests > 0 ? ((passedTests / totalTests) * 100).toFixed(1) : 0;
+      rate.textContent = `Success Rate: ${percentage}%`;
+      summaryDiv.appendChild(rate);
+    }
+
+    async function analyzeURL(url) {
+      log(`Analyzing ${url}...`);
+      const response = await fetch(`${currentEnv}/api/analyze`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, device: 'desktop', timeout: 60000 })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      if (!result.success) {
+        throw new Error(result.error || 'Analysis failed');
+      }
+
+      return result.data;
+    }
+
+    async function runTests() {
+      const runBtn = document.getElementById('runBtn');
+      const resultsDiv = document.getElementById('testResults');
+      currentEnv = document.getElementById('envSelect').value;
+
+      runBtn.disabled = true;
+      resultsDiv.innerHTML = '';
+      document.getElementById('log').innerHTML = '';
+      totalTests = 0;
+      passedTests = 0;
+      failedTests = 0;
+
+      log(`Starting test suite against ${currentEnv}`);
+
+      for (const site of TEST_SITES) {
+        const section = document.createElement('div');
+        section.className = 'test-section';
+
+        const heading = document.createElement('h2');
+        heading.textContent = site.name;
+        section.appendChild(heading);
+
+        resultsDiv.appendChild(section);
+
+        try {
+          log(`Testing ${site.name}`);
+          const data = await analyzeURL(site.url);
+          log(`Received data for ${site.name}`, 'success');
+
+          // Run individual tests
+          if (site.tests.prebidDetected !== undefined) {
+            const { item, detailsDiv } = createTestItem('Prebid Detection', 'running');
+            section.appendChild(item);
+            totalTests++;
+
+            const detected = data.prebid?.detected || false;
+            const pass = detected === site.tests.prebidDetected;
+            if (pass) passedTests++; else failedTests++;
+
+            updateTestItem(item, detailsDiv, pass ? 'pass' : 'fail',
+              `Expected: ${site.tests.prebidDetected}, Got: ${detected}`);
+            log(`  Prebid Detection: ${pass ? 'PASS' : 'FAIL'}`, pass ? 'success' : 'error');
+          }
+
+          if (site.tests.gamDetected !== undefined) {
+            const { item, detailsDiv } = createTestItem('GAM Detection', 'running');
+            section.appendChild(item);
+            totalTests++;
+
+            const detected = data.gam?.detected || false;
+            const pass = detected === site.tests.gamDetected;
+            if (pass) passedTests++; else failedTests++;
+
+            updateTestItem(item, detailsDiv, pass ? 'pass' : 'fail',
+              `Expected: ${site.tests.gamDetected}, Got: ${detected}`);
+            log(`  GAM Detection: ${pass ? 'PASS' : 'FAIL'}`, pass ? 'success' : 'error');
+          }
+
+          if (site.tests.minVendorCount !== undefined) {
+            const { item, detailsDiv } = createTestItem('Vendor Count', 'running');
+            section.appendChild(item);
+            totalTests++;
+
+            const count = data.vendor_count || 0;
+            const pass = count >= site.tests.minVendorCount;
+            if (pass) passedTests++; else failedTests++;
+
+            updateTestItem(item, detailsDiv, pass ? 'pass' : 'fail',
+              `Expected: >= ${site.tests.minVendorCount}, Got: ${count}`);
+            log(`  Vendor Count: ${pass ? 'PASS' : 'FAIL'}`, pass ? 'success' : 'error');
+          }
+
+          if (site.tests.managedService) {
+            const { item, detailsDiv } = createTestItem('Managed Service', 'running');
+            section.appendChild(item);
+            totalTests++;
+
+            const service = data.managed_service;
+            const pass = service === site.tests.managedService;
+            if (pass) passedTests++; else failedTests++;
+
+            updateTestItem(item, detailsDiv, pass ? 'pass' : 'fail',
+              `Expected: ${site.tests.managedService}, Got: ${service || 'none'}`);
+            log(`  Managed Service: ${pass ? 'PASS' : 'FAIL'}`, pass ? 'success' : 'error');
+          }
+
+          if (site.tests.hasVendors) {
+            const { item, detailsDiv } = createTestItem('Required Vendors', 'running');
+            section.appendChild(item);
+            totalTests++;
+
+            const vendors = data.vendors || [];
+            const missing = site.tests.hasVendors.filter(v => !vendors.includes(v));
+            const pass = missing.length === 0;
+            if (pass) passedTests++; else failedTests++;
+
+            updateTestItem(item, detailsDiv, pass ? 'pass' : 'fail',
+              pass ? 'All present' : `Missing: ${missing.join(', ')}`);
+            log(`  Required Vendors: ${pass ? 'PASS' : 'FAIL'}`, pass ? 'success' : 'error');
+          }
+
+          if (site.tests.adaptexDetected !== undefined) {
+            const { item, detailsDiv } = createTestItem('AdaPex Detection', 'running');
+            section.appendChild(item);
+            totalTests++;
+
+            const detected = data.managed_services_detected?.adapex || false;
+            const pass = detected === site.tests.adaptexDetected;
+            if (pass) passedTests++; else failedTests++;
+
+            updateTestItem(item, detailsDiv, pass ? 'pass' : 'fail',
+              `Expected: ${site.tests.adaptexDetected}, Got: ${detected}`);
+            log(`  AdaPex Detection: ${pass ? 'PASS' : 'FAIL'}`, pass ? 'success' : 'error');
+          }
+
+          updateSummary();
+
+        } catch (error) {
+          log(`Error testing ${site.name}: ${error.message}`, 'error');
+          const { item, detailsDiv } = createTestItem('Analysis Failed', 'fail');
+          updateTestItem(item, detailsDiv, 'fail', error.message);
+          section.appendChild(item);
+          totalTests++;
+          failedTests++;
+          updateSummary();
+        }
+      }
+
+      log('Test suite complete');
+      log(`Results: ${passedTests}/${totalTests} passed (${((passedTests/totalTests)*100).toFixed(1)}%)`,
+        passedTests === totalTests ? 'success' : 'error');
+      runBtn.disabled = false;
+    }
+
+    document.getElementById('runBtn').addEventListener('click', runTests);
+  </script>
+</body>
+</html>
