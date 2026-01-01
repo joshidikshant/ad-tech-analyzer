@@ -39,6 +39,18 @@ export interface PrebidInstanceResult {
   adUnitsCount: number;
 }
 
+// P1: Individual bid detail for the table
+export interface BidDetailResult {
+  bidder: string;
+  adUnit: string;
+  cpm: number;
+  currency: string;
+  status: 'won' | 'bid' | 'no-bid' | 'timeout' | 'rejected';
+  responseTime: number | null;
+  size: string | null;
+  source?: string;  // Which Prebid instance this bid came from
+}
+
 export interface AnalysisResult {
   url: string;
   timestamp: string;
@@ -58,6 +70,7 @@ export interface AnalysisResult {
     version?: string | null;  // Prebid.js version
     ad_units_count?: number;  // Number of ad units
     instances?: PrebidInstanceResult[];  // P3: All detected Prebid instances
+    bid_details?: BidDetailResult[];  // P1: Detailed bid data with CPM, status, timing
   };
   gam: {
     detected: boolean;
@@ -74,6 +87,126 @@ export interface AnalysisResult {
 }
 
 /**
+ * Prebid bid capture injection script
+ * This script is injected early to capture bids as they arrive via event listeners
+ */
+const PREBID_CAPTURE_SCRIPT = `
+(function() {
+  // Initialize capture storage
+  window.__adTechCapturedBids = window.__adTechCapturedBids || {
+    bidResponses: [],
+    winningBids: [],
+    noBids: [],
+    auctionEnded: false,
+    instances: {}
+  };
+
+  const captured = window.__adTechCapturedBids;
+
+  // Function to hook into a Prebid instance
+  function hookPrebidInstance(pbjsObj, instanceName) {
+    if (!pbjsObj || captured.instances[instanceName]) return;
+    captured.instances[instanceName] = { hooked: true, events: [] };
+
+    // Check if onEvent is available
+    if (typeof pbjsObj.onEvent !== 'function') {
+      // Use que to wait for Prebid to be ready
+      pbjsObj.que = pbjsObj.que || [];
+      pbjsObj.que.push(function() {
+        setupListeners(pbjsObj, instanceName);
+      });
+    } else {
+      setupListeners(pbjsObj, instanceName);
+    }
+  }
+
+  function setupListeners(pbjsObj, instanceName) {
+    if (!pbjsObj.onEvent) return;
+
+    // Capture bid responses as they arrive
+    try {
+      pbjsObj.onEvent('bidResponse', function(bid) {
+        captured.bidResponses.push({
+          ...bid,
+          _source: instanceName,
+          _capturedAt: Date.now()
+        });
+      });
+      captured.instances[instanceName].events.push('bidResponse');
+    } catch(e) {}
+
+    // Capture winning bids
+    try {
+      pbjsObj.onEvent('bidWon', function(bid) {
+        captured.winningBids.push({
+          ...bid,
+          _source: instanceName,
+          _capturedAt: Date.now()
+        });
+      });
+      captured.instances[instanceName].events.push('bidWon');
+    } catch(e) {}
+
+    // Capture no-bid responses
+    try {
+      pbjsObj.onEvent('noBid', function(bid) {
+        captured.noBids.push({
+          ...bid,
+          _source: instanceName,
+          _capturedAt: Date.now()
+        });
+      });
+      captured.instances[instanceName].events.push('noBid');
+    } catch(e) {}
+
+    // Mark auction end
+    try {
+      pbjsObj.onEvent('auctionEnd', function(auctionData) {
+        captured.auctionEnded = true;
+        captured.lastAuction = {
+          ...auctionData,
+          _source: instanceName,
+          _capturedAt: Date.now()
+        };
+      });
+      captured.instances[instanceName].events.push('auctionEnd');
+    } catch(e) {}
+  }
+
+  // Known Prebid global names
+  const knownPrebidNames = ['pbjs', 'fsprebid', 'pubwise', 'rampBid', 'pbConfig', 'hbObj', 'adpBidder', 'pwpbjs'];
+
+  // Hook existing instances
+  knownPrebidNames.forEach(function(name) {
+    if (window[name]) {
+      hookPrebidInstance(window[name], name);
+    }
+  });
+
+  // Also check for custom wrappers
+  if (window.googletag && window.googletag.cmd) {
+    // GAM may have Prebid integrated
+  }
+
+  // Poll for late-loaded Prebid instances (some sites load them async)
+  let pollCount = 0;
+  const pollInterval = setInterval(function() {
+    knownPrebidNames.forEach(function(name) {
+      if (window[name] && !captured.instances[name]) {
+        hookPrebidInstance(window[name], name);
+      }
+    });
+    pollCount++;
+    if (pollCount > 30) { // Stop after 15 seconds
+      clearInterval(pollInterval);
+    }
+  }, 500);
+
+  console.log('[AdTech Analyzer] Bid capture listeners injected');
+})();
+`;
+
+/**
  * Analyze a website's ad-tech stack
  * This is the core analysis function used by both MCP server and HTTP API
  */
@@ -86,6 +219,15 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
   try {
     console.log(`[MCP Handler] Navigating to ${url}...`);
     await client.navigateToPage(url);
+
+    // CRITICAL: Inject bid capture script IMMEDIATELY after navigation
+    // This sets up event listeners to capture bids as they arrive
+    console.log('[MCP Handler] Injecting Prebid bid capture listeners...');
+    try {
+      await client.evaluateScript(`() => { ${PREBID_CAPTURE_SCRIPT} }`);
+    } catch (err) {
+      console.log('[MCP Handler] Bid capture injection failed (non-critical):', err);
+    }
 
     // Wait for initial page load
     console.log('[MCP Handler] Waiting for initial page load...');
@@ -211,6 +353,7 @@ export async function handleAnalyzeSite(args: AnalyzeSiteArgs): Promise<Analysis
         version: apiData.pbjs.version,
         ad_units_count: apiData.pbjs.adUnitsCount,
         instances: apiData.pbjs.instances.length > 0 ? apiData.pbjs.instances : undefined,  // P3: All instances
+        bid_details: apiData.pbjs.bidDetails.length > 0 ? apiData.pbjs.bidDetails : undefined,  // P1: Bid details
       },
       gam: {
         detected: apiData.gam.present,

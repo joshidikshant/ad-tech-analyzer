@@ -31,6 +31,18 @@ export type PrebidInstance = {
   adUnitsCount: number;
 };
 
+// P1: Individual bid detail
+export type BidDetail = {
+  bidder: string;
+  adUnit: string;
+  cpm: number;
+  currency: string;
+  status: 'won' | 'bid' | 'no-bid' | 'timeout' | 'rejected';
+  responseTime: number | null;  // ms
+  size: string | null;  // e.g., "300x250"
+  source?: string;  // Which Prebid instance this bid came from
+};
+
 export type AdTechData = {
   pbjs: {
     present: boolean;
@@ -41,6 +53,7 @@ export type AdTechData = {
     version: string | null;  // Prebid.js version
     adUnitsCount: number;  // Number of ad units configured
     instances: PrebidInstance[];  // All detected Prebid instances (via _pbjsGlobals)
+    bidDetails: BidDetail[];  // P1: Detailed bid data with CPM, status, timing
   };
   gam: { present: boolean; slots: unknown[] | null; targeting: Record<string, string[]> | null };
   consent: ConsentData;  // CMP/Consent detection
@@ -106,7 +119,8 @@ export async function queryAdTechAPIs(
       adFormats: [],
       version: null,
       adUnitsCount: 0,
-      instances: []  // All detected Prebid instances
+      instances: [],  // All detected Prebid instances
+      bidDetails: []  // P1: Detailed bid data
     },
     gam: { present: false, slots: null, targeting: null },
     consent: {
@@ -382,6 +396,76 @@ export async function queryAdTechAPIs(
         } catch (e) {}
       }
 
+      // ========== P1: Extract Detailed Bid Data ==========
+      const bidDetails = [];
+
+      // Helper to extract bids from any Prebid instance
+      const extractBidsFromInstance = (pbjsInstance, instanceName) => {
+        if (!pbjsInstance) return;
+
+        // Get all bid responses (successful bids)
+        const bidResponses = safe(() => pbjsInstance.getBidResponses?.()) || {};
+        const winningBids = safe(() => pbjsInstance.getAllWinningBids?.()) || [];
+        // getNoBids() returns an object keyed by ad unit, not an array
+        const noBidsRaw = safe(() => pbjsInstance.getNoBids?.()) || {};
+
+        // Create a set of winning bid IDs for quick lookup
+        const winningBidsArray = Array.isArray(winningBids) ? winningBids : [];
+        const winningBidIds = new Set(winningBidsArray.map(b => b.adId || (b.bidder + '-' + b.adUnitCode)));
+
+        // Process successful bids
+        // Note: getBidResponses() returns adUnit -> array of bids directly (not {bids: []})
+        Object.keys(bidResponses).forEach(adUnit => {
+          const rawBids = bidResponses[adUnit];
+          const unitBids = Array.isArray(rawBids) ? rawBids : (rawBids?.bids || []);
+          if (!Array.isArray(unitBids) || unitBids.length === 0) return;
+          unitBids.forEach(bid => {
+            const bidId = bid.adId || (bid.bidder + '-' + bid.adUnitCode);
+            bidDetails.push({
+              bidder: bid.bidder || bid.bidderCode || 'unknown',
+              adUnit: adUnit,
+              cpm: bid.cpm || 0,
+              currency: bid.currency || 'USD',
+              status: winningBidIds.has(bidId) ? 'won' : 'bid',
+              responseTime: bid.timeToRespond || (bid.responseTimestamp && bid.requestTimestamp ? bid.responseTimestamp - bid.requestTimestamp : null),
+              size: bid.width && bid.height ? (bid.width + 'x' + bid.height) : null,
+              source: instanceName
+            });
+          });
+        });
+
+        // Process no-bids - getNoBids returns object keyed by ad unit
+        if (noBidsRaw && typeof noBidsRaw === 'object') {
+          Object.keys(noBidsRaw).forEach(adUnit => {
+            const unitNoBids = noBidsRaw[adUnit]?.bids || noBidsRaw[adUnit] || [];
+            const noBidsArray = Array.isArray(unitNoBids) ? unitNoBids : [unitNoBids];
+            noBidsArray.forEach(noBid => {
+              if (!noBid || typeof noBid !== 'object') return;
+              bidDetails.push({
+                bidder: noBid.bidder || noBid.bidderCode || 'unknown',
+                adUnit: adUnit,
+                cpm: 0,
+                currency: 'USD',
+                status: 'no-bid',
+                responseTime: null,
+                size: null,
+                source: instanceName
+              });
+            });
+          });
+        }
+      };
+
+      // Extract from main pbjs
+      extractBidsFromInstance(pbjs, 'pbjs');
+
+      // Extract from all detected instances
+      pbjsInstances.forEach(inst => {
+        if (inst.globalName !== 'pbjs') {
+          extractBidsFromInstance(w[inst.globalName], inst.globalName);
+        }
+      });
+
       return {
         pbjsPresent: !!pbjs || pbjsInstances.length > 0,
         pbjsConfig: pbjsConfig,
@@ -392,6 +476,8 @@ export async function queryAdTechAPIs(
         pbjsAdUnitsCount: Array.isArray(pbjsAdUnits) ? pbjsAdUnits.length : 0,
         pbjsInstances: pbjsInstances,  // P3: All detected Prebid instances
         pbjsGlobalsFound: pbjsGlobals.length > 0 ? pbjsGlobals : null,  // Debug info
+        // P1: Detailed bid data
+        bidDetails: bidDetails,
         // Only mark GAM as present if pubads() is available (GPT library loaded)
         gamPresent: !!pubads,
         gamSlots: slots || null,
@@ -439,6 +525,12 @@ export async function queryAdTechAPIs(
         }
       }
 
+      // P1: Bid details with CPM, status, timing
+      if (Array.isArray(snap.bidDetails) && snap.bidDetails.length > 0) {
+        out.pbjs.bidDetails = snap.bidDetails as BidDetail[];
+        console.log(`[P1 BidDetails] Extracted ${snap.bidDetails.length} bid details`);
+      }
+
       // P2: CMP/Consent data
       if (snap.consent) {
         if (snap.consent.tcf?.detected) {
@@ -475,23 +567,111 @@ export async function queryAdTechAPIs(
       const anyManagedService = Object.values(out.managedServices).some(v => v);
       const hasBidders = out.pbjs.bidders.length > 0;
       const hasGamSlots = Array.isArray(out.gam.slots) && out.gam.slots.length > 0;
+      const hasBidDetails = out.pbjs.bidDetails.length > 0;
 
-      // If managed service detected, keep polling until we get bidders or timeout
-      if (anyManagedService) {
-        if (hasBidders) break; // Got bidders, we're done
+      // P1: Wait for bid details when Prebid is present
+      // getBidResponses() returns data only after auction completes
+      if (out.pbjs.present && !hasBidDetails && out.attempts < 5) {
+        // Keep polling to capture bid responses
+        console.log(`[P1] Prebid present but no bid details yet, attempt ${out.attempts}/5`);
+      } else if (anyManagedService) {
+        // Managed service detected - wait for bidders OR bid details
+        if (hasBidders || hasBidDetails) break;
         // Otherwise continue polling (managed services lazy-load config)
       } else {
-        // No managed service - break if we have BOTH prebid bidders AND GAM slots (or timeout)
-        // This ensures we capture GAM slots which may load after pbjs
+        // No managed service - break if we have bid details OR (bidders AND GAM slots)
+        if (hasBidDetails) break;
         if (hasBidders && hasGamSlots) break;
-        // Also break if we've tried 3+ times and have at least some data
-        if (out.attempts >= 3 && (out.pbjs.present || out.gam.present)) break;
+        // Also break if we've tried 4+ times and have at least some data
+        if (out.attempts >= 4 && (out.pbjs.present || out.gam.present)) break;
       }
     }
 
     // Increase delay for managed services (lazy loading can take 5-10 seconds)
     const anyManagedService = Object.values(out.managedServices).some(v => v);
     await sleep(anyManagedService ? 3000 : 2000);
+  }
+
+  // ========== EVENT-CAPTURED BIDS QUERY ==========
+  // After all polling, query the event-captured bids from our injected listener
+  // These are more reliable than polling because they capture bids as they arrive
+  try {
+    console.log('[Captured Bids] Querying event-captured bid data...');
+    const capturedData = await client.evaluateScript(`() => {
+      const captured = window.__adTechCapturedBids;
+      if (!captured) return null;
+
+      return {
+        bidResponses: captured.bidResponses || [],
+        winningBids: captured.winningBids || [],
+        noBids: captured.noBids || [],
+        auctionEnded: captured.auctionEnded || false,
+        instances: captured.instances || {}
+      };
+    }`);
+
+    if (capturedData && (capturedData.bidResponses?.length > 0 || capturedData.noBids?.length > 0)) {
+      console.log(`[Captured Bids] Found ${capturedData.bidResponses?.length || 0} bid responses, ${capturedData.winningBids?.length || 0} winning bids, ${capturedData.noBids?.length || 0} no-bids`);
+
+      // Create a set of winning bid IDs
+      const winningBidIds = new Set<string>();
+      if (Array.isArray(capturedData.winningBids)) {
+        capturedData.winningBids.forEach((bid: any) => {
+          const id = bid.adId || (bid.bidder + '-' + bid.adUnitCode);
+          winningBidIds.add(id);
+        });
+      }
+
+      // Process captured bid responses (these have real CPM values!)
+      const capturedBidDetails: BidDetail[] = [];
+
+      if (Array.isArray(capturedData.bidResponses)) {
+        capturedData.bidResponses.forEach((bid: any) => {
+          const bidId = bid.adId || (bid.bidder + '-' + bid.adUnitCode);
+          capturedBidDetails.push({
+            bidder: bid.bidder || bid.bidderCode || 'unknown',
+            adUnit: bid.adUnitCode || 'unknown',
+            cpm: bid.cpm || 0,
+            currency: bid.currency || 'USD',
+            status: winningBidIds.has(bidId) ? 'won' : 'bid',
+            responseTime: bid.timeToRespond || null,
+            size: bid.width && bid.height ? `${bid.width}x${bid.height}` : null,
+            source: bid._source || 'captured'
+          });
+        });
+      }
+
+      // Process captured no-bids
+      if (Array.isArray(capturedData.noBids)) {
+        capturedData.noBids.forEach((bid: any) => {
+          capturedBidDetails.push({
+            bidder: bid.bidder || bid.bidderCode || 'unknown',
+            adUnit: bid.adUnitCode || 'unknown',
+            cpm: 0,
+            currency: 'USD',
+            status: 'no-bid',
+            responseTime: null,
+            size: null,
+            source: bid._source || 'captured'
+          });
+        });
+      }
+
+      // If we have captured bids with actual CPM values, prefer them over polled data
+      const hasCapturedWithCPM = capturedBidDetails.some(b => b.cpm > 0);
+      if (hasCapturedWithCPM) {
+        console.log(`[Captured Bids] Using event-captured bids (${capturedBidDetails.filter(b => b.cpm > 0).length} with CPM > 0)`);
+        out.pbjs.bidDetails = capturedBidDetails;
+      } else if (capturedBidDetails.length > 0 && out.pbjs.bidDetails.length === 0) {
+        // No CPM data in either, but captured has entries
+        console.log(`[Captured Bids] Using event-captured bids (no CPM values found)`);
+        out.pbjs.bidDetails = capturedBidDetails;
+      }
+    } else {
+      console.log('[Captured Bids] No captured bids found (listener may not have been injected or auction not started)');
+    }
+  } catch (err) {
+    console.log('[Captured Bids] Error querying captured bids:', err);
   }
 
   // FALLBACK: Extract bidders from network requests if client-side extraction failed

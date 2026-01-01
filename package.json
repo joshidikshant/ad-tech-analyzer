@@ -1,6 +1,6 @@
 {
   "name": "ad-tech-analyzer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "MCP server for automated ad-tech stack analysis. Detects 30+ vendors (Prebid, GAM, SSPs, managed services) on any website. NEW: Detailed bidder extraction with network-based fallback for server-side header bidding.",
   "main": "dist/mcp/server.js",
   "types": "dist/mcp/server.d.ts",

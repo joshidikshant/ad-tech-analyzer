@@ -29,6 +29,16 @@ interface AnalysisData {
       bidders: string[];
       adUnitsCount: number;
     }>;
+    bid_details?: Array<{
+      bidder: string;
+      adUnit: string;
+      cpm: number;
+      currency: string;
+      status: 'won' | 'bid' | 'no-bid' | 'timeout' | 'rejected';
+      responseTime: number | null;
+      size: string | null;
+      source?: string;
+    }>;
   };
   gam: {
     detected: boolean;
@@ -76,6 +86,9 @@ const container = {
 export default function AnalysisView({ data }: Props) {
   const [showPrebidConfig, setShowPrebidConfig] = useState(false);
   const [showGAMDetails, setShowGAMDetails] = useState(true); // Show GAM by default
+  const [showBidDetails, setShowBidDetails] = useState(true); // Show bid details by default
+  const [bidSortField, setBidSortField] = useState<'cpm' | 'bidder' | 'status' | 'responseTime'>('cpm');
+  const [bidSortAsc, setBidSortAsc] = useState(false); // Descending by default for CPM
 
   // Calculate total bidders (client-side + network-inferred)
   const totalBidders = (data.prebid.bidders?.length || 0) + (data.prebid.network_bidders?.length || 0);
@@ -289,6 +302,159 @@ export default function AnalysisView({ data }: Props) {
               <pre className="bg-cyber-bg-tertiary/50 border border-cyber-accent-primary/30 p-4 rounded overflow-x-auto text-xs font-mono text-cyber-success">
                 {JSON.stringify(data.prebid.config, null, 2)}
               </pre>
+            </motion.div>
+          )}
+        </GlowCard>
+      )}
+
+      {/* P1: Bid Details Table */}
+      {data.prebid.bid_details && data.prebid.bid_details.length > 0 && (
+        <GlowCard>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <h3 className="text-xl font-display font-bold text-cyber-accent-primary uppercase">
+                Bid Auction Results
+              </h3>
+              <span className="px-3 py-1 bg-cyber-accent-primary/20 border border-cyber-accent-primary/50 text-cyber-accent-primary rounded-full text-xs font-mono uppercase tracking-wider">
+                {data.prebid.bid_details.length} bids
+              </span>
+            </div>
+            <button
+              onClick={() => setShowBidDetails(!showBidDetails)}
+              className="text-sm font-mono text-cyber-accent-secondary hover:text-cyber-accent-primary transition-colors uppercase tracking-wider"
+            >
+              {showBidDetails ? '▼ Hide Table' : '▶ Show Table'}
+            </button>
+          </div>
+
+          {/* Summary Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div className="bg-cyber-bg-tertiary/30 p-3 rounded border border-cyber-success/30">
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">Won</p>
+              <p className="text-2xl font-display font-bold text-cyber-success">
+                {data.prebid.bid_details.filter(b => b.status === 'won').length}
+              </p>
+            </div>
+            <div className="bg-cyber-bg-tertiary/30 p-3 rounded border border-cyber-accent-primary/30">
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">Bids</p>
+              <p className="text-2xl font-display font-bold text-cyber-accent-primary">
+                {data.prebid.bid_details.filter(b => b.status === 'bid').length}
+              </p>
+            </div>
+            <div className="bg-cyber-bg-tertiary/30 p-3 rounded border border-cyber-error/30">
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">No-Bid</p>
+              <p className="text-2xl font-display font-bold text-cyber-error">
+                {data.prebid.bid_details.filter(b => b.status === 'no-bid').length}
+              </p>
+            </div>
+            <div className="bg-cyber-bg-tertiary/30 p-3 rounded border border-cyber-accent-secondary/30">
+              <p className="text-xs font-mono uppercase tracking-wider text-cyber-text-tertiary mb-1">Avg CPM</p>
+              <p className="text-2xl font-display font-bold text-cyber-accent-secondary">
+                ${(data.prebid.bid_details.filter(b => b.cpm > 0).reduce((sum, b) => sum + b.cpm, 0) /
+                  Math.max(1, data.prebid.bid_details.filter(b => b.cpm > 0).length)).toFixed(2)}
+              </p>
+            </div>
+          </div>
+
+          {/* Sortable Table */}
+          {showBidDetails && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              className="overflow-x-auto"
+            >
+              <table className="w-full text-sm font-mono">
+                <thead>
+                  <tr className="border-b border-cyber-accent-primary/30">
+                    <th
+                      className="py-3 px-4 text-left text-xs uppercase tracking-wider text-cyber-text-tertiary cursor-pointer hover:text-cyber-accent-primary transition-colors"
+                      onClick={() => { setBidSortField('bidder'); setBidSortAsc(bidSortField === 'bidder' ? !bidSortAsc : true); }}
+                    >
+                      Bidder {bidSortField === 'bidder' && (bidSortAsc ? '↑' : '↓')}
+                    </th>
+                    <th className="py-3 px-4 text-left text-xs uppercase tracking-wider text-cyber-text-tertiary">
+                      Ad Unit
+                    </th>
+                    <th
+                      className="py-3 px-4 text-right text-xs uppercase tracking-wider text-cyber-text-tertiary cursor-pointer hover:text-cyber-accent-primary transition-colors"
+                      onClick={() => { setBidSortField('cpm'); setBidSortAsc(bidSortField === 'cpm' ? !bidSortAsc : false); }}
+                    >
+                      CPM {bidSortField === 'cpm' && (bidSortAsc ? '↑' : '↓')}
+                    </th>
+                    <th
+                      className="py-3 px-4 text-center text-xs uppercase tracking-wider text-cyber-text-tertiary cursor-pointer hover:text-cyber-accent-primary transition-colors"
+                      onClick={() => { setBidSortField('status'); setBidSortAsc(bidSortField === 'status' ? !bidSortAsc : true); }}
+                    >
+                      Status {bidSortField === 'status' && (bidSortAsc ? '↑' : '↓')}
+                    </th>
+                    <th
+                      className="py-3 px-4 text-right text-xs uppercase tracking-wider text-cyber-text-tertiary cursor-pointer hover:text-cyber-accent-primary transition-colors"
+                      onClick={() => { setBidSortField('responseTime'); setBidSortAsc(bidSortField === 'responseTime' ? !bidSortAsc : true); }}
+                    >
+                      Response {bidSortField === 'responseTime' && (bidSortAsc ? '↑' : '↓')}
+                    </th>
+                    <th className="py-3 px-4 text-center text-xs uppercase tracking-wider text-cyber-text-tertiary">
+                      Size
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...data.prebid.bid_details]
+                    .sort((a, b) => {
+                      const multiplier = bidSortAsc ? 1 : -1;
+                      switch (bidSortField) {
+                        case 'cpm':
+                          return (a.cpm - b.cpm) * multiplier;
+                        case 'bidder':
+                          return a.bidder.localeCompare(b.bidder) * multiplier;
+                        case 'status':
+                          const statusOrder = { won: 0, bid: 1, 'no-bid': 2, timeout: 3, rejected: 4 };
+                          return (statusOrder[a.status] - statusOrder[b.status]) * multiplier;
+                        case 'responseTime':
+                          return ((a.responseTime || 0) - (b.responseTime || 0)) * multiplier;
+                        default:
+                          return 0;
+                      }
+                    })
+                    .map((bid, idx) => (
+                      <tr
+                        key={idx}
+                        className={`border-b border-cyber-bg-tertiary/50 hover:bg-cyber-bg-tertiary/30 transition-colors ${
+                          bid.status === 'won' ? 'bg-cyber-success/5' : ''
+                        }`}
+                      >
+                        <td className="py-3 px-4 text-cyber-text-primary font-semibold">
+                          {bid.bidder}
+                        </td>
+                        <td className="py-3 px-4 text-cyber-text-secondary truncate max-w-[200px]" title={bid.adUnit}>
+                          {bid.adUnit}
+                        </td>
+                        <td className={`py-3 px-4 text-right font-bold ${
+                          bid.cpm > 0 ? 'text-cyber-success' : 'text-cyber-text-tertiary'
+                        }`}>
+                          {bid.cpm > 0 ? `$${bid.cpm.toFixed(2)}` : '—'}
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <span className={`px-2 py-1 rounded text-xs uppercase tracking-wider ${
+                            bid.status === 'won' ? 'bg-cyber-success/20 text-cyber-success border border-cyber-success/50' :
+                            bid.status === 'bid' ? 'bg-cyber-accent-primary/20 text-cyber-accent-primary border border-cyber-accent-primary/50' :
+                            bid.status === 'no-bid' ? 'bg-cyber-error/20 text-cyber-error border border-cyber-error/50' :
+                            bid.status === 'timeout' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
+                            'bg-cyber-text-tertiary/20 text-cyber-text-tertiary border border-cyber-text-tertiary/50'
+                          }`}>
+                            {bid.status}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4 text-right text-cyber-text-secondary">
+                          {bid.responseTime ? `${bid.responseTime}ms` : '—'}
+                        </td>
+                        <td className="py-3 px-4 text-center text-cyber-text-secondary">
+                          {bid.size || '—'}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
             </motion.div>
           )}
         </GlowCard>

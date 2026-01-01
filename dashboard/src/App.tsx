@@ -28,6 +28,16 @@ interface AnalysisData {
       bidders: string[];
       adUnitsCount: number;
     }>;
+    bid_details?: Array<{
+      bidder: string;
+      adUnit: string;
+      cpm: number;
+      currency: string;
+      status: 'won' | 'bid' | 'no-bid' | 'timeout' | 'rejected';
+      responseTime: number | null;
+      size: string | null;
+      source?: string;
+    }>;
   };
   gam: {
     detected: boolean;
