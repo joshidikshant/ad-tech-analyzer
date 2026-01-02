@@ -15,8 +15,8 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:8080',
     'http://localhost:8081',
-    'https://ad-stack-analyzer.onrender.com', // Production frontend (old)
-    'https://tools.dikshantjoshi.com', // Production frontend (custom domain)
+    'https://tools.dikshantjoshi.com', // Production frontend (Netlify)
+    'https://ad-stack-analyzer.onrender.com', // Production frontend (Render - fallback)
     'https://ad-tech-analyzer.onrender.com', // Backend (for health checks)
   ],
   credentials: true
