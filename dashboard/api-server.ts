@@ -10,7 +10,15 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors({
-  origin: true,
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://localhost:8080',
+    'http://localhost:8081',
+    'https://ad-stack-analyzer.onrender.com', // Production frontend (old)
+    'https://tools.dikshantjoshi.com', // Production frontend (custom domain)
+    'https://ad-tech-analyzer.onrender.com', // Backend (for health checks)
+  ],
   credentials: true
 }));
 app.use(express.json());
