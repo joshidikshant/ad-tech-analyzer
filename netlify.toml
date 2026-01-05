@@ -1,0 +1,40 @@
+# Netlify Configuration for Ad Tech Analyzer Dashboard
+[build]
+  # Build dashboard from dashboard subdirectory
+  command = "cd dashboard && npm install && npm run build"
+  publish = "dashboard/dist"
+
+[build.environment]
+  # Node version
+  NODE_VERSION = "22.21.0"
+  # Production API URL - GCP Cloud Run backend
+  VITE_API_URL = "https://ad-tech-analyzer-717920911778.asia-south1.run.app"
+
+# Redirect rules for SPA (single page application)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+  ## (optional) Settings for Netlify Dev
+  ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
+  #[dev]
+  #  command = "yarn start" # Command to start your dev server
+  #  port = 3000 # Port that the dev server will be listening on
+  #  publish = "dist" # Folder with the static content for _redirect file
+
+  ## more info on configuring this file: https://ntl.fyi/file-based-build-config
