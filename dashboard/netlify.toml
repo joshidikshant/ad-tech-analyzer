@@ -7,9 +7,6 @@
   # Output directory
   publish = "dist"
 
-  # Base directory for build
-  base = "dashboard"
-
 [build.environment]
   # Node version
   NODE_VERSION = "22.21.0"
