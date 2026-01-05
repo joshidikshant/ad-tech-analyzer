@@ -8,7 +8,7 @@
   # Node version
   NODE_VERSION = "22.21.0"
   # Production API URL - GCP Cloud Run backend
-  VITE_API_URL = "https://ad-tech-analyzer-717920911778.asia-south1.run.app"
+  VITE_API_URL = "https://ad-tech-analyzer-x64pri4guq-el.a.run.app"
 
 # Redirect rules for SPA (single page application)
 [[redirects]]
