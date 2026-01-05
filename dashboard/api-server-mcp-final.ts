@@ -16,17 +16,32 @@ const handlersModule = await import('../src/mcp/handlers.js');
 const { handleAnalyzeSite } = handlersModule;
 
 const app = express();
+
+// CORS configuration with explicit origin handling
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:8080',
+  'http://localhost:8081',
+  'https://tools.dikshantjoshi.com', // Production frontend (Netlify)
+  'https://ad-stack-analyzer.onrender.com', // Production frontend (Render - fallback)
+  'https://ad-tech-analyzer.onrender.com', // Backend (for health checks)
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    'http://localhost:8080',
-    'http://localhost:8081',
-    'https://tools.dikshantjoshi.com', // Production frontend (Netlify)
-    'https://ad-stack-analyzer.onrender.com', // Production frontend (Render - fallback)
-    'https://ad-tech-analyzer.onrender.com', // Backend (for health checks)
-  ],
-  credentials: true
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.warn(`[CORS] Blocked origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 }));
 app.use(express.json());
 
